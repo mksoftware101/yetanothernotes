@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+/config/config_release.properities
+/config/yetanothernotes_release.jks
