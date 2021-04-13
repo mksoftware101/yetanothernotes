@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
 }
 
+Properties localConfig = new Properties()
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -16,11 +18,35 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    signingConfigs {
+        release {
+            if (System.getenv()["CI"]) {
+                if (System.getenv()["FCI_KEYSTORE_PATH"] != null) {
+                    storeFile file(System.getenv()["FCI_KEYSTORE_PATH"])
+                }
+                if (System.getenv()["FCI_KEYSTORE_PASSWORD"] != null) {
+                    storePassword System.getenv()["FCI_KEYSTORE_PASSWORD"]
+                }
+                if (System.getenv()["FCI_KEY_ALIAS"] != null) {
+                    keyAlias System.getenv()["FCI_KEY_ALIAS"]
+                }
+                if (System.getenv()["FCI_KEY_PASSWORD"] != null) {
+                    keyPassword System.getenv()["FCI_KEY_PASSWORD"]
+                }
+            } else {
+                localConfig.load(project.rootProject.file('config/config_release.properities').newDataInputStream())
+                storeFile file('../config/yetanothernotes_release.jks')
+                storePassword localConfig['release.keystorePassword']
+                keyAlias localConfig['release.keyAlias']
+                keyPassword localConfig['release.keyPassword']
+            }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
