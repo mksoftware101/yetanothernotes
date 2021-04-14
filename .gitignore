@@ -15,3 +15,5 @@
 local.properties
 /config/config_release.properities
 /config/yetanothernotes_release.jks
+/buildSrc/.gradle
+/buildSrc/build
