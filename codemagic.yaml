@@ -28,6 +28,7 @@ workflows:
           - mk.allegro.acc@gmail.com
         notify:
           failure: true
+          success: true
 
   yetanothernotes-release-workflow:
     name: YetAnotherNotes Release Workflow
