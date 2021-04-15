@@ -6,6 +6,8 @@ buildscript {
     dependencies {
         classpath BuildDependencies.androidGradlePlugin
         classpath BuildDependencies.kotlinGradlePlugin
+        classpath BuildDependencies.googleServicesPlugin
+        classpath BuildDependencies.firebaseCrashlytics
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

@@ -17,3 +17,4 @@ local.properties
 /config/yetanothernotes_release.jks
 /buildSrc/.gradle
 /buildSrc/build
+app/google-services.json
