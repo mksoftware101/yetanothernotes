@@ -75,6 +75,9 @@ dependencies {
     implementation Libs.firebaseAnalyticsKtx
     implementation Libs.firebaseCrashlyticsKtx
 
+    // timber
+    implementation Libs.timber
+
     // tests
     testImplementation TestLibs.junit
     androidTestImplementation TestLibs.extJunit

@@ -9,10 +9,11 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.ktx.Firebase
+import timber.log.Timber
 import java.lang.RuntimeException
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
     var crashTv: Button? = null
     var  fatalCrashTv : Button? = null
 
@@ -20,12 +21,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        firebaseAnalytics = Firebase.analytics
-
         crashTv = findViewById<Button>(R.id.textViewCrash)
         crashTv?.setOnClickListener {
-            Log.d("TAG", "abc")
-            FirebaseCrashlytics.getInstance().recordException(RuntimeException("Test non fatal exception"))
+            Timber.d("AAAAAA")
+            Timber.e(RuntimeException("Test non fatal exception"))
         }
 
         fatalCrashTv= findViewById<Button>(R.id.textViewCrashFatal)

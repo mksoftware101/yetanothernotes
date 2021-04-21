@@ -40,6 +40,7 @@ object Libs {
         const val kotlin = kotlinVersion
         const val material = "1.3.0"
         const val firebaseBom = "27.0.0"
+        const val timber = "4.7.1"
     }
 
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
@@ -47,6 +48,7 @@ object Libs {
     const val firebaseBom = "com.google.firebase:firebase-bom:${Versions.firebaseBom}"
     const val firebaseAnalyticsKtx = "com.google.firebase:firebase-analytics-ktx"
     const val firebaseCrashlyticsKtx = "com.google.firebase:firebase-crashlytics-ktx"
+    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
     val androidX = AndroidX
 
