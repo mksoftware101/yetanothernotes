@@ -1,5 +1,7 @@
 apply plugin: Plugins.androidApplication
 apply plugin: Plugins.kotlinAndroid
+apply plugin: Plugins.googleServices
+apply plugin: Plugins.firebaseCrashlytics
 
 
 Properties localConfig = new Properties()
@@ -62,13 +64,21 @@ android {
 }
 
 dependencies {
-
     implementation Libs.kotlin
     implementation Libs.androidX.core
     implementation Libs.androidX.appcompat
     implementation Libs.androidX.constraintLayout
     implementation Libs.androidMaterial
 
+    // firebase
+    implementation platform(Libs.firebaseBom)
+    implementation Libs.firebaseAnalyticsKtx
+    implementation Libs.firebaseCrashlyticsKtx
+
+    // timber
+    implementation Libs.timber
+
+    // tests
     testImplementation TestLibs.junit
     androidTestImplementation TestLibs.extJunit
     androidTestImplementation TestLibs.espresso
