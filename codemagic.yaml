@@ -69,6 +69,7 @@ workflows:
       cancel_previous_builds: false
     scripts:
       - *setup_google_services_file
+      - *download_translations
       - name: Set up local properties
         script: echo "sdk.dir=$HOME/programs/android-sdk-macosx" > "$FCI_BUILD_DIR/local.properties"
       - name: Set up key.properties
