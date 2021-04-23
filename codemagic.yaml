@@ -19,7 +19,8 @@ workflows:
           source: true
       cancel_previous_builds: false
     scripts:
-      - name: Setup google sevices file
+      - &setup_google_services_file
+        name: Setup google sevices file
         script: |
           echo $GP_SERVICES_ENCRYPTED | base64 --decode > $GP_SERVICES_PATH
       - name: Build debug Android app
@@ -59,9 +60,7 @@ workflows:
           source: true
       cancel_previous_builds: false
     scripts:
-      - name: Setup google sevices file
-        script: |
-          echo $GP_SERVICES_ENCRYPTED | base64 --decode > $GP_SERVICES_PATH
+      - *setup_google_services_file
       - name: Set up local properties
         script: echo "sdk.dir=$HOME/programs/android-sdk-macosx" > "$FCI_BUILD_DIR/local.properties"
       - name: Set up key.properties
