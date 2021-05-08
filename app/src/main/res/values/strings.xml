@@ -1,3 +1,14 @@
-<resources>
-    <string name="app_name">YetAnotherNotes</string>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Loco xml export: Android string resources
+ Project: YetAnotherNotes
+ Release: Working copy
+ Locale: en-GB, English (UK)
+ Exported by: Marek
+ Exported at: Sat, 08 May 2021 11:31:29 +0200
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="appName">YetAnotherNotes</string>
+    <string name="splashLabel">YetAnotherNotes</string>
+    <string name="splashVendor">mk.software101</string>
 </resources>

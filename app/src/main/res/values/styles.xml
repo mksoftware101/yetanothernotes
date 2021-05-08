@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SplashTitle">
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:textSize">@dimen/textL</item>
+    </style>
+
+    <style name="SplashVendor">
+        <item name="android:textColor">@color/secondaryText</item>
+        <item name="android:textSize">@dimen/textXS</item>
+    </style>
+</resources>

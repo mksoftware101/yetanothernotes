@@ -3,6 +3,7 @@ package com.mksoftware101.notes
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -19,18 +20,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        this.window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+
+        setContentView(R.layout.splash_fragment)
 
         crashTv = findViewById<Button>(R.id.textViewCrash)
         crashTv?.setOnClickListener {
             Timber.d("AAAAAA")
             Timber.e(RuntimeException("Test non fatal exception"))
-        }
-
-        fatalCrashTv= findViewById<Button>(R.id.textViewCrashFatal)
-        fatalCrashTv?.setOnClickListener{
-            Log.d("TAG", "def")
-            throw RuntimeException("Test fatal exception")
         }
     }
     
