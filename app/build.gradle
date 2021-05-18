@@ -69,6 +69,12 @@ dependencies {
     implementation Libs.androidX.core
     implementation Libs.androidX.appcompat
     implementation Libs.androidX.constraintLayout
+    implementation Libs.androidX.navigationFragment
+    implementation Libs.androidX.navigationUi
+    implementation Libs.androidX.navigationFragmentKtx
+    implementation Libs.androidX.navigationUiKtx
+    implementation Libs.androidX.navigationFeatureModuleSupport
+    implementation Libs.androidX.navigationCompose
     implementation Libs.androidMaterial
 
     // firebase
@@ -87,4 +93,5 @@ dependencies {
     testImplementation TestLibs.junit
     androidTestImplementation TestLibs.extJunit
     androidTestImplementation TestLibs.espresso
+    androidTestImplementation TestLibs.navigation
 }

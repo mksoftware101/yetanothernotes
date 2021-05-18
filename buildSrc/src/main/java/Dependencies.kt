@@ -57,12 +57,25 @@ object Libs {
             const val core = "1.3.2"
             const val appcompat = "1.2.0"
             const val constraintLayout = "2.0.4"
+            const val navigationVersion = "2.3.5"
+            const val navigationCompose = "1.0.0-alpha10"
         }
 
         const val core = "androidx.core:core-ktx:${Versions.core}"
         const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
         const val constraintLayout =
             "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+        const val navigationFragment =
+            "androidx.navigation:navigation-fragment:${Versions.navigationVersion}"
+        const val navigationUi = "androidx.navigation:navigation-ui:${Versions.navigationVersion}"
+        const val navigationFragmentKtx =
+            "androidx.navigation:navigation-fragment-ktx:${Versions.navigationVersion}"
+        const val navigationUiKtx =
+            "androidx.navigation:navigation-ui-ktx:${Versions.navigationVersion}"
+        const val navigationFeatureModuleSupport =
+            "androidx.navigation:navigation-dynamic-features-fragment:${Versions.navigationVersion}"
+        const val navigationCompose =
+            "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
     }
 }
 
@@ -71,6 +84,7 @@ object TestLibs {
         const val junit = "4.13"
         const val extJunit = "1.1.2"
         const val espresso = "3.3.0"
+        const val navigation = "2.3.5"
     }
 
     const val junit = "junit:junit:${Versions.junit}"
@@ -78,4 +92,5 @@ object TestLibs {
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 
     const val instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    const val navigation = "androidx.navigation:navigation-testing:${Versions.navigation}"
 }
