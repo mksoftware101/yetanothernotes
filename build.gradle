@@ -11,6 +11,7 @@ buildscript {
         classpath BuildDependencies.kotlinGradlePlugin
         classpath BuildDependencies.googleServicesPlugin
         classpath BuildDependencies.firebaseCrashlytics
+        classpath BuildDependencies.safeArgsPlugin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong

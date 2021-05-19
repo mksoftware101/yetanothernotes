@@ -22,7 +22,8 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view.postDelayed(object : Runnable {
             override fun run() {
-                findNavController().navigate(R.id.action_splashFragment_to_mainListFragment)
+                val direction = SplashFragmentDirections.actionSplashFragmentToMainListFragment()
+                findNavController().navigate(direction)
             }
         }, 3000)
     }

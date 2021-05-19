@@ -2,6 +2,7 @@ apply plugin: Plugins.androidApplication
 apply plugin: Plugins.kotlinAndroid
 apply plugin: Plugins.googleServices
 apply plugin: Plugins.firebaseCrashlytics
+apply plugin: Plugins.safeArgs
 apply plugin: 'kotlin-android'
 
 

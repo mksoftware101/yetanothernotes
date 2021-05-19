@@ -7,6 +7,7 @@ object BuildDependencies {
         const val androidGradlePlugin = "4.1.2"
         const val googleServicesPlugin = "4.3.5"
         const val firebaseCrashlytics = "2.5.2"
+        const val safeArgsGradlePlugin = "2.3.5"
     }
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
@@ -16,6 +17,8 @@ object BuildDependencies {
         "com.google.gms:google-services:${Versions.googleServicesPlugin}"
     const val firebaseCrashlytics =
         "com.google.firebase:firebase-crashlytics-gradle:${Versions.firebaseCrashlytics}"
+    const val safeArgsPlugin =
+        "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.safeArgsGradlePlugin}"
 }
 
 object Plugins {
@@ -23,6 +26,7 @@ object Plugins {
     const val kotlinAndroid = "kotlin-android"
     const val googleServices = "com.google.gms.google-services"
     const val firebaseCrashlytics = "com.google.firebase.crashlytics"
+    const val safeArgs = "androidx.navigation.safeargs.kotlin"
 }
 
 object Apps {
@@ -76,6 +80,8 @@ object Libs {
             "androidx.navigation:navigation-dynamic-features-fragment:${Versions.navigationVersion}"
         const val navigationCompose =
             "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
+        const val safeArgs =
+            "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationVersion}"
     }
 }
 
