@@ -1,5 +1,6 @@
 apply plugin: Plugins.androidApplication
 apply plugin: Plugins.kotlinAndroid
+apply plugin: Plugins.kotlinKapt
 apply plugin: Plugins.googleServices
 apply plugin: Plugins.firebaseCrashlytics
 apply plugin: Plugins.safeArgs
@@ -62,6 +63,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 

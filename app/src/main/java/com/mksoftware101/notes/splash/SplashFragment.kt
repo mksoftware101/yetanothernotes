@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.mksoftware101.notes.R
 
 class SplashFragment : Fragment() {
@@ -15,15 +14,15 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-        return inflater.inflate(R.layout.splash_fragment, container, false)
+        return inflater.inflate(R.layout.layout_splash, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.postDelayed(object : Runnable {
             override fun run() {
-                val direction = SplashFragmentDirections.actionSplashFragmentToMainListFragment()
-                findNavController().navigate(direction)
+//                val direction = SplashFragmentDirections.actionSplashFragmentToMainListFragment()
+//                findNavController().navigate(direction)
             }
         }, 3000)
     }
