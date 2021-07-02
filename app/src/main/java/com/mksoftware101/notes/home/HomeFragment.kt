@@ -1,4 +1,4 @@
-package com.mksoftware101.notes.mainlist
+package com.mksoftware101.notes.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,27 +10,27 @@ import com.mksoftware101.notes.MainActivityUiCommand
 import com.mksoftware101.notes.R
 import timber.log.Timber
 
-class MainListFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     lateinit var mainActivityDriver: MainActivityUiCommand
 
     companion object {
-        fun newInstance() = MainListFragment()
+        fun newInstance() = HomeFragment()
     }
 
-    private lateinit var viewModel: MainListViewModel
+    private lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.main_list_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mainActivityDriver = activity as MainActivityUiCommand
-        viewModel = ViewModelProvider(this).get(MainListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

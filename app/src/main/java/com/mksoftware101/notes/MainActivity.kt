@@ -2,8 +2,15 @@ package com.mksoftware101.notes
 
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentContainerView
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import timber.log.Timber
+
 //import com.mksoftware101.notes.databinding.ActivityMainBinding
 
 interface MainActivityUiCommand {
@@ -12,14 +19,40 @@ interface MainActivityUiCommand {
 
 class MainActivity : AppCompatActivity(), MainActivityUiCommand {
 
-//    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        this.window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-//        binding = ActivityMainBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val navController =
+            findViewById<FragmentContainerView>(R.id.navHostFragment).findNavController()
+        setupBottomNavigation(bottomNavigation, navController)
+        controlBottomNavigationVisibility(bottomNavigation, navController)
+    }
+
+    private fun setupBottomNavigation(
+        bottomNavigation: BottomNavigationView?,
+        navController: NavController
+    ) {
+        bottomNavigation?.setupWithNavController(navController)
+    }
+
+    private fun controlBottomNavigationVisibility(
+        bottomNavigation: BottomNavigationView?,
+        navController: NavController
+    ) {
+        navController
+            .addOnDestinationChangedListener { _, destination: NavDestination, _ ->
+                Timber.d("[d] dest=$destination")
+                when (destination.id) {
+                    R.id.splashFragment -> bottomNavigation?.visibility = View.GONE
+                    else -> bottomNavigation?.visibility = View.VISIBLE
+                }
+            }
+
     }
 
     override fun hideSplashScreen() {
