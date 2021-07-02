@@ -3,9 +3,13 @@
 
     <item
         android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_menu_home_24"
+        android:enabled="true"
         android:title="@string/menuHome" />
 
     <item
         android:id="@+id/favouriteFragment"
+        android:icon="@drawable/ic_menu_favorite_24"
+        android:enabled="true"
         android:title="@string/menuFavourite" />
 </menu>
