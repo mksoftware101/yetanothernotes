@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
+<?xml version="1.0" encoding="UTF-8"?><!--
  Loco xml export: Android string resources
  Project: YetAnotherNotes
  Release: Working copy
@@ -11,4 +10,6 @@
     <string name="appName">YetAnotherNotes</string>
     <string name="splashLabel">YetAnotherNotes</string>
     <string name="splashVendor">mk.software101</string>
+    <string name="menuHome">Home</string>
+    <string name="menuFavourite">Favourite</string>
 </resources>
