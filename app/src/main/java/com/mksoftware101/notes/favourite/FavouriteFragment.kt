@@ -1,18 +1,14 @@
 package com.mksoftware101.notes.favourite
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.mksoftware101.notes.R
 
 class FavouriteFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = FavouriteFragment()
-    }
 
     private lateinit var viewModel: FavouriteViewModel
 
@@ -26,7 +22,5 @@ class FavouriteFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(FavouriteViewModel::class.java)
-        // TODO: Use the ViewModel
     }
-
 }

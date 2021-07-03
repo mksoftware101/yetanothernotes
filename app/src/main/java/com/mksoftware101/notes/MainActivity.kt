@@ -9,15 +9,8 @@ import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import timber.log.Timber
 
-//import com.mksoftware101.notes.databinding.ActivityMainBinding
-
-interface MainActivityUiCommand {
-    fun hideSplashScreen()
-}
-
-class MainActivity : AppCompatActivity(), MainActivityUiCommand {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,9 +56,5 @@ class MainActivity : AppCompatActivity(), MainActivityUiCommand {
                 finish()
             }
         }
-    }
-
-    override fun hideSplashScreen() {
-//        binding.splashLayout.rootView.visibility = View.GONE
     }
 }
