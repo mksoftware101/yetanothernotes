@@ -46,13 +46,23 @@ class MainActivity : AppCompatActivity(), MainActivityUiCommand {
     ) {
         navController
             .addOnDestinationChangedListener { _, destination: NavDestination, _ ->
-                Timber.d("[d] dest=$destination")
                 when (destination.id) {
                     R.id.splashFragment -> bottomNavigation?.visibility = View.GONE
                     else -> bottomNavigation?.visibility = View.VISIBLE
                 }
             }
+    }
 
+    override fun onBackPressed() {
+        val navController =
+            findViewById<FragmentContainerView>(R.id.navHostFragment).findNavController()
+
+        val destinationId: Int? = navController.currentDestination?.id
+        destinationId?.let {
+            if (it != R.id.splashFragment) {
+                finish()
+            }
+        }
     }
 
     override fun hideSplashScreen() {
