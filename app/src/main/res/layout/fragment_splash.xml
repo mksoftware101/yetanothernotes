@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorPrimaryDark"
-    tools:context=".splash.SplashFragment">
+    tools:context=".splash.SplashFragment"
+    android:id="@+id/rootView">
 
     <TextView
         android:id="@+id/splashLabel"

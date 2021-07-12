@@ -1,34 +1,60 @@
 package com.mksoftware101.notes
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.WindowManager
-import android.widget.Button
-import android.widget.TextView
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.google.firebase.ktx.Firebase
-import timber.log.Timber
-import java.lang.RuntimeException
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentContainerView
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    var crashTv: Button? = null
-    var  fatalCrashTv : Button? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        setContentView(R.layout.activity_main)
+    }
 
-        setContentView(R.layout.splash_fragment)
+    override fun onStart() {
+        super.onStart()
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val navController =
+            findViewById<FragmentContainerView>(R.id.navHostFragment).findNavController()
+        setupBottomNavigation(bottomNavigation, navController)
+        controlBottomNavigationVisibility(bottomNavigation, navController)
+    }
 
-        crashTv = findViewById<Button>(R.id.textViewCrash)
-        crashTv?.setOnClickListener {
-            Timber.d("AAAAAA")
-            Timber.e(RuntimeException("Test non fatal exception"))
+    private fun setupBottomNavigation(
+        bottomNavigation: BottomNavigationView?,
+        navController: NavController
+    ) {
+        bottomNavigation?.setupWithNavController(navController)
+    }
+
+    private fun controlBottomNavigationVisibility(
+        bottomNavigation: BottomNavigationView?,
+        navController: NavController
+    ) {
+        navController
+            .addOnDestinationChangedListener { _, destination: NavDestination, _ ->
+                when (destination.id) {
+                    R.id.splashFragment -> bottomNavigation?.visibility = View.GONE
+                    else -> bottomNavigation?.visibility = View.VISIBLE
+                }
+            }
+    }
+
+    override fun onBackPressed() {
+        val navController =
+            findViewById<FragmentContainerView>(R.id.navHostFragment).findNavController()
+
+        val destinationId: Int? = navController.currentDestination?.id
+        destinationId?.let {
+            if (it != R.id.splashFragment) {
+                finish()
+            }
         }
     }
-    
 }
