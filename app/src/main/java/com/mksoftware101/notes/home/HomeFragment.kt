@@ -8,6 +8,7 @@ import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mksoftware101.notes.R
+import timber.log.Timber
 
 class HomeFragment : Fragment() {
 
@@ -20,6 +21,22 @@ class HomeFragment : Fragment() {
         closeFullScreenMode()
         setWhiteStatusBarColor()
         return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.state.observe(this, ::render)
+        viewModel.fetchAllNotes()
+    }
+
+    private fun render(homeState: HomeState) {
+        when (homeState) {
+            is AllNotesFetchedState -> renderAllNotes(homeState)
+        }
+    }
+
+    private fun renderAllNotes(homeState: AllNotesFetchedState) {
+        Timber.d("[d] $homeState")
     }
 
     private fun setWhiteStatusBarColor() {
