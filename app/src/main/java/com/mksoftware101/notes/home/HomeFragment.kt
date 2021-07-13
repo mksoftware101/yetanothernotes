@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mksoftware101.notes.R
 import timber.log.Timber
+import com.mksoftware101.notes.home.HomeIntent.*
+import com.mksoftware101.notes.home.HomeState.*
 
 class HomeFragment : Fragment() {
 
@@ -25,8 +27,9 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.state.observe(this, ::render)
-        viewModel.fetchAllNotes()
+//         observe(viewModel.state, ::render)
+        viewModel.getState().observe(this, ::render)
+        viewModel.sendIntent(FetchAllNotes)
     }
 
     private fun render(homeState: HomeState) {

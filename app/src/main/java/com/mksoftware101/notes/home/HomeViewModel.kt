@@ -1,19 +1,21 @@
 package com.mksoftware101.notes.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.mksoftware101.notes.base.BaseViewModel
+import com.mksoftware101.notes.home.HomeIntent.FetchAllNotes
+import com.mksoftware101.notes.home.HomeState.AllNotesFetchedState
 import com.mksoftware101.notes.home.domain.FetchAllNotesUseCase
 
-class HomeViewModel : ViewModel() {
-
+class HomeViewModel : BaseViewModel<HomeIntent, HomeState>() {
     private val fetchAllNotesUseCase: FetchAllNotesUseCase = FetchAllNotesUseCase()
 
-    private val mutableState: MutableLiveData<HomeState> = MutableLiveData()
-    val state: LiveData<HomeState> = mutableState
+    override fun sendIntent(intent: HomeIntent) {
+        when (intent) {
+            is FetchAllNotes -> handleFetchAllNotesIntent()
+        }
+    }
 
-    fun fetchAllNotes() {
+    private fun handleFetchAllNotesIntent() {
         val notes = fetchAllNotesUseCase.run()
-        mutableState.value = AllNotesFetchedState(notes)
+        submit(AllNotesFetchedState(notes))
     }
 }
