@@ -1,4 +1,4 @@
-package com.mksoftware101.notes.base
+package com.mksoftware101.notes.core
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.mksoftware101.notes.home
+package com.mksoftware101.notes.features.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mksoftware101.notes.R
 import timber.log.Timber
-import com.mksoftware101.notes.home.HomeIntent.*
-import com.mksoftware101.notes.home.HomeState.*
+import com.mksoftware101.notes.features.home.HomeIntent.*
+import com.mksoftware101.notes.features.home.HomeState.*
 
 class HomeFragment : Fragment() {
 

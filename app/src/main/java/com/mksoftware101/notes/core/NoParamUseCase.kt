@@ -1,4 +1,4 @@
-package com.mksoftware101.notes.base
+package com.mksoftware101.notes.core
 
 interface NoParamUseCase<out T> {
     fun run(): T

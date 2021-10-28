@@ -1,4 +1,4 @@
-package com.mksoftware101.notes.splash
+package com.mksoftware101.notes.features.splash
 
 import android.os.Bundle
 import android.view.LayoutInflater

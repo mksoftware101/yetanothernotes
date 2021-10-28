@@ -1,4 +1,4 @@
-package com.mksoftware101.notes.favourite
+package com.mksoftware101.notes.features.favourite
 
 import androidx.lifecycle.ViewModel
 
