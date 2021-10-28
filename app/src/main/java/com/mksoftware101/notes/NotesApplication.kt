@@ -5,7 +5,9 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import timber.log.Timber
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class NotesApplication : Application() {
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 

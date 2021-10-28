@@ -5,6 +5,7 @@ apply plugin: Plugins.googleServices
 apply plugin: Plugins.firebaseCrashlytics
 apply plugin: Plugins.safeArgs
 apply plugin: 'kotlin-android'
+apply plugin: Plugins.hilt
 
 
 Properties localConfig = new Properties()
@@ -82,6 +83,10 @@ dependencies {
     implementation Libs.androidX.navigationCompose
     implementation Libs.androidMaterial
 
+    // di
+    implementation Libs.di.hilt
+    kapt Libs.di.hiltKapt
+
     // firebase
     implementation platform(Libs.firebaseBom)
     implementation Libs.firebaseAnalyticsKtx
@@ -99,4 +104,9 @@ dependencies {
     androidTestImplementation TestLibs.extJunit
     androidTestImplementation TestLibs.espresso
     androidTestImplementation TestLibs.navigation
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
