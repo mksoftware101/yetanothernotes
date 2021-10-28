@@ -8,7 +8,7 @@
         android:title="@string/menuHome" />
 
     <item
-        android:id="@+id/favouriteFragment"
+        android:id="@+id/detailsFragment"
         android:icon="@drawable/ic_menu_favorite_24"
         android:enabled="true"
         android:title="@string/menuFavourite" />
