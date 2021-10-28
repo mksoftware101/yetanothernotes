@@ -1,16 +1,15 @@
 package com.mksoftware101.notes
 
-import com.mksoftware101.notes.features.home.HomeViewModel
+import com.mksoftware101.notes.features.allnotes.AllNotesViewModel
 import org.junit.Before
-import org.junit.Ignore
 
-class HomeViewModelTest {
+class AllNotesViewModelTest {
 
-    lateinit var viewModel: HomeViewModel
+    lateinit var viewModel: AllNotesViewModel
 
     @Before
     fun setUp() {
-        viewModel = HomeViewModel()
+        viewModel = AllNotesViewModel()
     }
 
 //    fun `fetch all notes from database`() {
