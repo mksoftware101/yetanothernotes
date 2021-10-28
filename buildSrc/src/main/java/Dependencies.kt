@@ -8,6 +8,7 @@ object BuildDependencies {
         const val googleServicesPlugin = "4.3.5"
         const val firebaseCrashlytics = "2.5.2"
         const val safeArgsGradlePlugin = "2.3.5"
+        const val hiltPlugin = "2.38.1"
     }
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
@@ -19,6 +20,7 @@ object BuildDependencies {
         "com.google.firebase:firebase-crashlytics-gradle:${Versions.firebaseCrashlytics}"
     const val safeArgsPlugin =
         "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.safeArgsGradlePlugin}"
+    const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hiltPlugin}"
 }
 
 object Plugins {
@@ -28,6 +30,7 @@ object Plugins {
     const val googleServices = "com.google.gms.google-services"
     const val firebaseCrashlytics = "com.google.firebase.crashlytics"
     const val safeArgs = "androidx.navigation.safeargs.kotlin"
+    const val hilt = "dagger.hilt.android.plugin"
 }
 
 object Apps {
@@ -83,6 +86,16 @@ object Libs {
             "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
         const val safeArgs =
             "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationVersion}"
+    }
+
+    val di = Di
+
+    object Di {
+        private object Version {
+            const val hilt = "2.38.1"
+        }
+        const val hilt = "com.google.dagger:hilt-android:${Version.hilt}"
+        const val hiltKapt = "com.google.dagger:hilt-android-compiler:${Version.hilt}"
     }
 }
 
