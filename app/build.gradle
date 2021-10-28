@@ -99,8 +99,14 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
 
+    // room
+    implementation Libs.db.room
+    kapt Libs.db.roomKapt
+    implementation Libs.db.roomKtx
+
     // tests
     testImplementation TestLibs.junit
+    testImplementation TestLibs.room
     androidTestImplementation TestLibs.extJunit
     androidTestImplementation TestLibs.espresso
     androidTestImplementation TestLibs.navigation

@@ -1,3 +1,5 @@
+import sun.security.pkcs11.Secmod
+
 private const val kotlinVersion = "1.4.31"
 
 object BuildDependencies {
@@ -94,8 +96,25 @@ object Libs {
         private object Version {
             const val hilt = "2.38.1"
         }
+
         const val hilt = "com.google.dagger:hilt-android:${Version.hilt}"
         const val hiltKapt = "com.google.dagger:hilt-android-compiler:${Version.hilt}"
+    }
+
+    val db = Db
+
+    object Db {
+        private object Version {
+            const val room = "2.3.0"
+        }
+
+        const val room = "androidx.room:room-runtime:${Version.room}"
+
+        // To use Kotlin annotation processing tool (kapt)
+        const val roomKapt = "androidx.room:room-compiler:${Version.room}"
+
+        // Kotlin Extensions and Coroutines support for Room
+        const val roomKtx = "androidx.room:room-ktx:${Version.room}"
     }
 }
 
@@ -105,6 +124,7 @@ object TestLibs {
         const val extJunit = "1.1.2"
         const val espresso = "3.3.0"
         const val navigation = "2.3.5"
+        const val room = "2.3.0"
     }
 
     const val junit = "junit:junit:${Versions.junit}"
@@ -113,4 +133,5 @@ object TestLibs {
 
     const val instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     const val navigation = "androidx.navigation:navigation-testing:${Versions.navigation}"
+    const val room = "androidx.room:room-testing:${Versions.navigation}"
 }
