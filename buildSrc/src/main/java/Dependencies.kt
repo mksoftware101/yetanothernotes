@@ -45,13 +45,11 @@ object Apps {
 
 object Libs {
     private object Versions {
-        const val kotlin = kotlinVersion
         const val material = "1.3.0"
         const val firebaseBom = "27.0.0"
         const val timber = "4.7.1"
     }
 
-    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     const val androidMaterial = "com.google.android.material:material:${Versions.material}"
     const val firebaseBom = "com.google.firebase:firebase-bom:${Versions.firebaseBom}"
     const val firebaseAnalyticsKtx = "com.google.firebase:firebase-analytics-ktx"
@@ -67,6 +65,8 @@ object Libs {
             const val constraintLayout = "2.0.4"
             const val navigationVersion = "2.3.5"
             const val navigationCompose = "1.0.0-alpha10"
+            const val livedata = "2.3.1"
+            const val viewmodel = "2.3.1"
         }
 
         const val core = "androidx.core:core-ktx:${Versions.core}"
@@ -86,6 +86,8 @@ object Libs {
             "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
         const val safeArgs =
             "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationVersion}"
+        const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.livedata}"
+        const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewmodel}"
     }
 
     val di = Di
@@ -94,8 +96,25 @@ object Libs {
         private object Version {
             const val hilt = "2.38.1"
         }
+
         const val hilt = "com.google.dagger:hilt-android:${Version.hilt}"
         const val hiltKapt = "com.google.dagger:hilt-android-compiler:${Version.hilt}"
+    }
+
+    val db = Db
+
+    object Db {
+        private object Version {
+            const val room = "2.3.0"
+        }
+
+        const val room = "androidx.room:room-runtime:${Version.room}"
+
+        // To use Kotlin annotation processing tool (kapt)
+        const val roomKapt = "androidx.room:room-compiler:${Version.room}"
+
+        // Kotlin Extensions and Coroutines support for Room
+        const val roomKtx = "androidx.room:room-ktx:${Version.room}"
     }
 }
 
@@ -105,6 +124,7 @@ object TestLibs {
         const val extJunit = "1.1.2"
         const val espresso = "3.3.0"
         const val navigation = "2.3.5"
+        const val room = "2.3.0"
     }
 
     const val junit = "junit:junit:${Versions.junit}"
@@ -113,4 +133,5 @@ object TestLibs {
 
     const val instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     const val navigation = "androidx.navigation:navigation-testing:${Versions.navigation}"
+    const val room = "androidx.room:room-testing:${Versions.room}"
 }

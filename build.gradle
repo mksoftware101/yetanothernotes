@@ -1,7 +1,4 @@
 buildscript {
-    ext {
-        kotlin_version = '1.4.31'
-    }
     repositories {
         google()
         jcenter()
@@ -12,11 +9,7 @@ buildscript {
         classpath BuildDependencies.googleServicesPlugin
         classpath BuildDependencies.firebaseCrashlytics
         classpath BuildDependencies.safeArgsPlugin
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath BuildDependencies.hiltPlugin
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
