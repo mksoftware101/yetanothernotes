@@ -133,5 +133,5 @@ object TestLibs {
 
     const val instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     const val navigation = "androidx.navigation:navigation-testing:${Versions.navigation}"
-    const val room = "androidx.room:room-testing:${Versions.navigation}"
+    const val room = "androidx.room:room-testing:${Versions.room}"
 }
