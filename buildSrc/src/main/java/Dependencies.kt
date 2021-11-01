@@ -1,5 +1,3 @@
-import sun.security.pkcs11.Secmod
-
 private const val kotlinVersion = "1.4.31"
 
 object BuildDependencies {
@@ -47,13 +45,11 @@ object Apps {
 
 object Libs {
     private object Versions {
-        const val kotlin = kotlinVersion
         const val material = "1.3.0"
         const val firebaseBom = "27.0.0"
         const val timber = "4.7.1"
     }
 
-    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     const val androidMaterial = "com.google.android.material:material:${Versions.material}"
     const val firebaseBom = "com.google.firebase:firebase-bom:${Versions.firebaseBom}"
     const val firebaseAnalyticsKtx = "com.google.firebase:firebase-analytics-ktx"
@@ -69,6 +65,8 @@ object Libs {
             const val constraintLayout = "2.0.4"
             const val navigationVersion = "2.3.5"
             const val navigationCompose = "1.0.0-alpha10"
+            const val livedata = "2.3.1"
+            const val viewmodel = "2.3.1"
         }
 
         const val core = "androidx.core:core-ktx:${Versions.core}"
@@ -88,6 +86,8 @@ object Libs {
             "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
         const val safeArgs =
             "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationVersion}"
+        const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.livedata}"
+        const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewmodel}"
     }
 
     val di = Di
