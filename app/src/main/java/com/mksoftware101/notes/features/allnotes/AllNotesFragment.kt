@@ -22,7 +22,7 @@ class AllNotesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        notesDb.getNotesDao()
+        val res = notesDb.getNotesDao().getAllNotes()
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 

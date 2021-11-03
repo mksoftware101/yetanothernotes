@@ -21,7 +21,7 @@ object NotesDbModule {
     fun providesDatabaseName() = "notesDb"
 
     @Provides
-    fun bindCreateCallabck(): RoomDatabase.Callback = CreateCallback()
+    fun providesCreateCallabck(): RoomDatabase.Callback = CreateCallback()
 
     @Provides
     fun providesNotesDb(
@@ -31,5 +31,6 @@ object NotesDbModule {
     ): NotesDb =
         Room.databaseBuilder(appContext, NotesDb::class.java, name)
             .addCallback(createCallback)
+            .allowMainThreadQueries() // ToDo Only in early bird stage, remove it afterwards
             .build()
 }
