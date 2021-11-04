@@ -48,6 +48,7 @@ object Libs {
         const val material = "1.3.0"
         const val firebaseBom = "27.0.0"
         const val timber = "4.7.1"
+        const val threeTenAbp = "1.3.1"
     }
 
     const val androidMaterial = "com.google.android.material:material:${Versions.material}"
@@ -55,6 +56,7 @@ object Libs {
     const val firebaseAnalyticsKtx = "com.google.firebase:firebase-analytics-ktx"
     const val firebaseCrashlyticsKtx = "com.google.firebase:firebase-crashlytics-ktx"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+    const val threeTenAbp = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenAbp}"
 
     val androidX = AndroidX
 
