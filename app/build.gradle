@@ -95,6 +95,9 @@ dependencies {
     // timber
     implementation Libs.timber
 
+    // time and date library
+    implementation Libs.threeTenAbp
+
     // room
     implementation Libs.db.room
     kapt Libs.db.roomKapt

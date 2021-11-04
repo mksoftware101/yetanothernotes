@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mksoftware101.notes.R
 import com.mksoftware101.notes.core.db.NotesDb
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -22,12 +23,17 @@ class AllNotesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val res = notesDb.getNotesDao().getAllNotes()
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(AllNotesViewModel::class.java)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val res = notesDb.getNotesDao().getAllNotes()
+        Timber.d("[d] getAllNotes return ${res.size} elements")
     }
 }
