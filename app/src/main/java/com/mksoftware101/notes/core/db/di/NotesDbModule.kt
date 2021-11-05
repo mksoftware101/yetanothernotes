@@ -31,6 +31,5 @@ object NotesDbModule {
     ): NotesDb =
         Room.databaseBuilder(appContext, NotesDb::class.java, name)
             .addCallback(createCallback)
-            .allowMainThreadQueries() // ToDo Only in early bird stage, remove it afterwards
             .build()
 }

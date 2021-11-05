@@ -11,7 +11,7 @@ data class NotesEntity(
     val id: Long,
 
     @ColumnInfo(name = "creation_date")
-    val creationDate: Long,
+    val creationDate: String,
 
     val data: String
 )
