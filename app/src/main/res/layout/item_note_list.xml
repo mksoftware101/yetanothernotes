@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="itemViewModel"
-            type="com.mksoftware101.notes.features.notes.ui.ItemNotesViewModel" />
+            name="vm"
+            type="com.mksoftware101.notes.features.noteList.ui.NoteListItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +16,7 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        android:onClick="@{()->itemViewModel.onClick()}"
+        android:onClick="@{()->vm.onClick()}"
         android:paddingTop="@dimen/marginXS"
         android:paddingBottom="@dimen/marginXS">
 
@@ -24,7 +24,7 @@
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{itemViewModel.title}"
+            android:text="@{vm.title}"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/marginXXS"
-            android:text="@{itemViewModel.creationDate}"
+            android:text="@{vm.creationDate}"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

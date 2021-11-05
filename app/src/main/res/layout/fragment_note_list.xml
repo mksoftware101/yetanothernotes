@@ -6,23 +6,23 @@
     <data>
 
         <variable
-            name="notesViewModel"
-            type="com.mksoftware101.notes.features.notes.ui.NotesViewModel" />
+            name="vm"
+            type="com.mksoftware101.notes.features.noteList.ui.NoteListViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".features.notes.ui.NotesFragment">
+        tools:context=".features.noteList.ui.NoteListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/notesRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/marginS"
-            app:itemBinding="@{notesViewModel.itemBinding}"
-            app:items="@{notesViewModel.items}"
+            app:itemBinding="@{vm.displayItemBinding}"
+            app:items="@{vm.displayItems}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>

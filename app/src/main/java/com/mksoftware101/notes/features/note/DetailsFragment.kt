@@ -1,4 +1,4 @@
-package com.mksoftware101.notes.features.details
+package com.mksoftware101.notes.features.note
 
 import android.os.Bundle
 import android.view.LayoutInflater

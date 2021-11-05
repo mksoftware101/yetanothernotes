@@ -7,16 +7,16 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.mksoftware101.notes.features.notes.ui.NotesFragment"
+        android:name="com.mksoftware101.notes.features.noteList.ui.NoteListFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_notes">
+        tools:layout="@layout/fragment_note_list">
         <action
             android:id="@+id/action_homeFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.mksoftware101.notes.features.details.DetailsFragment"
+        android:name="com.mksoftware101.notes.features.note.DetailsFragment"
         android:label="DetailsFragment"
         tools:layout="@layout/fragment_details" />
 </navigation>
