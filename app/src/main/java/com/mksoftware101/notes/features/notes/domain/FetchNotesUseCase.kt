@@ -1,9 +1,9 @@
-package com.mksoftware101.notes.features.allnotes.domain
+package com.mksoftware101.notes.features.notes.domain
 
 import com.mksoftware101.notes.core.repository.NotesRepository
 import com.mksoftware101.notes.core.usecase.NoParamUseCase
-import com.mksoftware101.notes.features.allnotes.domain.extensions.toNotes
-import com.mksoftware101.notes.features.allnotes.types.Notes
+import com.mksoftware101.notes.features.notes.domain.extensions.toNotes
+import com.mksoftware101.notes.features.notes.types.Notes
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

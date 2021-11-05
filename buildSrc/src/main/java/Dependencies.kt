@@ -49,6 +49,7 @@ object Libs {
         const val firebaseBom = "27.0.0"
         const val timber = "4.7.1"
         const val threeTenAbp = "1.3.1"
+        const val bindingCollectionAdapter = "4.0.0"
     }
 
     const val androidMaterial = "com.google.android.material:material:${Versions.material}"
@@ -57,6 +58,10 @@ object Libs {
     const val firebaseCrashlyticsKtx = "com.google.firebase:firebase-crashlytics-ktx"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     const val threeTenAbp = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenAbp}"
+    const val bindingCollectionAdapter =
+        "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:${Versions.bindingCollectionAdapter}"
+    const val bindingCollectionAdapterRecyclerView =
+        "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:${Versions.bindingCollectionAdapter}"
 
     val androidX = AndroidX
 

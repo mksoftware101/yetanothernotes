@@ -64,9 +64,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-//    buildFeatures {
-//        viewBinding true
-//    }
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -102,6 +102,10 @@ dependencies {
     implementation Libs.db.room
     kapt Libs.db.roomKapt
     implementation Libs.db.roomKtx
+
+    // recyclerview
+    implementation Libs.bindingCollectionAdapter
+    implementation Libs.bindingCollectionAdapterRecyclerView
 
     // tests
     testImplementation TestLibs.junit

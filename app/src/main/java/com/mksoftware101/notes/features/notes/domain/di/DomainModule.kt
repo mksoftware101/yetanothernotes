@@ -1,7 +1,7 @@
-package com.mksoftware101.notes.features.allnotes.domain.di
+package com.mksoftware101.notes.features.notes.domain.di
 
 import com.mksoftware101.notes.core.repository.NotesRepository
-import com.mksoftware101.notes.features.allnotes.domain.FetchNotesUseCase
+import com.mksoftware101.notes.features.notes.domain.FetchNotesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
