@@ -19,36 +19,44 @@ class NoteListViewModel @Inject constructor(
     private val getNoteListUseCase: GetObservableNoteListUseCase
 ) : ViewModel() {
 
-    private val displayItemCallback = object : DiffUtil.ItemCallback<NoteListItemViewModel>() {
-        override fun areItemsTheSame(
-            oldItem: NoteListItemViewModel,
-            newItem: NoteListItemViewModel
-        ): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(
-            oldItem: NoteListItemViewModel,
-            newItem: NoteListItemViewModel
-        ): Boolean {
-            return oldItem.title == newItem.title &&
-                    oldItem.creationDate == newItem.creationDate
-        }
-
-    }
-
-    val displayItems = AsyncDiffObservableList(displayItemCallback)
-    val displayItemBinding = ItemBinding.of<NoteListItemViewModel>(BR.vm, R.layout.item_note_list)
+    val display = Display()
 
     internal fun getNoteList() {
         viewModelScope.launch {
             try {
                 getNoteListUseCase.run().collect { noteList ->
-                    displayItems.update(noteList.toDisplay())
+                    display.update(noteList.toDisplay())
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+        }
+    }
+
+    class Display {
+        private val itemCallback = object : DiffUtil.ItemCallback<NoteListItemViewModel>() {
+            override fun areItemsTheSame(
+                oldItem: NoteListItemViewModel,
+                newItem: NoteListItemViewModel
+            ): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(
+                oldItem: NoteListItemViewModel,
+                newItem: NoteListItemViewModel
+            ): Boolean {
+                return oldItem.title == newItem.title &&
+                        oldItem.creationDate == newItem.creationDate
+            }
+
+        }
+
+        val items = AsyncDiffObservableList(itemCallback)
+        val itemBinding = ItemBinding.of<NoteListItemViewModel>(BR.vm, R.layout.item_note_list)
+
+        fun update(list: List<NoteListItemViewModel>) {
+            items.update(list)
         }
     }
 }

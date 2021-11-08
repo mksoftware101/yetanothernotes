@@ -22,7 +22,7 @@ class NoteListFragment : Fragment() {
     ): View? {
         val binding = DataBindingUtil.inflate<FragmentNoteListBinding>(inflater, R.layout.fragment_note_list, container, false)
         viewModel = ViewModelProvider(this).get(NoteListViewModel::class.java)
-        binding.vm = viewModel
+        binding.viewModel = viewModel
         return binding.root.rootView
     }
 

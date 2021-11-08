@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="vm"
+            name="viewModel"
             type="com.mksoftware101.notes.features.noteList.ui.NoteListViewModel" />
     </data>
 
@@ -21,8 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/marginS"
-            app:itemBinding="@{vm.displayItemBinding}"
-            app:items="@{vm.displayItems}"
+            app:itemBinding="@{viewModel.display.itemBinding}"
+            app:items="@{viewModel.display.items}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>
