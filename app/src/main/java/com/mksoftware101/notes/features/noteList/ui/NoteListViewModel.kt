@@ -21,11 +21,14 @@ class NoteListViewModel @Inject constructor(
     val displayItems = ObservableArrayList<NoteListItemViewModel>()
     val displayItemBinding = ItemBinding.of<NoteListItemViewModel>(BR.vm, R.layout.item_note_list)
 
-    init {
+    internal fun getNoteList() {
         viewModelScope.launch {
             try {
                 getNoteListUseCase.run().collect { noteList ->
-                    displayItems.addAll(noteList.toDisplay())
+                    with(displayItems) {
+                        clear()
+                        addAll(noteList.toDisplay())
+                    }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

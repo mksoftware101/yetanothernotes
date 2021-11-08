@@ -14,13 +14,20 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NoteListFragment : Fragment() {
 
+    private lateinit var viewModel: NoteListViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = DataBindingUtil.inflate<FragmentNoteListBinding>(inflater, R.layout.fragment_note_list, container, false)
-        val noteListViewModel = ViewModelProvider(this).get(NoteListViewModel::class.java)
-        binding.vm = noteListViewModel
+        viewModel = ViewModelProvider(this).get(NoteListViewModel::class.java)
+        binding.vm = viewModel
         return binding.root.rootView
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getNoteList()
     }
 }

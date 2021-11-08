@@ -118,6 +118,46 @@ class CreateCallback : RoomDatabase.Callback() {
                 "Each class includes support for printing and parsing all manner of dates and times."
             )
         },
+        ContentValues().also {
+            it.put("id", 11)
+            it.put("creation_date", now.plusDays(1).plusMinutes(34).format(dateTimeFormatter).toString())
+            it.put(
+                "data",
+                "The LineNumberTable attribute is needed for disambiguating between optimized positions inside methods."
+            )
+        },
+        ContentValues().also {
+            it.put("id", 12)
+            it.put("creation_date", now.plusDays(3).plusMinutes(55).format(dateTimeFormatter).toString())
+            it.put(
+                "data",
+                "The SourceFile attribute is necessary for getting line numbers printed in a stack trace on a virtual machine or device."
+            )
+        },
+        ContentValues().also {
+            it.put("id", 13)
+            it.put("creation_date", now.plusDays(9).minusMinutes(12).format(dateTimeFormatter).toString())
+            it.put(
+                "data",
+                "The actual original source file name is not required when retracing as the mapping file contains the original source file."
+            )
+        },
+        ContentValues().also {
+            it.put("id", 14)
+            it.put("creation_date", now.plusDays(3).minusMinutes(120).format(dateTimeFormatter).toString())
+            it.put(
+                "data",
+                "When publishing your app on Google Play, you can upload the mapping.txt file for each version of your app."
+            )
+        },
+        ContentValues().also {
+            it.put("id", 15)
+            it.put("creation_date", now.plusDays(12).minusMinutes(200).format(dateTimeFormatter).toString())
+            it.put(
+                "data",
+                "Then Google Play will deobfuscate incoming stack traces from user-reported issues so you can review them in the Play Console."
+            )
+        },
     )
 
     override fun onCreate(dataBase: SupportSQLiteDatabase) {
