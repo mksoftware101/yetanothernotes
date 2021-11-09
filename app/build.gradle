@@ -107,6 +107,9 @@ dependencies {
     implementation Libs.bindingCollectionAdapter
     implementation Libs.bindingCollectionAdapterRecyclerView
 
+    // airbnb
+    implementation Libs.airbnbLottie
+
     // tests
     testImplementation TestLibs.junit
     testImplementation TestLibs.room

@@ -10,7 +10,7 @@
             type="com.mksoftware101.notes.features.noteList.ui.NoteListViewModel" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -25,5 +25,12 @@
             app:items="@{viewModel.display.items}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    </LinearLayout>
+        <include
+            layout="@layout/view_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:loading="@{viewModel.display.loadingObservable}"
+            tools:visibility="gone" />
+
+    </FrameLayout>
 </layout>

@@ -39,6 +39,7 @@ class CreateCallback @Inject constructor(
     }
 
     private fun fill() {
+        Thread.sleep(2000)
         values.forEach { notesEntity ->
             db.get().getNotesDao().insert(notesEntity)
         }

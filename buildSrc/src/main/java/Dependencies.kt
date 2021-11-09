@@ -50,6 +50,7 @@ object Libs {
         const val timber = "4.7.1"
         const val threeTenAbp = "1.3.1"
         const val bindingCollectionAdapter = "4.0.0"
+        const val airbnbLottie = "3.4.0"
     }
 
     const val androidMaterial = "com.google.android.material:material:${Versions.material}"
@@ -62,6 +63,7 @@ object Libs {
         "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:${Versions.bindingCollectionAdapter}"
     const val bindingCollectionAdapterRecyclerView =
         "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:${Versions.bindingCollectionAdapter}"
+    const val airbnbLottie = "com.airbnb.android:lottie:${Versions.airbnbLottie}"
 
     val androidX = AndroidX
 
