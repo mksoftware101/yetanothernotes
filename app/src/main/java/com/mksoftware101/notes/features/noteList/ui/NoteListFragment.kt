@@ -25,9 +25,4 @@ class NoteListFragment : Fragment() {
         binding.viewModel = viewModel
         return binding.root.rootView
     }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getNoteList()
-    }
 }

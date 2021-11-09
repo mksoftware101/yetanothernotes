@@ -21,7 +21,7 @@ class NoteListViewModel @Inject constructor(
 
     val display = Display()
 
-    internal fun getNoteList() {
+    init {
         viewModelScope.launch {
             try {
                 getNoteListUseCase.run().collect { noteList ->
