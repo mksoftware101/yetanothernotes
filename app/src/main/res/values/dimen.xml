@@ -10,4 +10,7 @@
     <dimen name="textXXS">12sp</dimen>
     <dimen name="textXS">14sp</dimen>
     <dimen name="textL">34sp</dimen>
+
+    <dimen name="notesListItemIconSize">40dp</dimen>
+    <dimen name="notesListItemLetterSize">18sp</dimen>
 </resources>

@@ -20,16 +20,26 @@
         android:paddingTop="@dimen/marginXS"
         android:paddingBottom="@dimen/marginXS">
 
+        <include
+            android:id="@+id/letterIcon"
+            layout="@layout/item_notes_list_icon"
+            app:background="@{vm.color}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:letter="@{vm.letter}" />
+
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginS"
             android:text="@{vm.title}"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/letterIcon"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Notes title" />
 
@@ -43,7 +53,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/titleTextView"
             app:layout_constraintTop_toBottomOf="@+id/titleTextView"
             tools:text="05.11.2021" />
     </androidx.constraintlayout.widget.ConstraintLayout>

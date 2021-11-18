@@ -76,7 +76,7 @@ class NoteListViewModel @Inject constructor(
         }
 
         val items = AsyncDiffObservableList(itemCallback)
-        val itemBinding = ItemBinding.of<NoteListItemViewModel>(BR.vm, R.layout.item_note_list)
+        val itemBinding = ItemBinding.of<NoteListItemViewModel>(BR.vm, R.layout.item_notes_list)
 
         var loadingObservable = ObservableBoolean(false)
 

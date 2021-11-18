@@ -5,6 +5,6 @@ import com.mksoftware101.notes.features.noteList.ui.NoteListItemViewModel
 
 fun NoteList.toDisplay() : List<NoteListItemViewModel> {
     return map {
-        NoteListItemViewModel(it.content.substring(0, 8), it.creationDate, it.id)
+        NoteListItemViewModel(it.content.substring(0, 8), it.creationDate, it.id, letter = it.content.take(1))
     }
 }
