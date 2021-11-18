@@ -82,6 +82,7 @@ dependencies {
     implementation Libs.androidMaterial
     implementation Libs.androidX.livedata
     implementation Libs.androidX.viewmodel
+    implementation Libs.androidX.swipeToRefresh
 
     // di
     implementation Libs.di.hilt

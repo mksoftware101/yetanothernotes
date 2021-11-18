@@ -76,6 +76,7 @@ object Libs {
             const val navigationCompose = "1.0.0-alpha10"
             const val livedata = "2.3.1"
             const val viewmodel = "2.3.1"
+            const val swipeToRefresh = "1.1.0"
         }
 
         const val core = "androidx.core:core-ktx:${Versions.core}"
@@ -97,6 +98,7 @@ object Libs {
             "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationVersion}"
         const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.livedata}"
         const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewmodel}"
+        const val swipeToRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeToRefresh}"
     }
 
     val di = Di
