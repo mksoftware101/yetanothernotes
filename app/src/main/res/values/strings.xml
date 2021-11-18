@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
  Loco xml export: Android string resources
  Project: YetAnotherNotes
  Release: Working copy
  Locale: en-GB, English (UK)
  Exported by: Marek
- Exported at: Sat, 08 May 2021 11:31:29 +0200
+ Exported at: Thu, 18 Nov 2021 18:27:15 +0100
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="appName">YetAnotherNotes</string>
@@ -12,4 +13,6 @@
     <string name="splashVendor">mk.software101</string>
     <string name="menuHome">Home</string>
     <string name="menuFavourite">Favourite</string>
+    <string name="snackbarRetryBtn">Retry</string>
+    <string name="snackbarDbError">Error while get notes list</string>
 </resources>

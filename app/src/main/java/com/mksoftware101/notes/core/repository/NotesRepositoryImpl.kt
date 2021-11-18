@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 class NotesRepositoryImpl(private val db: NotesDb) : NotesRepository {
 
-    override fun getAllNotes(): Flow<List<NotesEntity>> = db.getNotesDao().getAllNotes()
+    override fun getDbEntityList(): Flow<List<NotesEntity>> = db.getNotesDao().getAllNotes()
 }

@@ -64,9 +64,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-//    buildFeatures {
-//        viewBinding true
-//    }
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -82,6 +82,7 @@ dependencies {
     implementation Libs.androidMaterial
     implementation Libs.androidX.livedata
     implementation Libs.androidX.viewmodel
+    implementation Libs.androidX.swipeToRefresh
 
     // di
     implementation Libs.di.hilt
@@ -102,6 +103,13 @@ dependencies {
     implementation Libs.db.room
     kapt Libs.db.roomKapt
     implementation Libs.db.roomKtx
+
+    // recyclerview
+    implementation Libs.bindingCollectionAdapter
+    implementation Libs.bindingCollectionAdapterRecyclerView
+
+    // airbnb
+    implementation Libs.airbnbLottie
 
     // tests
     testImplementation TestLibs.junit

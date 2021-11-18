@@ -49,6 +49,8 @@ object Libs {
         const val firebaseBom = "27.0.0"
         const val timber = "4.7.1"
         const val threeTenAbp = "1.3.1"
+        const val bindingCollectionAdapter = "4.0.0"
+        const val airbnbLottie = "3.4.0"
     }
 
     const val androidMaterial = "com.google.android.material:material:${Versions.material}"
@@ -57,6 +59,11 @@ object Libs {
     const val firebaseCrashlyticsKtx = "com.google.firebase:firebase-crashlytics-ktx"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
     const val threeTenAbp = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenAbp}"
+    const val bindingCollectionAdapter =
+        "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:${Versions.bindingCollectionAdapter}"
+    const val bindingCollectionAdapterRecyclerView =
+        "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:${Versions.bindingCollectionAdapter}"
+    const val airbnbLottie = "com.airbnb.android:lottie:${Versions.airbnbLottie}"
 
     val androidX = AndroidX
 
@@ -69,6 +76,7 @@ object Libs {
             const val navigationCompose = "1.0.0-alpha10"
             const val livedata = "2.3.1"
             const val viewmodel = "2.3.1"
+            const val swipeToRefresh = "1.1.0"
         }
 
         const val core = "androidx.core:core-ktx:${Versions.core}"
@@ -90,6 +98,7 @@ object Libs {
             "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationVersion}"
         const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.livedata}"
         const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewmodel}"
+        const val swipeToRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeToRefresh}"
     }
 
     val di = Di
