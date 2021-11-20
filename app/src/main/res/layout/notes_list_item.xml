@@ -34,11 +34,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/marginS"
+            android:layout_marginEnd="@dimen/marginS"
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"
             android:text="@{vm.title}"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/favouriteIcon"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@+id/circleLetter"
             app:layout_constraintTop_toTopOf="parent"
@@ -52,10 +53,20 @@
             android:layout_marginTop="@dimen/marginXXS"
             android:text="@{vm.creationDate}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@+id/titleTextView"
             app:layout_constraintTop_toBottomOf="@+id/titleTextView"
             tools:text="05.11.2021" />
+
+        <CheckBox
+            android:id="@+id/favouriteIcon"
+            android:layout_width="@dimen/notesListItemFavouriteIconSize"
+            android:layout_height="@dimen/notesListItemFavouriteIconSize"
+            android:layout_gravity="center"
+            android:button="@drawable/ic_favourite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

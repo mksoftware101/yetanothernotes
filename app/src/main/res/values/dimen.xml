@@ -13,4 +13,6 @@
 
     <dimen name="notesListItemIconSize">40dp</dimen>
     <dimen name="notesListItemLetterSize">18sp</dimen>
+    <dimen name="notesListItemFavouriteIconSize">24dp</dimen>
+    <dimen name="notesListItemFavouriteContainserSize">40dp</dimen>
 </resources>
