@@ -15,4 +15,15 @@
 
     <color name="primaryText">#CCCCCC</color>
     <color name="secondaryText">#999999</color>
+
+    <!-- region Letter colors -->
+    <color name="color1">#2a9d8f</color>
+    <color name="color2">#6a994e</color>
+    <color name="color3">#e76f51</color>
+    <color name="color4">#264653</color>
+    <color name="color5">#a68a64</color>
+    <color name="color6">#457b9d</color>
+    <color name="color7">#14213d</color>
+    <color name="color_default">#9e2a2b</color>
+    <!-- endregion -->
 </resources>

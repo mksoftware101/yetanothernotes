@@ -20,14 +20,16 @@
         android:paddingTop="@dimen/marginXS"
         android:paddingBottom="@dimen/marginXS">
 
-        <include
+        <com.mksoftware101.notes.core.ui.components.CircleLetter
             android:id="@+id/letterIcon"
-            layout="@layout/item_notes_list_icon"
-            app:background="@{vm.color}"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/marginS"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:letter="@{vm.letter}" />
+            app:letter="@{vm.letter}"
+            tools:letter="A"/>
 
         <TextView
             android:id="@+id/titleTextView"
