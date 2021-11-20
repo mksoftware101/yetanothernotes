@@ -17,41 +17,40 @@
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:onClick="@{()->vm.onClick()}"
-        android:paddingTop="@dimen/marginXS"
-        android:paddingBottom="@dimen/marginXS">
+        android:padding="@dimen/marginS">
 
         <com.mksoftware101.notes.core.ui.components.CircleLetter
-            android:id="@+id/letterIcon"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="@dimen/marginS"
-            android:layout_height="wrap_content"
+            android:id="@+id/circleLetter"
+            android:layout_width="@dimen/notesListItemIconSize"
+            android:layout_height="@dimen/notesListItemIconSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:letter="@{vm.letter}"
-            tools:letter="A"/>
+            app:letter="@{vm.letter}" />
 
         <TextView
             android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
+            style="@style/ListItemTitleText"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/marginS"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
             android:text="@{vm.title}"
-            android:textColor="@color/black"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toEndOf="@+id/letterIcon"
+            app:layout_constraintStart_toEndOf="@+id/circleLetter"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Notes title" />
+            tools:text="@tools:sample/lorem[20]" />
 
         <TextView
             android:id="@+id/creationDateTextView"
+            style="@style/ListItemCaption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/marginXXS"
             android:text="@{vm.creationDate}"
-            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"

@@ -30,9 +30,16 @@ class CircleLetter @JvmOverloads constructor(
 
     init {
         val circleLetterAttributes = context.obtainStyledAttributes(attrs, R.styleable.CircleLetter)
+        val letterText = circleLetterAttributes.getString(R.styleable.CircleLetter_letter) ?: ""
+        setLetter(letterText)
         circleLetterAttributes.recycle()
     }
 
+    /**
+     * Set upper case letter to the center of a view.
+     *
+     * @param letterText String contains letter or some string from which first letter will be extracted.
+     * */
     fun setLetter(letterText: String) {
         var letterColorId: Int = R.color.color_default
         if (letterText.isNotBlank() && letterText[0].isLetter()) {
@@ -41,6 +48,6 @@ class CircleLetter @JvmOverloads constructor(
             layout.letterTextView.text = letter.toString()
         }
         layout.circleLetterLayout.backgroundTintList =
-            context.resources.getColorStateList(letterColorId)
+            context.resources.getColorStateList(letterColorId, context.theme)
     }
 }
