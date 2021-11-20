@@ -16,6 +16,11 @@
     <color name="primaryText">#CCCCCC</color>
     <color name="secondaryText">#999999</color>
 
+    <color name="transparent">#00000000</color>
+    <color name="transparentF">#0F000000</color>
+
+    <color name="gray1">#D3D3D3</color>
+
     <!-- region Letter colors -->
     <color name="color1">#2a9d8f</color>
     <color name="color2">#6a994e</color>
