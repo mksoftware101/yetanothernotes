@@ -20,6 +20,7 @@
     <color name="transparentF">#0F000000</color>
 
     <color name="gray1">#D3D3D3</color>
+    <color name="red1">#8D0101</color>
 
     <!-- region Letter colors -->
     <color name="color1">#2a9d8f</color>

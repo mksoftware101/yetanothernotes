@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.mksoftware101.notes.R
 import com.mksoftware101.notes.databinding.FragmentNoteListBinding
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class NoteListFragment : Fragment() {
@@ -33,6 +36,16 @@ class NoteListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         startObserveError()
         setupSwipeToRefresh()
+        setupSwipeToDelete()
+    }
+
+    private fun setupSwipeToDelete() {
+        val itemTouchHelper = ItemTouchHelper(object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                viewModel.onRemove(viewHolder.adapterPosition)
+            }
+        })
+        itemTouchHelper.attachToRecyclerView(viewBinding.notesRecyclerView)
     }
 
     private fun startObserveError() {
