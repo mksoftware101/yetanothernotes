@@ -36,6 +36,11 @@ class NoteListViewModel @Inject constructor(
         getNoteList()
     }
 
+    fun onRemove(index: Int) {
+        display.remove(index)
+        // ToDo Add remove index from Db
+    }
+
     private fun getNoteList() {
         viewModelScope.launch {
             try {
@@ -76,7 +81,7 @@ class NoteListViewModel @Inject constructor(
         }
 
         val items = AsyncDiffObservableList(itemCallback)
-        val itemBinding = ItemBinding.of<NoteListItemViewModel>(BR.vm, R.layout.item_note_list)
+        val itemBinding = ItemBinding.of<NoteListItemViewModel>(BR.vm, R.layout.notes_list_item)
 
         var loadingObservable = ObservableBoolean(false)
 
@@ -88,6 +93,14 @@ class NoteListViewModel @Inject constructor(
 
         fun update(list: List<NoteListItemViewModel>) {
             items.update(list)
+        }
+
+        fun remove(index: Int) {
+            val modifiedItems = mutableListOf<NoteListItemViewModel>().apply {
+                addAll(items.toList())
+                removeAt(index)
+            }
+            items.update(modifiedItems)
         }
     }
 }

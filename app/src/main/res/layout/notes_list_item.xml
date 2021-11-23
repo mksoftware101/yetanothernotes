@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.mksoftware101.notes.features.noteList.ui.NoteListItemViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/notes_list_item_background"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="@drawable/notes_list_item_selectable"
+        android:onClick="@{()->vm.onClick()}"
+        android:padding="@dimen/marginS">
+
+        <com.mksoftware101.notes.core.ui.components.CircleLetter
+            android:id="@+id/circleLetter"
+            android:layout_width="@dimen/notesListItemIconSize"
+            android:layout_height="@dimen/notesListItemIconSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:letter="@{vm.letter}" />
+
+        <TextView
+            android:id="@+id/titleTextView"
+            style="@style/ListItemTitleText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginS"
+            android:layout_marginEnd="@dimen/marginS"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@{vm.title}"
+            app:layout_constraintEnd_toStartOf="@+id/favouriteIcon"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/circleLetter"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/lorem[20]" />
+
+        <TextView
+            android:id="@+id/creationDateTextView"
+            style="@style/ListItemCaption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginXXS"
+            android:text="@{vm.creationDate}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@+id/titleTextView"
+            app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+            tools:text="05.11.2021" />
+
+        <CheckBox
+            android:id="@+id/favouriteIcon"
+            android:layout_width="@dimen/notesListItemFavouriteIconSize"
+            android:layout_height="@dimen/notesListItemFavouriteIconSize"
+            android:layout_gravity="center"
+            android:button="@drawable/ic_favourite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
