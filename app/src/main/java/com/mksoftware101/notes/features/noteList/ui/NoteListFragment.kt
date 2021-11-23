@@ -13,7 +13,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.mksoftware101.notes.R
 import com.mksoftware101.notes.databinding.FragmentNoteListBinding
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class NoteListFragment : Fragment() {
