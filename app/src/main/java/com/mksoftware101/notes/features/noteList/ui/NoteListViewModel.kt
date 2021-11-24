@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mksoftware101.notes.R
 import com.mksoftware101.notes.features.noteList.data.Note
 import com.mksoftware101.notes.features.noteList.data.types.NoteList
 import com.mksoftware101.notes.features.noteList.domain.GetObservableNotesListUseCase
@@ -15,6 +16,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,8 +28,8 @@ class NoteListViewModel @Inject constructor(
     val recyclerViewHelper = NotesListRecyclerViewHelper()
     var loading = ObservableBoolean(false)
 
-    private val _error = MutableLiveData<Boolean>()
-    val error: LiveData<Boolean> = _error
+    private val _error = MutableLiveData<NotesListError>()
+    val error: LiveData<NotesListError> = _error
 
     private val notesList = mutableListOf<Note>()
 
@@ -40,15 +42,18 @@ class NoteListViewModel @Inject constructor(
     }
 
     fun onRemove(index: Int) {
-        if (notesList.isIndexOutOfRange(index))
-            return // ToDo Send error message
+        if (notesList.isIndexOutOfRange(index)) {
+            RemoveNoteError(R.string.errorRemoveNoteGeneral)
+            return
+        }
 
         recyclerViewHelper.remove(index)
         viewModelScope.launch {
             try {
                 removeNoteUseCase.run(notesList[index])
             } catch (e: Exception) {
-                e.printStackTrace() // ToDo Send error message and log error by Timber
+                Timber.e(e, "Error while remove note")
+                RemoveNoteError(R.string.errorRemoveNoteFromDb)
             }
         }
     }
@@ -59,14 +64,13 @@ class NoteListViewModel @Inject constructor(
                 getNotesListUseCase.run()
                     .onStart {
                         loading.set(true)
-                        _error.value = false
                     }.collect { list ->
                         loading.set(false)
                         update(list)
                     }
             } catch (e: Exception) {
                 e.printStackTrace()
-                _error.value = true
+                _error.value = GetNotesListError
             }
         }
     }

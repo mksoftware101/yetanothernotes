@@ -35,7 +35,7 @@
             layout="@layout/view_loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:loading="@{viewModel.loadingObservable}"
+            android:loading="@{viewModel.loading}"
             tools:visibility="gone" />
 
     </FrameLayout>

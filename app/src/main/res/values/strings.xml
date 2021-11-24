@@ -5,7 +5,7 @@
  Release: Working copy
  Locale: en-GB, English (UK)
  Exported by: Marek
- Exported at: Thu, 18 Nov 2021 18:27:15 +0100
+ Exported at: Wed, 24 Nov 2021 22:23:00 +0100
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="appName">YetAnotherNotes</string>
@@ -14,5 +14,7 @@
     <string name="menuHome">Home</string>
     <string name="menuFavourite">Favourite</string>
     <string name="snackbarRetryBtn">Retry</string>
-    <string name="snackbarDbError">Error while get notes list</string>
+    <string name="errorGetNotesList">Error while get notes list</string>
+    <string name="errorRemoveNoteGeneral">Remove note error</string>
+    <string name="errorRemoveNoteFromDb">Remove note from database error</string>
 </resources>
