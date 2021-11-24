@@ -7,4 +7,8 @@ import kotlinx.coroutines.flow.Flow
 class NotesRepositoryImpl(private val db: NotesDb) : NotesRepository {
 
     override fun getDbEntityList(): Flow<List<NotesEntity>> = db.getNotesDao().getAllNotes()
+
+    override suspend fun remove(entity: NotesEntity) {
+        db.getNotesDao().delete(entity)
+    }
 }

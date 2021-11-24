@@ -60,14 +60,14 @@ class NoteListFragment : Fragment() {
     private fun setupSwipeToRefresh() {
         viewBinding.swipeToRefresh.setOnRefreshListener {
             viewBinding.swipeToRefresh.isRefreshing = false
-            viewModel.refresh()
+            viewModel.onRefresh()
         }
     }
 
     private fun showErrorSnackbar() {
         errorSnackbar =
             Snackbar.make(viewBinding.root, R.string.snackbarDbError, Snackbar.LENGTH_LONG)
-                .setAction(R.string.snackbarRetryBtn) { viewModel.refresh() }
+                .setAction(R.string.snackbarRetryBtn) { viewModel.onRefresh() }
                 .also { it.show() }
     }
 
