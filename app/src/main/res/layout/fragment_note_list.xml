@@ -26,8 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/marginS"
-                app:itemBinding="@{viewModel.display.itemBinding}"
-                app:items="@{viewModel.display.items}"
+                app:itemBinding="@{viewModel.recyclerViewHelper.itemBinding}"
+                app:items="@{viewModel.recyclerViewHelper.items}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -35,7 +35,7 @@
             layout="@layout/view_loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:loading="@{viewModel.display.loadingObservable}"
+            android:loading="@{viewModel.loading}"
             tools:visibility="gone" />
 
     </FrameLayout>

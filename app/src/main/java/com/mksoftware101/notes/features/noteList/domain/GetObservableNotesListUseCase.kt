@@ -7,8 +7,9 @@ import com.mksoftware101.notes.features.noteList.data.types.ObservableNoteList
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 
-class GetObservableNoteListUseCase(private val repository: NotesRepository) :
-    NoParamUseCase<ObservableNoteList> {
+class GetObservableNotesListUseCase(
+    private val repository: NotesRepository
+) : NoParamUseCase<ObservableNoteList> {
 
     override fun run(): ObservableNoteList {
         return repository.getDbEntityList()

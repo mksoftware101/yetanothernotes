@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,7 +21,6 @@ class NoteListFragment : Fragment() {
 
     private val viewModel: NoteListViewModel by viewModels()
     private lateinit var viewBinding: FragmentNoteListBinding
-    private var errorSnackbar: Snackbar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,11 +49,10 @@ class NoteListFragment : Fragment() {
     }
 
     private fun startObserveError() {
-        viewModel.error.observe(viewLifecycleOwner, { isError ->
-            if (isError) {
-                showErrorSnackbar()
-            } else {
-                hideErrorSnackbar()
+        viewModel.error.observe(viewLifecycleOwner, { error ->
+            when (error) {
+                is GetNotesListError -> showErrorSnackbar()
+                is RemoveNoteError -> showErrorSnackbar(error.messageResId)
             }
         })
     }
@@ -60,18 +60,17 @@ class NoteListFragment : Fragment() {
     private fun setupSwipeToRefresh() {
         viewBinding.swipeToRefresh.setOnRefreshListener {
             viewBinding.swipeToRefresh.isRefreshing = false
-            viewModel.refresh()
+            viewModel.onRefresh()
         }
     }
 
     private fun showErrorSnackbar() {
-        errorSnackbar =
-            Snackbar.make(viewBinding.root, R.string.snackbarDbError, Snackbar.LENGTH_LONG)
-                .setAction(R.string.snackbarRetryBtn) { viewModel.refresh() }
-                .also { it.show() }
+        Snackbar.make(viewBinding.root, R.string.errorGetNotesList, Snackbar.LENGTH_LONG)
+            .setAction(R.string.snackbarRetryBtn) { viewModel.onRefresh() }
+            .also { it.show() }
     }
 
-    private fun hideErrorSnackbar() {
-        errorSnackbar?.dismiss()
+    private fun showErrorSnackbar(@StringRes messageResId: Int) {
+        Snackbar.make(viewBinding.root, messageResId, Snackbar.LENGTH_LONG).show()
     }
 }

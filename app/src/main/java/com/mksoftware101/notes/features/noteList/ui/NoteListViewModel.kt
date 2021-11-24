@@ -5,102 +5,81 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.recyclerview.widget.DiffUtil
-import com.mksoftware101.notes.BR
 import com.mksoftware101.notes.R
-import com.mksoftware101.notes.features.noteList.domain.GetObservableNoteListUseCase
-import com.mksoftware101.notes.features.noteList.ui.extensions.toDisplay
+import com.mksoftware101.notes.features.noteList.data.Note
+import com.mksoftware101.notes.features.noteList.data.types.NoteList
+import com.mksoftware101.notes.features.noteList.domain.GetObservableNotesListUseCase
+import com.mksoftware101.notes.features.noteList.domain.RemoveNoteUseCase
+import com.mksoftware101.notes.features.noteList.domain.extensions.isIndexOutOfRange
+import com.mksoftware101.notes.features.noteList.ui.extensions.toItemsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-import me.tatarka.bindingcollectionadapter2.ItemBinding
-import me.tatarka.bindingcollectionadapter2.collections.AsyncDiffObservableList
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class NoteListViewModel @Inject constructor(
-    private val getNoteListUseCase: GetObservableNoteListUseCase
+    private val getNotesListUseCase: GetObservableNotesListUseCase,
+    private val removeNoteUseCase: RemoveNoteUseCase,
 ) : ViewModel() {
 
-    val display = Display()
+    val recyclerViewHelper = NotesListRecyclerViewHelper()
+    var loading = ObservableBoolean(false)
 
-    private val _error = MutableLiveData<Boolean>()
-    val error: LiveData<Boolean> = _error
+    private val _error = MutableLiveData<NotesListError>()
+    val error: LiveData<NotesListError> = _error
+
+    private val notesList = mutableListOf<Note>()
 
     init {
-        getNoteList()
+        getNotesList()
     }
 
-    fun refresh() {
-        getNoteList()
+    fun onRefresh() {
+        getNotesList()
     }
 
     fun onRemove(index: Int) {
-        display.remove(index)
-        // ToDo Add remove index from Db
-    }
+        if (notesList.isIndexOutOfRange(index)) {
+            RemoveNoteError(R.string.errorRemoveNoteGeneral)
+            return
+        }
 
-    private fun getNoteList() {
+        recyclerViewHelper.remove(index)
         viewModelScope.launch {
             try {
-                getNoteListUseCase.run()
+                removeNoteUseCase.run(notesList[index])
+            } catch (e: Exception) {
+                Timber.e(e, "Error while remove note")
+                RemoveNoteError(R.string.errorRemoveNoteFromDb)
+            }
+        }
+    }
+
+    private fun getNotesList() {
+        viewModelScope.launch {
+            try {
+                getNotesListUseCase.run()
                     .onStart {
-                        display.loading = true
-                        _error.value = false
-                    }.collect { noteList ->
-                        with(display) {
-                            loading = false
-                            update(noteList.toDisplay())
-                        }
+                        loading.set(true)
+                    }.collect { list ->
+                        loading.set(false)
+                        update(list)
                     }
             } catch (e: Exception) {
                 e.printStackTrace()
-                _error.value = true
+                _error.value = GetNotesListError
             }
         }
     }
 
-    class Display {
-        private val itemCallback = object : DiffUtil.ItemCallback<NoteListItemViewModel>() {
-            override fun areItemsTheSame(
-                oldItem: NoteListItemViewModel,
-                newItem: NoteListItemViewModel
-            ): Boolean {
-                return oldItem.id == newItem.id
-            }
-
-            override fun areContentsTheSame(
-                oldItem: NoteListItemViewModel,
-                newItem: NoteListItemViewModel
-            ): Boolean {
-                return oldItem.title == newItem.title &&
-                        oldItem.creationDate == newItem.creationDate
-            }
-
+    private fun update(list: NoteList) {
+        with(notesList) {
+            clear()
+            addAll(list)
         }
-
-        val items = AsyncDiffObservableList(itemCallback)
-        val itemBinding = ItemBinding.of<NoteListItemViewModel>(BR.vm, R.layout.notes_list_item)
-
-        var loadingObservable = ObservableBoolean(false)
-
-        var loading: Boolean = false
-            set(value) {
-                field = value
-                loadingObservable.set(value)
-            }
-
-        fun update(list: List<NoteListItemViewModel>) {
-            items.update(list)
-        }
-
-        fun remove(index: Int) {
-            val modifiedItems = mutableListOf<NoteListItemViewModel>().apply {
-                addAll(items.toList())
-                removeAt(index)
-            }
-            items.update(modifiedItems)
-        }
+        recyclerViewHelper.items.update(list.toItemsViewModel())
     }
 }
