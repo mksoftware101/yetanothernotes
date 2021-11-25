@@ -28,8 +28,11 @@ class NoteListViewModel @Inject constructor(
     val recyclerViewHelper = NotesListRecyclerViewHelper()
     var loading = ObservableBoolean(false)
 
-    private val _error = MutableLiveData<NotesListError>()
-    val error: LiveData<NotesListError> = _error
+    private val _error = MutableLiveData<NotesListErrorState>()
+    val error: LiveData<NotesListErrorState> = _error
+
+    private val _success = MutableLiveData<NotesListSuccessState>()
+    val success: LiveData<NotesListSuccessState> = _success
 
     private val notesList = mutableListOf<Note>()
 
@@ -51,8 +54,9 @@ class NoteListViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 removeNoteUseCase.run(notesList[index])
+                _success.value = RemoveNoteSuccessState
             } catch (e: Exception) {
-                Timber.e(e, "Error while remove note")
+                Timber.e(e, "Error while remove note from db")
                 RemoveNoteError(R.string.errorRemoveNoteFromDb)
             }
         }

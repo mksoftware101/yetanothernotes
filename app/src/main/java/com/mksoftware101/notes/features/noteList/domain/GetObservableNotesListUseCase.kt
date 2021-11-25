@@ -13,7 +13,7 @@ class GetObservableNotesListUseCase(
 
     override fun run(): ObservableNoteList {
         return repository.getDbEntityList()
-            .filter { it.isNotEmpty() }
+//            .filter { it.isNotEmpty() } // When list is empty, then loader doesn't hide because of this filter
             .map { it.toNoteList() }
     }
 }
