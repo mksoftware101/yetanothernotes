@@ -44,6 +44,10 @@ class NoteListViewModel @Inject constructor(
         getNotesList()
     }
 
+    fun onAdd() {
+
+    }
+
     fun onRemove(index: Int) {
         if (notesList.isIndexOutOfRange(index)) {
             RemoveNoteError(R.string.errorRemoveNoteGeneral)

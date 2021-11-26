@@ -5,7 +5,7 @@
  Release: Working copy
  Locale: en-GB, English (UK)
  Exported by: Marek
- Exported at: Thu, 25 Nov 2021 16:49:48 +0100
+ Exported at: Fri, 26 Nov 2021 18:14:08 +0100
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="appName">YetAnotherNotes</string>
@@ -18,4 +18,5 @@
     <string name="errorRemoveNoteGeneral">Remove note error</string>
     <string name="errorRemoveNoteFromDb">Remove note from database error</string>
     <string name="successRemoveNote">Note has been removed</string>
+    <string name="fabCreate">Create</string>
 </resources>

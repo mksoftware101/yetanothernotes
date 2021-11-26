@@ -15,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.mksoftware101.notes.R
 import com.mksoftware101.notes.databinding.FragmentNoteListBinding
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class NoteListFragment : Fragment() {
@@ -38,6 +39,25 @@ class NoteListFragment : Fragment() {
         startObserveSuccess()
         setupSwipeToRefresh()
         setupSwipeToDelete()
+        viewBinding.notesRecyclerView.addOnScrollListener( object :
+            RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+//                Timber.d("[d] $dx $dy")
+            }
+        })
+
+        viewBinding.notesRecyclerView.onFlingListener = object: RecyclerView.OnFlingListener() {
+            override fun onFling(velocityX: Int, velocityY: Int): Boolean {
+                Timber.d("[d] velocity: $velocityX $velocityY")
+                if (velocityY > 0) {
+                    viewBinding.addNoteFab.shrink()
+                } else if (velocityY < 0) {
+                    viewBinding.addNoteFab.extend()
+                }
+                return true
+            }
+        }
     }
 
     private fun setupSwipeToDelete() {
