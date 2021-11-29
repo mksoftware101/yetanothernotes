@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.BaseTransientBottomBar.Duration
 import com.google.android.material.snackbar.Snackbar
 import com.mksoftware101.notes.R
@@ -21,6 +23,7 @@ import timber.log.Timber
 class NoteListFragment : Fragment() {
 
     private val viewModel: NoteListViewModel by viewModels()
+    private val fabInterpolator = AccelerateDecelerateInterpolator()
     private lateinit var viewBinding: FragmentNoteListBinding
 
     override fun onCreateView(
@@ -39,21 +42,16 @@ class NoteListFragment : Fragment() {
         startObserveSuccess()
         setupSwipeToRefresh()
         setupSwipeToDelete()
-        viewBinding.notesRecyclerView.addOnScrollListener( object :
-            RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-//                Timber.d("[d] $dx $dy")
-            }
-        })
+        setupOnFlingListener()
+    }
 
-        viewBinding.notesRecyclerView.onFlingListener = object: RecyclerView.OnFlingListener() {
+    private fun setupOnFlingListener() {
+        viewBinding.notesRecyclerView.onFlingListener = object : RecyclerView.OnFlingListener() {
             override fun onFling(velocityX: Int, velocityY: Int): Boolean {
-                Timber.d("[d] velocity: $velocityX $velocityY")
                 if (velocityY > 0) {
-                    viewBinding.addNoteFab.shrink()
+                    viewBinding.fab.shrink()
                 } else if (velocityY < 0) {
-                    viewBinding.addNoteFab.extend()
+                    viewBinding.fab.extend()
                 }
                 return true
             }
@@ -103,6 +101,22 @@ class NoteListFragment : Fragment() {
     }
 
     private fun showSnackbar(@StringRes messageResId: Int, @Duration duration: Int) {
-        Snackbar.make(viewBinding.root, messageResId, duration).show()
+        val snackbar = Snackbar.make(viewBinding.root, messageResId, duration)
+        snackbar.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+            override fun onShown(transientBottomBar: Snackbar?) {
+                super.onShown(transientBottomBar)
+                val delta: Float = viewBinding.fab.translationY - snackbar.view.height
+                viewBinding.fab
+                    .animate().translationY(delta).setInterpolator(fabInterpolator).start()
+            }
+
+            override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                super.onDismissed(transientBottomBar, event)
+                val delta: Float = viewBinding.fab.translationY + snackbar.view.height
+                viewBinding.fab
+                    .animate().translationY(delta).setInterpolator(fabInterpolator).start()
+            }
+        })
+        snackbar.show()
     }
 }
