@@ -9,6 +9,7 @@ import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.distinctUntilChanged
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -26,6 +27,11 @@ class NoteListFragment : Fragment() {
     private val fabInterpolator = AccelerateDecelerateInterpolator()
     private lateinit var viewBinding: FragmentNoteListBinding
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.setObserversToIdle()
+    }
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -101,22 +107,23 @@ class NoteListFragment : Fragment() {
     }
 
     private fun showSnackbar(@StringRes messageResId: Int, @Duration duration: Int) {
-        val snackbar = Snackbar.make(viewBinding.root, messageResId, duration)
-        snackbar.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
-            override fun onShown(transientBottomBar: Snackbar?) {
-                super.onShown(transientBottomBar)
-                val delta: Float = viewBinding.fab.translationY - snackbar.view.height
-                viewBinding.fab
-                    .animate().translationY(delta).setInterpolator(fabInterpolator).start()
-            }
+        Snackbar.make(viewBinding.root, messageResId, duration)
+            .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                override fun onShown(snackbar: Snackbar?) {
+                    super.onShown(snackbar)
+                    val delta: Float =
+                        viewBinding.fab.translationY - (snackbar?.view?.height?.toFloat() ?: 0.0f)
+                    viewBinding.fab
+                        .animate().translationY(delta).setInterpolator(fabInterpolator).start()
+                }
 
-            override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                super.onDismissed(transientBottomBar, event)
-                val delta: Float = viewBinding.fab.translationY + snackbar.view.height
-                viewBinding.fab
-                    .animate().translationY(delta).setInterpolator(fabInterpolator).start()
-            }
-        })
-        snackbar.show()
+                override fun onDismissed(snackbar: Snackbar?, event: Int) {
+                    super.onDismissed(snackbar, event)
+                    val delta: Float =
+                        viewBinding.fab.translationY + (snackbar?.view?.height?.toFloat() ?: 0.0f)
+                    viewBinding.fab
+                        .animate().translationY(delta).setInterpolator(fabInterpolator).start()
+                }
+            }).show()
     }
 }

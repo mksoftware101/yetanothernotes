@@ -48,6 +48,11 @@ class NoteListViewModel @Inject constructor(
 
     }
 
+    fun setObserversToIdle() {
+        _success.value = IdleNoteSuccessState
+        _error.value = IdleNoteErrorState
+    }
+
     fun onRemove(index: Int) {
         if (notesList.isIndexOutOfRange(index)) {
             RemoveNoteError(R.string.errorRemoveNoteGeneral)
