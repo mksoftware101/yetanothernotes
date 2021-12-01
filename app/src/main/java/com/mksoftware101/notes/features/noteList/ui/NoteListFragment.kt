@@ -66,9 +66,9 @@ class NoteListFragment : Fragment() {
         viewBinding.notesRecyclerView.onFlingListener = object : RecyclerView.OnFlingListener() {
             override fun onFling(velocityX: Int, velocityY: Int): Boolean {
                 if (velocityY > 0) {
-                    viewBinding.fab.shrink()
-                } else if (velocityY < 0) {
                     viewBinding.fab.extend()
+                } else if (velocityY < 0) {
+                    viewBinding.fab.shrink()
                 }
                 return true
             }
