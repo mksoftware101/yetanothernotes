@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.mksoftware101.notes.R
 import com.mksoftware101.notes.databinding.FragmentNoteListBinding
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class NoteListFragment : Fragment() {
@@ -65,6 +66,7 @@ class NoteListFragment : Fragment() {
     private fun setupOnFlingListener() {
         viewBinding.notesRecyclerView.onFlingListener = object : RecyclerView.OnFlingListener() {
             override fun onFling(velocityX: Int, velocityY: Int): Boolean {
+//                Timber.d("[d] $velocityY")
                 if (velocityY > 0) {
                     viewBinding.fab.extend()
                 } else if (velocityY < 0) {

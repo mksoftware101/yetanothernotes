@@ -10,13 +10,8 @@ class NotesListItemFactory @Inject constructor(
 ) : ListItemFactory<NoteList, List<NoteListItemViewModel>> {
 
     override fun assemble(data: NoteList): List<NoteListItemViewModel> {
-        return data.map {
-            NoteListItemViewModel(
-                it.content.substring(0, 20),
-                it.creationDate,
-                it.id,
-                letter = it.content.take(1)
-            ).addUpdateUseCase(updateNoteUseCase)
+        return data.map { note ->
+            NoteListItemViewModel(note, updateNoteUseCase)
         }
     }
 }

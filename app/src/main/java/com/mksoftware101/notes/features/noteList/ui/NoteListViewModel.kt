@@ -11,7 +11,6 @@ import com.mksoftware101.notes.features.noteList.data.types.NoteList
 import com.mksoftware101.notes.features.noteList.domain.GetObservableNotesListUseCase
 import com.mksoftware101.notes.features.noteList.domain.RemoveNoteUseCase
 import com.mksoftware101.notes.features.noteList.domain.extensions.isIndexOutOfRange
-import com.mksoftware101.notes.features.noteList.ui.extensions.toItemsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
@@ -68,6 +67,7 @@ class NoteListViewModel @Inject constructor(
             } catch (e: Exception) {
                 Timber.e(e, "Error while remove note from db")
                 RemoveNoteError(R.string.errorRemoveNoteFromDb)
+                // ToDo Revert item when error occured
             }
         }
     }
