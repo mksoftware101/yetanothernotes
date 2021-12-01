@@ -9,16 +9,15 @@ import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.distinctUntilChanged
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.BaseTransientBottomBar.Duration
 import com.google.android.material.snackbar.Snackbar
 import com.mksoftware101.notes.R
 import com.mksoftware101.notes.databinding.FragmentNoteListBinding
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class NoteListFragment : Fragment() {
@@ -31,7 +30,7 @@ class NoteListFragment : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel.setObserversToIdle()
     }
-    
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,8 +75,10 @@ class NoteListFragment : Fragment() {
     private fun startObserveErrors() {
         viewModel.error.observe(viewLifecycleOwner, { error ->
             when (error) {
-                is GetNotesListError -> showSnackbar()
+                is GetNotesListError -> showSnackbarWithRetry()
                 is RemoveNoteError -> showSnackbar(error.messageResId, Snackbar.LENGTH_LONG)
+                is IdleNoteErrorState -> { /* Nothing to do */
+                }
             }
         })
     }
@@ -89,6 +90,8 @@ class NoteListFragment : Fragment() {
                     R.string.successRemoveNote,
                     Snackbar.LENGTH_SHORT
                 )
+                is IdleNoteSuccessState -> { /* Nothing to do */
+                }
             }
         })
     }
@@ -100,7 +103,7 @@ class NoteListFragment : Fragment() {
         }
     }
 
-    private fun showSnackbar() {
+    private fun showSnackbarWithRetry() {
         Snackbar.make(viewBinding.root, R.string.errorGetNotesList, Snackbar.LENGTH_LONG)
             .setAction(R.string.snackbarRetryBtn) { viewModel.onRefresh() }
             .also { it.show() }
@@ -111,19 +114,27 @@ class NoteListFragment : Fragment() {
             .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
                 override fun onShown(snackbar: Snackbar?) {
                     super.onShown(snackbar)
-                    val delta: Float =
-                        viewBinding.fab.translationY - (snackbar?.view?.height?.toFloat() ?: 0.0f)
-                    viewBinding.fab
-                        .animate().translationY(delta).setInterpolator(fabInterpolator).start()
+                    moveFabUpWithAnimation(viewBinding.fab, snackbar)
                 }
 
                 override fun onDismissed(snackbar: Snackbar?, event: Int) {
                     super.onDismissed(snackbar, event)
-                    val delta: Float =
-                        viewBinding.fab.translationY + (snackbar?.view?.height?.toFloat() ?: 0.0f)
-                    viewBinding.fab
-                        .animate().translationY(delta).setInterpolator(fabInterpolator).start()
+                    moveFabDownWithAnimation(viewBinding.fab, snackbar)
                 }
             }).show()
+    }
+
+    private fun moveFabUpWithAnimation(fab: ExtendedFloatingActionButton, snackbar: Snackbar?) {
+        with(fab) {
+            val delta = translationY - (snackbar?.view?.height?.toFloat() ?: 0.0f)
+            animate().translationY(delta).setInterpolator(fabInterpolator).start()
+        }
+    }
+
+    private fun moveFabDownWithAnimation(fab: ExtendedFloatingActionButton, snackbar: Snackbar?) {
+        with(fab) {
+            val delta = translationY + (snackbar?.view?.height?.toFloat() ?: 0.0f)
+            animate().translationY(delta).setInterpolator(fabInterpolator).start()
+        }
     }
 }
