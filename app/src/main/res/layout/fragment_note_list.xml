@@ -8,6 +8,8 @@
         <variable
             name="viewModel"
             type="com.mksoftware101.notes.features.noteList.ui.NoteListViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <FrameLayout
@@ -40,10 +42,11 @@
             android:layout_marginBottom="@dimen/marginS"
             android:elevation="@dimen/marginL"
             android:onClick="@{()->viewModel.onAdd()}"
-            app:icon="@drawable/ic_note_outline"
-            android:textColor="@color/white"
             android:text="@string/fabCreate"
             android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:visibility="@{viewModel.loading ? View.GONE : View.VISIBLE}"
+            app:icon="@drawable/ic_note_outline"
             app:iconTint="@color/white" />
 
         <include
