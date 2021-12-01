@@ -65,6 +65,7 @@
             android:layout_height="@dimen/notesListItemFavouriteIconSize"
             android:layout_gravity="center"
             android:button="@drawable/ic_favourite"
+            android:onClick="@{() -> vm.onFavouriteChange()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

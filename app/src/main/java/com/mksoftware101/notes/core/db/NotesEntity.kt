@@ -13,5 +13,7 @@ data class NotesEntity(
     @ColumnInfo(name = "creation_date")
     val creationDate: String,
 
+    val favourite: Boolean,
+
     val data: String
 )

@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface NotesRepository {
     fun getDbEntityList(): Flow<List<NotesEntity>>
     suspend fun remove(entity: NotesEntity)
+    suspend fun update(entity: NotesEntity)
 }

@@ -11,4 +11,8 @@ class NotesRepositoryImpl(private val db: NotesDb) : NotesRepository {
     override suspend fun remove(entity: NotesEntity) {
         db.getNotesDao().delete(entity)
     }
+
+    override suspend fun update(entity: NotesEntity) {
+        db.getNotesDao().update(entity)
+    }
 }

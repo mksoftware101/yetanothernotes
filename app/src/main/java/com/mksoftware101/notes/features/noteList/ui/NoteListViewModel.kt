@@ -23,6 +23,7 @@ import javax.inject.Inject
 class NoteListViewModel @Inject constructor(
     private val getNotesListUseCase: GetObservableNotesListUseCase,
     private val removeNoteUseCase: RemoveNoteUseCase,
+    private val notesListItemFactory: NotesListItemFactory,
 ) : ViewModel() {
 
     val recyclerViewHelper = NotesListRecyclerViewHelper()
@@ -93,6 +94,8 @@ class NoteListViewModel @Inject constructor(
             clear()
             addAll(list)
         }
-        recyclerViewHelper.items.update(list.toItemsViewModel())
+        recyclerViewHelper.items.update(
+            notesListItemFactory.assemble(list)
+        )
     }
 }
