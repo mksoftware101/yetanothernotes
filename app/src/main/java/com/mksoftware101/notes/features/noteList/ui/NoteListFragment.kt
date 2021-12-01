@@ -26,6 +26,18 @@ class NoteListFragment : Fragment() {
     private val fabInterpolator = AccelerateDecelerateInterpolator()
     private lateinit var viewBinding: FragmentNoteListBinding
 
+    private val snackbarCallback = object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+        override fun onShown(snackbar: Snackbar?) {
+            super.onShown(snackbar)
+            moveFabUpWithAnimation(viewBinding.fab, snackbar)
+        }
+
+        override fun onDismissed(snackbar: Snackbar?, event: Int) {
+            super.onDismissed(snackbar, event)
+            moveFabDownWithAnimation(viewBinding.fab, snackbar)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.setObserversToIdle()
@@ -105,23 +117,13 @@ class NoteListFragment : Fragment() {
 
     private fun showSnackbarWithRetry() {
         Snackbar.make(viewBinding.root, R.string.errorGetNotesList, Snackbar.LENGTH_LONG)
+            .addCallback(snackbarCallback)
             .setAction(R.string.snackbarRetryBtn) { viewModel.onRefresh() }
             .also { it.show() }
     }
 
     private fun showSnackbar(@StringRes messageResId: Int, @Duration duration: Int) {
-        Snackbar.make(viewBinding.root, messageResId, duration)
-            .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
-                override fun onShown(snackbar: Snackbar?) {
-                    super.onShown(snackbar)
-                    moveFabUpWithAnimation(viewBinding.fab, snackbar)
-                }
-
-                override fun onDismissed(snackbar: Snackbar?, event: Int) {
-                    super.onDismissed(snackbar, event)
-                    moveFabDownWithAnimation(viewBinding.fab, snackbar)
-                }
-            }).show()
+        Snackbar.make(viewBinding.root, messageResId, duration).addCallback(snackbarCallback).show()
     }
 
     private fun moveFabUpWithAnimation(fab: ExtendedFloatingActionButton, snackbar: Snackbar?) {
