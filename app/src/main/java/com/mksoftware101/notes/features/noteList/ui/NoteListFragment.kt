@@ -17,8 +17,12 @@ import com.google.android.material.snackbar.BaseTransientBottomBar.Duration
 import com.google.android.material.snackbar.Snackbar
 import com.mksoftware101.notes.R
 import com.mksoftware101.notes.databinding.FragmentNoteListBinding
+import com.mksoftware101.notes.features.noteList.ui.communication.noteslistitem.AddToFavouriteFailed
+import com.mksoftware101.notes.features.noteList.ui.communication.noteslistitem.ErrorChannel
+import com.mksoftware101.notes.features.noteList.ui.communication.noteslistitem.RemoveFromFavouriteFailed
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class NoteListFragment : Fragment() {
@@ -26,6 +30,8 @@ class NoteListFragment : Fragment() {
     private val viewModel: NoteListViewModel by viewModels()
     private val fabInterpolator = AccelerateDecelerateInterpolator()
     private lateinit var viewBinding: FragmentNoteListBinding
+
+    @Inject lateinit var errorChannel: ErrorChannel
 
     private val snackbarCallback = object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
         override fun onShown(snackbar: Snackbar?) {
@@ -61,6 +67,16 @@ class NoteListFragment : Fragment() {
         setupSwipeToRefresh()
         setupSwipeToDelete()
         setupOnFlingListener()
+        setupChannels()
+    }
+
+    private fun setupChannels() {
+        errorChannel.error.observe(viewLifecycleOwner, { state ->
+            when(state) {
+                is AddToFavouriteFailed -> showSnackbar(R.string.appName, Snackbar.LENGTH_SHORT)
+                is RemoveFromFavouriteFailed -> {}
+            }
+        })
     }
 
     private fun setupOnFlingListener() {
