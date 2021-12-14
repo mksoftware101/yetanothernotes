@@ -1,5 +1,6 @@
 package com.mksoftware101.notes.features.noteList.ui
 
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mksoftware101.notes.features.noteList.data.Note
@@ -7,10 +8,11 @@ import com.mksoftware101.notes.features.noteList.domain.UpdateNoteUseCase
 import com.mksoftware101.notes.features.noteList.ui.communication.noteslistitem.AddToFavouriteFailed
 import com.mksoftware101.notes.features.noteList.ui.communication.noteslistitem.Channels
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.lang.Exception
 
 class NoteListItemViewModel(
-    private val note: Note,
+    private var note: Note,
     private val updateNoteUseCase: UpdateNoteUseCase,
     private val errorChannel: Channels
 ) : ViewModel() {
@@ -25,10 +27,14 @@ class NoteListItemViewModel(
         get() = note.creationDate
 
     val isFavourite: Boolean
-        get() = note.isFavourite
+        get() {
+            return note.isFavourite
+        }
 
     val id: Long
         get() = note.id
+
+    val toggle: ObservableBoolean = ObservableBoolean(false)
 
     fun onClick() {
         // ToDo Navigate to details screen
@@ -37,14 +43,12 @@ class NoteListItemViewModel(
     fun onFavouriteChange() {
         viewModelScope.launch {
             try {
-                updateNoteUseCase.run(
-                    note.copy(isFavourite = !note.isFavourite)
-                )
-                errorChannel.emitError(AddToFavouriteFailed)
+                note = note.copy(isFavourite = note.isFavourite)
+                updateNoteUseCase.run(note)
             } catch (e: Exception) {
-                e.printStackTrace()
-                // ToDo Add som ecode to handle error here and pass it to the main activity
-                // ToDo Revert value when error occured
+                Timber.e(e, "Error while add note to favourites")
+                errorChannel.emitError(AddToFavouriteFailed)
+                toggle.set(false)
             }
         }
     }
