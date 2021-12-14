@@ -1,9 +1,6 @@
 package com.mksoftware101.notes.core.db
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -16,4 +13,7 @@ interface NotesDao {
 
     @Delete
     suspend fun delete(notesEntity: NotesEntity)
+
+    @Update
+    suspend fun update(notesEntity: NotesEntity)
 }

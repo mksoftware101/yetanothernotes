@@ -10,14 +10,16 @@ internal fun List<NotesEntity>.toNoteList(): NoteList {
 }
 
 internal fun NotesEntity.toNote() = Note(
-    id = this.id.toInt(),
+    id = this.id,
     creationDate = this.creationDate,
+    isFavourite = this.favourite,
     content = this.data
 )
 
 internal fun Note.toNotesEntity() = NotesEntity(
-    id = this.id.toLong(),
+    id = this.id,
     creationDate = this.creationDate,
+    favourite = this.isFavourite,
     data = this.content
 )
 

@@ -21,6 +21,8 @@ class NotesListRecyclerViewHelper {
             newItem: NoteListItemViewModel
         ): Boolean {
             return oldItem.title == newItem.title &&
+                    oldItem.isFavourite == newItem.isFavourite &&
+                    oldItem.letter == newItem.letter &&
                     oldItem.creationDate == newItem.creationDate
         }
 
