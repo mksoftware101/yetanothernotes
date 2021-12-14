@@ -7,11 +7,18 @@ sealed class BaseState
 object AddToFavouriteFailed : BaseState()
 object RemoveFromFavouriteFailed : BaseState()
 
-class ErrorChannel {
+class Channels {
     private val _error = MutableLiveData<BaseState>()
     val error: LiveData<BaseState> = _error
 
-    fun submit(errorState: BaseState) {
+    private val _output = MutableLiveData<BaseState>()
+    val output: LiveData<BaseState> = _output
+
+    fun emitError(errorState: BaseState) {
         _error.value = errorState
+    }
+
+    fun emit(state: BaseState) {
+        _output.value = state
     }
 }

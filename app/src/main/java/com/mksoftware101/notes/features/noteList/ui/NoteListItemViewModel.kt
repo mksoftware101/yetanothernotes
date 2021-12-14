@@ -5,15 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.mksoftware101.notes.features.noteList.data.Note
 import com.mksoftware101.notes.features.noteList.domain.UpdateNoteUseCase
 import com.mksoftware101.notes.features.noteList.ui.communication.noteslistitem.AddToFavouriteFailed
-import com.mksoftware101.notes.features.noteList.ui.communication.noteslistitem.ErrorChannel
+import com.mksoftware101.notes.features.noteList.ui.communication.noteslistitem.Channels
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.lang.Exception
 
 class NoteListItemViewModel(
     private val note: Note,
     private val updateNoteUseCase: UpdateNoteUseCase,
-    private val errorChannel: ErrorChannel
+    private val errorChannel: Channels
 ) : ViewModel() {
 
     val title: String
@@ -41,7 +40,7 @@ class NoteListItemViewModel(
                 updateNoteUseCase.run(
                     note.copy(isFavourite = !note.isFavourite)
                 )
-                errorChannel.submit(AddToFavouriteFailed)
+                errorChannel.emitError(AddToFavouriteFailed)
             } catch (e: Exception) {
                 e.printStackTrace()
                 // ToDo Add som ecode to handle error here and pass it to the main activity

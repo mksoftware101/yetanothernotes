@@ -5,7 +5,7 @@ import com.mksoftware101.notes.features.noteList.domain.GetObservableNotesListUs
 import com.mksoftware101.notes.features.noteList.domain.RemoveNoteUseCase
 import com.mksoftware101.notes.features.noteList.domain.UpdateNoteUseCase
 import com.mksoftware101.notes.features.noteList.ui.NotesListItemFactory
-import com.mksoftware101.notes.features.noteList.ui.communication.noteslistitem.ErrorChannel
+import com.mksoftware101.notes.features.noteList.ui.communication.noteslistitem.Channels
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,6 +26,6 @@ object NoteListDomainModule {
     fun providesUpdateNoteUseCase(repository: NotesRepository) = UpdateNoteUseCase(repository)
 
     @Provides
-    fun providesNotesListItemFactory(updateNoteUseCase: UpdateNoteUseCase, channel: ErrorChannel) =
+    fun providesNotesListItemFactory(updateNoteUseCase: UpdateNoteUseCase, channel: Channels) =
         NotesListItemFactory(updateNoteUseCase, channel)
 }

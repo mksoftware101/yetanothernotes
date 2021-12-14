@@ -1,6 +1,6 @@
 package com.mksoftware101.notes.features.noteList.ui.communication.di
 
-import com.mksoftware101.notes.features.noteList.ui.communication.noteslistitem.ErrorChannel
+import com.mksoftware101.notes.features.noteList.ui.communication.noteslistitem.Channels
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,5 +13,5 @@ object ChannelsModule {
 
     @Provides
     @Singleton
-    fun providesChannel() = ErrorChannel()
+    fun providesChannels() = Channels()
 }
