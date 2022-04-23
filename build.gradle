@@ -10,6 +10,7 @@ buildscript {
         classpath BuildDependencies.firebaseCrashlytics
         classpath BuildDependencies.safeArgsPlugin
         classpath BuildDependencies.hiltPlugin
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30'
     }
 }
 
