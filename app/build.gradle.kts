@@ -4,7 +4,7 @@ import java.io.FileInputStream
 
 plugins {
     id(Plugins.androidApplication)
-    id(Plugins.kotlinAndroid)
+    id(Plugins.kotlinForAndroid)
     id(Plugins.kotlinKapt)
     id(Plugins.googleServices)
     id(Plugins.firebaseCrashlytics)
@@ -13,15 +13,15 @@ plugins {
 }
 
 android {
-    compileSdk = Apps.compileSdk
-    buildToolsVersion = Apps.buildTools
+    compileSdk = DefaultConfig.compileSdk
+    buildToolsVersion = DefaultConfig.buildToolsVersion
 
     defaultConfig {
-        applicationId = Apps.applicationId
-        minSdk = Apps.minSdk
-        targetSdk = Apps.targetSdk
-        versionCode = Apps.versionCode
-        versionName = Apps.versionName
+        applicationId = DefaultConfig.applicationId
+        minSdk = DefaultConfig.minSdk
+        targetSdk = DefaultConfig.targetSdk
+        versionCode = Releases.versionCode
+        versionName = Releases.versionName
 
         testInstrumentationRunner = TestLibs.instrumentationRunner
     }

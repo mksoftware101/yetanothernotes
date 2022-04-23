@@ -25,7 +25,8 @@ object BuildDependencies {
 
 object Plugins {
     const val androidApplication = "com.android.application"
-    const val kotlinAndroid = "kotlin-android"
+    const val androidLibrary = "com.android.library"
+    const val kotlinForAndroid = "org.jetbrains.kotlin.android"
     const val kotlinKapt = "kotlin-kapt"
     const val googleServices = "com.google.gms.google-services"
     const val firebaseCrashlytics = "com.google.firebase.crashlytics"
@@ -33,19 +34,22 @@ object Plugins {
     const val hilt = "dagger.hilt.android.plugin"
 }
 
-object Apps {
-    const val compileSdk = 30
+object Releases {
+    val versionCode = 1
+    val versionName = "1.0.0"
+}
+
+object DefaultConfig {
+    const val compileSdk = 31
     const val minSdk = 23
-    const val targetSdk = compileSdk
-    const val versionCode = 1
-    const val versionName = "1.0.0"
-    const val buildTools = "30.0.3"
+    const val targetSdk = 31
+    const val buildToolsVersion = "31.0.0"
     const val applicationId = "com.mksoftware101.notes"
 }
 
 object Libs {
     private object Versions {
-        const val material = "1.3.0"
+        const val material = "1.4.0"
         const val firebaseBom = "27.0.0"
         const val timber = "4.7.1"
         const val threeTenAbp = "1.3.1"
@@ -69,8 +73,8 @@ object Libs {
 
     object AndroidX {
         private object Versions {
-            const val core = "1.3.2"
-            const val appcompat = "1.2.0"
+            const val core = "1.7.0"
+            const val appcompat = "1.4.1"
             const val constraintLayout = "2.0.4"
             const val navigationVersion = "2.3.5"
             const val navigationCompose = "1.0.0-alpha10"
@@ -131,9 +135,9 @@ object Libs {
 
 object TestLibs {
     private object Versions {
-        const val junit = "4.13"
-        const val extJunit = "1.1.2"
-        const val espresso = "3.3.0"
+        const val junit = "4.13.2"
+        const val extJunit = "1.1.3"
+        const val espresso = "3.4.0"
         const val navigation = "2.3.5"
         const val room = "2.3.0"
     }
