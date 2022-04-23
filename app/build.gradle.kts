@@ -27,8 +27,7 @@ android {
     }
     signingConfigs {
         create("release") {
-            println(">>>>>> CI=${System.getenv()["CI"]}")
-            if (System.getenv()["CI"] != null) {
+            if (System.getenv()["CI"] == "true") {
                 if (System.getenv()["FCI_KEYSTORE_PATH"] != null) {
                     storeFile = file(System.getenv()["FCI_KEYSTORE_PATH"].toString())
                 }
