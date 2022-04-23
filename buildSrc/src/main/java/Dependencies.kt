@@ -1,10 +1,10 @@
-private const val kotlinVersion = "1.4.31"
+private const val kotlinVersion = "1.5.31"
 
 object BuildDependencies {
 
     private object Versions {
         const val kotlinGradlePlugin = kotlinVersion
-        const val androidGradlePlugin = "4.1.2"
+        const val androidGradlePlugin = "7.1.2"
         const val googleServicesPlugin = "4.3.5"
         const val firebaseCrashlytics = "2.5.2"
         const val safeArgsGradlePlugin = "2.3.5"
