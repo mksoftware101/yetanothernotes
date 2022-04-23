@@ -47,6 +47,15 @@ object DefaultConfig {
     const val applicationId = "com.mksoftware101.notes"
 }
 
+object Features {
+    val login = ":features:login"
+    val notes = ":features:notes"
+}
+
+object Common {
+    val uiComponents = ":common:ui-components"
+}
+
 object Libs {
     private object Versions {
         const val material = "1.4.0"
@@ -75,11 +84,11 @@ object Libs {
         private object Versions {
             const val core = "1.7.0"
             const val appcompat = "1.4.1"
-            const val constraintLayout = "2.0.4"
-            const val navigationVersion = "2.3.5"
+            const val constraintLayout = "2.1.3"
+            const val navigationVersion = "2.4.2"
             const val navigationCompose = "1.0.0-alpha10"
-            const val livedata = "2.3.1"
-            const val viewmodel = "2.3.1"
+            const val livedata = "2.4.1"
+            const val viewmodel = "2.4.1"
             const val swipeToRefresh = "1.1.0"
         }
 
@@ -102,7 +111,8 @@ object Libs {
             "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationVersion}"
         const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.livedata}"
         const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewmodel}"
-        const val swipeToRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeToRefresh}"
+        const val swipeToRefresh =
+            "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeToRefresh}"
     }
 
     val di = Di

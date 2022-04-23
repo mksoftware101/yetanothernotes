@@ -42,7 +42,14 @@ android {
                 }
             } else {
                 val localReleaseProp = Properties()
-                localReleaseProp.load(FileInputStream(File(rootProject.rootDir, "config/config_release.properities")))
+                localReleaseProp.load(
+                    FileInputStream(
+                        File(
+                            rootProject.rootDir,
+                            "config/config_release.properities"
+                        )
+                    )
+                )
                 storeFile = File(rootProject.rootDir, "config/yetanothernotes_release.jks")
                 storePassword = localReleaseProp["release.keystorePassword"].toString()
                 keyAlias = localReleaseProp["release.keyAlias"].toString()
@@ -94,6 +101,10 @@ dependencies {
     // di
     implementation(Libs.di.hilt)
     kapt(Libs.di.hiltKapt)
+
+    // features
+    implementation(project(Features.login))
+    implementation(project(Features.notes))
 
     // firebase
     implementation(platform(Libs.firebaseBom))
