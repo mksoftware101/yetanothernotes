@@ -102,20 +102,18 @@ dependencies {
     implementation(Libs.di.hilt)
     kapt(Libs.di.hiltKapt)
 
+    // core
+    implementation(project(Core.core))
+
     // features
     implementation(project(Features.login))
     implementation(project(Features.notes))
 
-    // firebase
-    implementation(platform(Libs.firebaseBom))
-    implementation(Libs.firebaseAnalyticsKtx)
-    implementation(Libs.firebaseCrashlyticsKtx)
+    // DateTime ToDo Remove after migration
+    implementation(Libs.threeTenAbp)
 
     // timber
     implementation(Libs.timber)
-
-    // time and date library
-    implementation(Libs.threeTenAbp)
 
     // room
     implementation(Libs.db.room)

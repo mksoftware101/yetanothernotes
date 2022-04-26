@@ -47,13 +47,17 @@ object DefaultConfig {
     const val applicationId = "com.mksoftware101.notes"
 }
 
-object Features {
-    val login = ":features:login"
-    val notes = ":features:notes"
+object Core {
+    val core = ":core"
 }
 
 object Common {
     val uiComponents = ":common:ui-components"
+}
+
+object Features {
+    val login = ":features:login"
+    val notes = ":features:notes"
 }
 
 object Libs {
