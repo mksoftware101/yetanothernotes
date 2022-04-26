@@ -5,7 +5,7 @@
  Release: Working copy
  Locale: en-GB, English (UK)
  Exported by: Marek
- Exported at: Wed, 08 Dec 2021 20:00:32 +0100
+ Exported at: Tue, 26 Apr 2022 13:32:45 +0200
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="appName">YetAnotherNotes</string>
@@ -20,4 +20,10 @@
     <string name="successRemoveNote">Note has been removed</string>
     <string name="fabCreate">Create</string>
     <string name="errorAddToFavourities">Error while add to favourities</string>
+    <string name="loginLogin">Log in</string>
+    <string name="loginSignUp">Sign up</string>
+    <string name="loginForgotPassword">Forgot password?</string>
+    <string name="loginEmail">E-mail</string>
+    <string name="loginPassword">Password</string>
+    <string name="loginNewUser">New user?</string>
 </resources>

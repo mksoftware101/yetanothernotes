@@ -105,6 +105,10 @@ dependencies {
     // core
     implementation(project(Core.core))
 
+    // common
+    implementation(project(Common.resources))
+    implementation(project(Common.uiComponents))
+
     // features
     implementation(project(Features.login))
     implementation(project(Features.notes))
