@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.mksoftware101.notes.features.noteList.ui.NoteListItemViewModel" />
+            type="com.mksoftware101.notes.legacy.features.noteList.ui.NoteListItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
         android:onClick="@{()->vm.onClick()}"
         android:padding="@dimen/marginS">
 
-        <com.mksoftware101.notes.core.ui.components.CircleLetter
+        <com.mksoftware101.notes.legacy.core.ui.components.CircleLetter
             android:id="@+id/circleLetter"
             android:layout_width="@dimen/notesListItemIconSize"
             android:layout_height="@dimen/notesListItemIconSize"
