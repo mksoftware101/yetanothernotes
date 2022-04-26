@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.mksoftware101.notes.features.noteList.ui.NoteListViewModel" />
+            type="com.mksoftware101.notes.legacy.features.noteList.ui.NoteListViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".features.noteList.ui.NoteListFragment">
+        tools:context=".legacy.features.noteList.ui.NoteListFragment">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeToRefresh"

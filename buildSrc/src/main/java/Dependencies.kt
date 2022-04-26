@@ -1,10 +1,10 @@
-private const val kotlinVersion = "1.4.31"
+private const val kotlinVersion = "1.5.31"
 
 object BuildDependencies {
 
     private object Versions {
         const val kotlinGradlePlugin = kotlinVersion
-        const val androidGradlePlugin = "4.1.2"
+        const val androidGradlePlugin = "7.1.2"
         const val googleServicesPlugin = "4.3.5"
         const val firebaseCrashlytics = "2.5.2"
         const val safeArgsGradlePlugin = "2.3.5"
@@ -25,7 +25,8 @@ object BuildDependencies {
 
 object Plugins {
     const val androidApplication = "com.android.application"
-    const val kotlinAndroid = "kotlin-android"
+    const val androidLibrary = "com.android.library"
+    const val kotlinForAndroid = "org.jetbrains.kotlin.android"
     const val kotlinKapt = "kotlin-kapt"
     const val googleServices = "com.google.gms.google-services"
     const val firebaseCrashlytics = "com.google.firebase.crashlytics"
@@ -33,19 +34,35 @@ object Plugins {
     const val hilt = "dagger.hilt.android.plugin"
 }
 
-object Apps {
-    const val compileSdk = 30
+object Releases {
+    val versionCode = 1
+    val versionName = "1.0.0"
+}
+
+object DefaultConfig {
+    const val compileSdk = 31
     const val minSdk = 23
-    const val targetSdk = compileSdk
-    const val versionCode = 1
-    const val versionName = "1.0.0"
-    const val buildTools = "30.0.3"
+    const val targetSdk = 31
+    const val buildToolsVersion = "31.0.0"
     const val applicationId = "com.mksoftware101.notes"
+}
+
+object Core {
+    val core = ":core"
+}
+
+object Common {
+    val uiComponents = ":common:ui-components"
+}
+
+object Features {
+    val login = ":features:login"
+    val notes = ":features:notes"
 }
 
 object Libs {
     private object Versions {
-        const val material = "1.3.0"
+        const val material = "1.4.0"
         const val firebaseBom = "27.0.0"
         const val timber = "4.7.1"
         const val threeTenAbp = "1.3.1"
@@ -69,13 +86,13 @@ object Libs {
 
     object AndroidX {
         private object Versions {
-            const val core = "1.3.2"
-            const val appcompat = "1.2.0"
-            const val constraintLayout = "2.0.4"
-            const val navigationVersion = "2.3.5"
+            const val core = "1.7.0"
+            const val appcompat = "1.4.1"
+            const val constraintLayout = "2.1.3"
+            const val navigationVersion = "2.4.2"
             const val navigationCompose = "1.0.0-alpha10"
-            const val livedata = "2.3.1"
-            const val viewmodel = "2.3.1"
+            const val livedata = "2.4.1"
+            const val viewmodel = "2.4.1"
             const val swipeToRefresh = "1.1.0"
         }
 
@@ -98,7 +115,8 @@ object Libs {
             "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationVersion}"
         const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.livedata}"
         const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewmodel}"
-        const val swipeToRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeToRefresh}"
+        const val swipeToRefresh =
+            "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeToRefresh}"
     }
 
     val di = Di
@@ -131,9 +149,9 @@ object Libs {
 
 object TestLibs {
     private object Versions {
-        const val junit = "4.13"
-        const val extJunit = "1.1.2"
-        const val espresso = "3.3.0"
+        const val junit = "4.13.2"
+        const val extJunit = "1.1.3"
+        const val espresso = "3.4.0"
         const val navigation = "2.3.5"
         const val room = "2.3.0"
     }
