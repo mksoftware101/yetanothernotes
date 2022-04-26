@@ -53,6 +53,7 @@ object Core {
 
 object Common {
     val uiComponents = ":common:ui-components"
+    val resources = ":common:resources"
 }
 
 object Features {
