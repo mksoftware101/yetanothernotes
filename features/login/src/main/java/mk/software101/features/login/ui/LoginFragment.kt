@@ -40,10 +40,10 @@ class LoginFragment : Fragment() {
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
 
-        val usernameEditText = binding.username
-        val passwordEditText = binding.password
-        val loginButton = binding.login
-        val loadingProgressBar = binding.loading
+        val usernameEditText = binding.usernameTxt
+        val passwordEditText = binding.passwordTxt
+        val loginButton = binding.loginBtn
+        val loadingProgressBar = binding.loadingProgressBar
 
         loginViewModel.loginFormState.observe(viewLifecycleOwner,
             Observer { loginFormState ->
@@ -109,7 +109,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome) + model.displayName
+        val welcome = "wellcome" + model.displayName
         // TODO : initiate successful logged in experience
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()

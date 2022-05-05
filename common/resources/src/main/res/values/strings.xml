@@ -5,7 +5,7 @@
  Release: Working copy
  Locale: en-GB, English (UK)
  Exported by: Marek
- Exported at: Tue, 26 Apr 2022 13:32:45 +0200
+ Exported at: Thu, 05 May 2022 13:59:13 +0200
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="appName">YetAnotherNotes</string>
@@ -26,4 +26,8 @@
     <string name="loginEmail">E-mail</string>
     <string name="loginPassword">Password</string>
     <string name="loginNewUser">New user?</string>
+    <string name="signupEmail">E-mail</string>
+    <string name="signupPassword">Password</string>
+    <string name="signupRepeatPassword">Repeat password</string>
+    <string name="signupSignUp">Sign up</string>
 </resources>
