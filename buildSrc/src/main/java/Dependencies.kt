@@ -82,6 +82,7 @@ object Libs {
     const val bindingCollectionAdapterRecyclerView =
         "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:${Versions.bindingCollectionAdapter}"
     const val airbnbLottie = "com.airbnb.android:lottie:${Versions.airbnbLottie}"
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${kotlinVersion}"
 
     val androidX = AndroidX
 
