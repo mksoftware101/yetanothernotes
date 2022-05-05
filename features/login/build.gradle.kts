@@ -47,6 +47,13 @@ dependencies {
     // Common
     implementation(project(Common.resources))
 
+    // Navigation
+    implementation(Libs.androidX.navigationFragment)
+    implementation(Libs.androidX.navigationUi)
+    implementation(Libs.androidX.navigationFragmentKtx)
+    implementation(Libs.androidX.navigationUiKtx)
+    implementation(Libs.androidX.navigationFeatureModuleSupport)
+
     testImplementation(TestLibs.junit)
     androidTestImplementation(TestLibs.extJunit)
     androidTestImplementation(TestLibs.espresso)
