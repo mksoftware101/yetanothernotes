@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="mk.software101.features.login.ui.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loginContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/loginInnerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/marginM"
+            android:paddingTop="@dimen/marginM"
+            android:paddingRight="@dimen/marginM"
+            android:paddingBottom="@dimen/marginM"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.35"
+            tools:context=".ui.LoginFragment">
+
+            <EditText
+                android:id="@+id/usernameTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/loginEmail"
+                android:inputType="textEmailAddress"
+                android:selectAllOnFocus="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/passwordTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginXS"
+                android:hint="@string/loginPassword"
+                android:imeActionLabel="@string/loginLogin"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:selectAllOnFocus="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usernameTxt" />
+
+            <TextView
+                android:id="@+id/forgotPasswordTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginXS"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/loginForgotPassword"
+                app:layout_constraintEnd_toEndOf="@+id/passwordTxt"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="@+id/passwordTxt"
+                app:layout_constraintTop_toBottomOf="@+id/passwordTxt" />
+
+            <Button
+                android:id="@+id/loginBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="@dimen/marginXL"
+                android:enabled="true"
+                android:text="@string/loginLogin"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/forgotPasswordTxt" />
+
+            <TextView
+                android:id="@+id/newUserTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginXS"
+                android:text="@string/loginNewUser"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/signUpTxt"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loginBtn" />
+
+            <TextView
+                android:id="@+id/signUpTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginXS"
+                android:layout_marginTop="@dimen/marginXS"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/loginSignUp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/newUserTxt"
+                app:layout_constraintTop_toBottomOf="@id/loginBtn" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/loadingProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

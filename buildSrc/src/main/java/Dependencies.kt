@@ -63,7 +63,7 @@ object Features {
 
 object Libs {
     private object Versions {
-        const val material = "1.4.0"
+        const val material = "1.5.0"
         const val firebaseBom = "27.0.0"
         const val timber = "4.7.1"
         const val threeTenAbp = "1.3.1"
@@ -95,6 +95,7 @@ object Libs {
             const val livedata = "2.4.1"
             const val viewmodel = "2.4.1"
             const val swipeToRefresh = "1.1.0"
+            const val annotation = "1.3.0"
         }
 
         const val core = "androidx.core:core-ktx:${Versions.core}"
@@ -118,6 +119,7 @@ object Libs {
         const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewmodel}"
         const val swipeToRefresh =
             "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeToRefresh}"
+        const val annotation = "androidx.annotation:annotation:${Versions.annotation}"
     }
 
     val di = Di

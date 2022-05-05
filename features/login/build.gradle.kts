@@ -30,12 +30,29 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {
     implementation(Libs.androidX.core)
     implementation(Libs.androidX.appcompat)
+    implementation(Libs.androidX.annotation)
     implementation(Libs.androidMaterial)
+    implementation(Libs.androidX.constraintLayout)
+    implementation(Libs.androidX.livedata)
+    implementation(Libs.androidX.viewmodel)
+
+    // Common
+    implementation(project(Common.resources))
+
+    // Navigation
+    implementation(Libs.androidX.navigationFragment)
+    implementation(Libs.androidX.navigationUi)
+    implementation(Libs.androidX.navigationFragmentKtx)
+    implementation(Libs.androidX.navigationUiKtx)
+    implementation(Libs.androidX.navigationFeatureModuleSupport)
 
     testImplementation(TestLibs.junit)
     androidTestImplementation(TestLibs.extJunit)

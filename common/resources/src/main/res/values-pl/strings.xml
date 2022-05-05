@@ -5,7 +5,7 @@
  Release: Working copy
  Locale: pl, Polish
  Exported by: Marek
- Exported at: Tue, 26 Apr 2022 13:32:45 +0200
+ Exported at: Thu, 05 May 2022 13:59:13 +0200
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="appName"></string>
@@ -26,4 +26,8 @@
     <string name="loginEmail">E-mail</string>
     <string name="loginPassword">Hasło</string>
     <string name="loginNewUser">Nowy użytkownik?</string>
+    <string name="signupEmail">E-mail</string>
+    <string name="signupPassword">Hasło</string>
+    <string name="signupRepeatPassword">Powtórz hasło</string>
+    <string name="signupSignUp">Rejestracja</string>
 </resources>

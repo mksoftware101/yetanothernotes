@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="mk.software101.features.signup.ui.SignupViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/signupContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="mk.software101.features.signup.ui.SignupFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/signupInnerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/marginM"
+            android:paddingTop="@dimen/marginM"
+            android:paddingRight="@dimen/marginM"
+            android:paddingBottom="@dimen/marginM"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.35">
+
+            <EditText
+                android:id="@+id/emailTxt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:hint="@string/signupEmail"
+                android:inputType="textEmailAddress"
+                android:selectAllOnFocus="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/passwordTxt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/marginS"
+                android:hint="@string/signupPassword"
+                android:inputType="textPassword"
+                android:selectAllOnFocus="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailTxt" />
+
+            <EditText
+                android:id="@+id/repeatPasswordTxt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/marginS"
+                android:hint="@string/signupRepeatPassword"
+                android:inputType="textPassword"
+                android:selectAllOnFocus="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/passwordTxt" />
+
+            <Button
+                android:id="@+id/signupBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginL"
+                android:text="@string/signupSignUp"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/repeatPasswordTxt" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
