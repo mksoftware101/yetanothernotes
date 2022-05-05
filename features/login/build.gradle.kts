@@ -31,7 +31,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
-        viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -43,6 +43,9 @@ dependencies {
     implementation(Libs.androidX.constraintLayout)
     implementation(Libs.androidX.livedata)
     implementation(Libs.androidX.viewmodel)
+
+    // Common
+    implementation(project(Common.resources))
 
     testImplementation(TestLibs.junit)
     androidTestImplementation(TestLibs.extJunit)

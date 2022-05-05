@@ -5,7 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/fragment_note_list.xml" value="0.365625" />
         <entry key="app/src/main/res/layout/notes_list_item.xml" value="0.365625" />
-        <entry key="features/login/src/main/res/layout/fragment_login.xml" value="0.5494791666666666" />
+        <entry key="features/login/src/main/res/layout/fragment_login.xml" value="0.33" />
       </map>
     </option>
   </component>
