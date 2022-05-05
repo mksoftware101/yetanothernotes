@@ -1,6 +1,7 @@
 plugins {
     id(Plugins.androidLibrary)
     id(Plugins.kotlinForAndroid)
+    id(Plugins.safeArgs)
 }
 
 android {
