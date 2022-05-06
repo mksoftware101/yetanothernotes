@@ -46,6 +46,7 @@ dependencies {
     implementation(Libs.androidX.viewmodel)
 
     // Common
+    implementation(project(Common.uiComponents))
     implementation(project(Common.resources))
 
     // Navigation

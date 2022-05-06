@@ -30,18 +30,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.35">
 
-            <EditText
+            <com.mksoftware101.common.ui_components.input.username.UserNameEditText
                 android:id="@+id/emailTxt"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:hint="@string/signupEmail"
-                android:inputType="textEmailAddress"
-                android:onTextChanged="@{(text, start, before, count) -> viewModel.onEmailChanged(text)}"
-                android:selectAllOnFocus="true"
-                android:error="@{viewModel.emailError}"
+                app:layout_constraintBottom_toTopOf="@id/passwordTxt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:onValid="@{(userName) -> viewModel.onEmailChanged(userName)}"
+                />
 
             <EditText
                 android:id="@+id/passwordTxt"

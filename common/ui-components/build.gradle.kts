@@ -1,6 +1,7 @@
 plugins {
     id(Plugins.androidLibrary)
     id(Plugins.kotlinForAndroid)
+    id(Plugins.kotlinKapt)
 }
 
 android {
@@ -30,12 +31,18 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {
     implementation(Libs.androidX.core)
     implementation(Libs.androidX.appcompat)
     implementation(Libs.androidMaterial)
+    implementation(Libs.androidX.viewmodel)
+
+    implementation(Libs.coroutines)
 
     testImplementation(TestLibs.junit)
     androidTestImplementation(TestLibs.extJunit)

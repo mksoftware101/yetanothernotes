@@ -69,6 +69,7 @@ object Libs {
         const val threeTenAbp = "1.3.1"
         const val bindingCollectionAdapter = "4.0.0"
         const val airbnbLottie = "3.4.0"
+        const val coroutines = "1.3.9"
     }
 
     const val androidMaterial = "com.google.android.material:material:${Versions.material}"
@@ -82,7 +83,7 @@ object Libs {
     const val bindingCollectionAdapterRecyclerView =
         "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:${Versions.bindingCollectionAdapter}"
     const val airbnbLottie = "com.airbnb.android:lottie:${Versions.airbnbLottie}"
-    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${kotlinVersion}"
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
     val androidX = AndroidX
 
