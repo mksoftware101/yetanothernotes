@@ -27,7 +27,7 @@ class UserNameEditText @JvmOverloads constructor(
         orientation = HORIZONTAL
     }
 
-    fun setCallback(callback: ValidUserNameCallback) {
-        binding.viewModel?.validUserNameCallback = callback
+    fun setCallback(callback: UserNameCallback) {
+        binding.viewModel?.userNameCallback = callback
     }
 }

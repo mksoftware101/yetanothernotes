@@ -16,7 +16,7 @@ class SignupViewModel : ViewModel() {
         Log.d("TAG", "[d] Will do sign up")
     }
 
-    fun onEmailChanged(email: String) {
+    fun onEmailChanged(email: String?) {
         Log.d("TAG", "[d] SUCCESS, valid emial = $email")
 //        delayEmailValidationJob?.cancel()
 //        delayEmailValidationJob = viewModelScope.launch {

@@ -1,6 +1,5 @@
 package com.mksoftware101.common.ui_components.input.username
 
-import android.util.Log
 import android.util.Patterns
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
@@ -16,7 +15,8 @@ class UserNameViewModel : ViewModel() {
 
     val usernameError = ObservableField<String>()
     val usernameHint = ObservableField<String>("Email")
-    var validUserNameCallback: ValidUserNameCallback? = null
+    var userNameCallback: UserNameCallback? = null
+    var lastUserName: String? = null
 
     private var validationJob: Job? = null
 
@@ -25,11 +25,17 @@ class UserNameViewModel : ViewModel() {
         validationJob = viewModelScope.launch {
             resetError()
             delay(DELAY_MS)
-            if (Patterns.EMAIL_ADDRESS.matcher(userName).matches()) {
-                Log.d("TAG", "[d] Email changed = $userName")
-                validUserNameCallback?.onValidUserName(userName.toString())
-            } else {
-                setError()
+            val userNameCandidate: String? =
+                if (Patterns.EMAIL_ADDRESS.matcher(userName).matches()) {
+                    userName.toString()
+                } else {
+                    setError()
+                    null
+                }
+
+            if (userNameCandidate != lastUserName) {
+                lastUserName = userNameCandidate
+                userNameCallback?.onUserNameChanged(lastUserName)
             }
         }
     }
