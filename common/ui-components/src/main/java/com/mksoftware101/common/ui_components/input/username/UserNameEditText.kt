@@ -10,24 +10,31 @@ import com.mksoftware101.common.ui_components.databinding.EdittextUsernameBindin
 
 class UserNameEditText @JvmOverloads constructor(
     context: Context,
-    attributes: AttributeSet? = null,
+    attributeSet: AttributeSet? = null,
     defaultStyleAttributes: Int = 0
-) : LinearLayout(context, attributes, defaultStyleAttributes) {
+) : LinearLayout(context, attributeSet, defaultStyleAttributes) {
 
-    private val binding = DataBindingUtil.inflate<EdittextUsernameBinding>(
-        LayoutInflater.from(context),
-        R.layout.edittext_username,
-        this,
-        true
-    ).also {
-        it.viewModel = UserNameViewModel()
-    }
+    private var binding: EdittextUsernameBinding
 
     init {
+        val attributes = context.obtainStyledAttributes(attributeSet, R.styleable.UserNameEditText)
+        val rawUserNameType = attributes.getInt(R.styleable.UserNameEditText_userNameType, -1)
+        attributes.recycle()
+
+        binding = DataBindingUtil.inflate<EdittextUsernameBinding>(
+            LayoutInflater.from(context),
+            R.layout.edittext_username,
+            this,
+            true
+        ).also {
+            val userNameType = UserNameType.from(rawUserNameType)
+            it.viewModel = UserNameViewModel(userNameType)
+        }
+
         orientation = HORIZONTAL
     }
 
     fun setCallback(callback: UserNameCallback) {
-        binding.viewModel?.userNameCallback = callback
+        binding.viewModel?.usernameCallback = callback
     }
 }
