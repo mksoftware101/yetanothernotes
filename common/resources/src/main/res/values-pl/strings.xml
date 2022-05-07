@@ -26,6 +26,7 @@
     <string name="loginEmail">E-mail</string>
     <string name="loginPassword">Hasło</string>
     <string name="loginNewUser">Nowy użytkownik?</string>
+    <string name="signupUsername">Nazwa użytkownika</string>
     <string name="signupEmail">E-mail</string>
     <string name="signupPassword">Hasło</string>
     <string name="signupRepeatPassword">Powtórz hasło</string>

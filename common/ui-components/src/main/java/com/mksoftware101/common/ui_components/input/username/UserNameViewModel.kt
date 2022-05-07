@@ -1,24 +1,19 @@
 package com.mksoftware101.common.ui_components.input.username
 
-import android.util.Log
-import android.util.Patterns
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mksoftware101.core.validator.Validator
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class UserNameViewModel(private val userNameType: UserNameType) : ViewModel() {
+class UserNameViewModel(val usernameHint: String, val validator: Validator) : ViewModel() {
     companion object {
         private const val DELAY_MS = 500L
     }
 
-    init {
-        Log.d("TAG", "Username type = $userNameType")
-    }
     val usernameError = ObservableField<String>()
-    val usernameHint = ObservableField<String>()
     var usernameCallback: UserNameCallback? = null
 
     private var validationJob: Job? = null
@@ -30,7 +25,7 @@ class UserNameViewModel(private val userNameType: UserNameType) : ViewModel() {
             resetError()
             delay(DELAY_MS)
             val userNameCandidate: String? =
-                if (Patterns.EMAIL_ADDRESS.matcher(userName).matches()) {
+                if (validator.isValid(userName.toString())) {
                     userName.toString()
                 } else {
                     setError()
