@@ -7,15 +7,12 @@ import com.mksoftware101.core.validator.Validator
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import com.mksoftware101.core.constants.Constants.DEBOUNCE_MS
 
 class UserNameViewModel(
     private val validator: Validator,
     private val errorText: String
 ) : ViewModel() {
-    companion object {
-        private const val DELAY_MS = 500L
-    }
-
     val usernameError = ObservableField<String>()
     var usernameCallback: UserNameCallback? = null
 
@@ -26,7 +23,7 @@ class UserNameViewModel(
         validationJob?.cancel()
         validationJob = viewModelScope.launch {
             resetError()
-            delay(DELAY_MS)
+            delay(DEBOUNCE_MS)
             val userNameCandidate: String? =
                 if (validator.isValid(userName.toString())) {
                     userName.toString()
