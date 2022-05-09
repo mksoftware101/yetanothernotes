@@ -35,38 +35,54 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 app:hint="@string/signupEmail"
-                app:layout_constraintBottom_toTopOf="@id/passwordTxt"
+                app:layout_constraintBottom_toTopOf="@id/passwordContainer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:onUserNameChanged="@{(userName) -> viewModel.onEmailChanged(userName)}"
-                app:userNameType="email" />
+                app:userNameType="email"
+                tools:hint="Email" />
 
-            <EditText
-                android:id="@+id/passwordTxt"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordContainer"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/marginS"
-                android:hint="@string/signupPassword"
-                android:inputType="textPassword"
-                android:selectAllOnFocus="true"
+                app:endIconMode="password_toggle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailTxt" />
+                app:layout_constraintTop_toBottomOf="@+id/emailTxt">
 
-            <EditText
-                android:id="@+id/repeatPasswordTxt"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/signupPassword"
+                    android:inputType="textPassword"
+                    android:selectAllOnFocus="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/repeatPasswordContainer"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/marginS"
-                android:hint="@string/signupRepeatPassword"
-                android:inputType="textPassword"
-                android:selectAllOnFocus="true"
+                app:endIconMode="password_toggle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passwordTxt" />
+                app:layout_constraintTop_toBottomOf="@+id/passwordContainer">
 
-            <Button
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/repeatPasswordText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/signupRepeatPassword"
+                    android:inputType="textPassword"
+                    android:selectAllOnFocus="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/signupBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,7 +93,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/repeatPasswordTxt" />
+                app:layout_constraintTop_toBottomOf="@+id/repeatPasswordContainer" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
