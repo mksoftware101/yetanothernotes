@@ -4,7 +4,9 @@ interface UserNameCallback {
     /**
      * Called when userName has changed.
      *
-     * [userName] can be null, means invalid
+     * It's called when username has changed from invalid to valid and  vice versa.
+     * UserName decide if typed text is valid or not based on Validator. See [UserNameViewModel]
+     *
      */
     fun onUserNameChanged(userName: String?)
 }

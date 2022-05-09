@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import com.mksoftware101.common.ui_components.R
 import com.mksoftware101.common.ui_components.databinding.EdittextUsernameBinding
@@ -21,7 +22,13 @@ class UserNameEditText @JvmOverloads constructor(
 
     init {
         val attributes = context.obtainStyledAttributes(attributeSet, R.styleable.UserNameEditText)
-        val rawUserNameType = attributes.getInt(R.styleable.UserNameEditText_userNameType, -1)
+        val userNameType = UserNameType.from(
+            attributes.getInt(R.styleable.UserNameEditText_userNameType, -1)
+        )
+
+        @StringRes
+        val hintResId =
+            attributes.getResourceId(R.styleable.UserNameEditText_hint, R.string.signupUsername)
         attributes.recycle()
 
         binding = DataBindingUtil.inflate<EdittextUsernameBinding>(
@@ -29,14 +36,14 @@ class UserNameEditText @JvmOverloads constructor(
             R.layout.edittext_username,
             this,
             true
-        ).also {
-            val userNameType = UserNameType.from(rawUserNameType)
-            val hint = getHintBy(userNameType)
-            val validator = getValidator(userNameType)
-            it.viewModel = UserNameViewModel(hint, validator)
+        ).also { bindings ->
+            bindings.userNameEditText.hint = resources.getString(hintResId)
+            bindings.viewModel = UserNameViewModel(
+                validator = getValidator(userNameType),
+                errorText = getErrorText(userNameType)
+            )
         }
 
-        resources.getString(com.mksoftware101.common.resources.R.string.loginEmail)
         orientation = HORIZONTAL
     }
 
@@ -52,8 +59,8 @@ class UserNameEditText @JvmOverloads constructor(
         UserNameType.EMAIL -> EmailValidator()
     }
 
-    private fun getHintBy(userNameType: UserNameType) = when (userNameType) {
-        UserNameType.USER_NAME -> context.getString(R.string.signupUsername)
-        UserNameType.EMAIL -> context.getString(R.string.signupEmail)
+    private fun getErrorText(type: UserNameType): String = when (type) {
+        UserNameType.USER_NAME -> resources.getString(R.string.userNameEditTextUserNameError)
+        UserNameType.EMAIL -> resources.getString(R.string.userNameEditTextEmailError)
     }
 }

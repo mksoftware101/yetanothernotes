@@ -34,13 +34,13 @@
                 android:id="@+id/emailTxt"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                app:hint="@string/signupEmail"
                 app:layout_constraintBottom_toTopOf="@id/passwordTxt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:userNameType="email"
                 app:onUserNameChanged="@{(userName) -> viewModel.onEmailChanged(userName)}"
-                />
+                app:userNameType="email" />
 
             <EditText
                 android:id="@+id/passwordTxt"

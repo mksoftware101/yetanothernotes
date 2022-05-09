@@ -8,7 +8,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class UserNameViewModel(val usernameHint: String, val validator: Validator) : ViewModel() {
+class UserNameViewModel(
+    private val validator: Validator,
+    private val errorText: String
+) : ViewModel() {
     companion object {
         private const val DELAY_MS = 500L
     }
@@ -41,7 +44,5 @@ class UserNameViewModel(val usernameHint: String, val validator: Validator) : Vi
 
     private fun resetError() = usernameError.set(null)
 
-    private fun setError() {
-        usernameError.set("Wrong email address")
-    }
+    private fun setError() = usernameError.set(errorText)
 }
