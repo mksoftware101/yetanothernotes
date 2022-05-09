@@ -33,4 +33,5 @@
     <string name="signupUsername">User name</string>
     <string name="userNameEditTextEmailError">Wrong e-mail address</string>
     <string name="userNameEditTextUserNameError">Wrong user name</string>
+    <string name="signupPasswordRequirements">At least six signs with one capital letter, one small getter and one number</string>
 </resources>

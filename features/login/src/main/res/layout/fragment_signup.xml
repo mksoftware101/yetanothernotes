@@ -82,18 +82,29 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/passwordRequirements"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/marginXXS"
+                android:text="@string/signupPasswordRequirements"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/repeatPasswordContainer" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/signupBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/marginL"
+                android:layout_marginTop="@dimen/marginXL"
                 android:onClickListener="@{() -> viewModel.onSignup()}"
                 android:text="@string/signupSignUp"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/repeatPasswordContainer" />
+                app:layout_constraintTop_toBottomOf="@+id/passwordRequirements" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
