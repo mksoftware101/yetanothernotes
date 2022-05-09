@@ -1,5 +1,5 @@
 object Kotlin {
-    const val version = "1.5.31"
+    const val version = "1.6.21"
 }
 
 object BuildDependencies {
@@ -71,7 +71,7 @@ object Libs {
         const val threeTenAbp = "1.3.1"
         const val bindingCollectionAdapter = "4.0.0"
         const val airbnbLottie = "3.4.0"
-        const val coroutines = "1.3.9"
+        const val coroutines = "1.6.1"
     }
 
     const val androidMaterial = "com.google.android.material:material:${Versions.material}"
@@ -161,6 +161,7 @@ object TestLibs {
         const val espresso = "3.4.0"
         const val navigation = "2.3.5"
         const val room = "2.3.0"
+        const val coroutines = "1.6.1"
     }
 
     const val junit = "junit:junit:${Versions.junit}"
@@ -170,4 +171,5 @@ object TestLibs {
     const val instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     const val navigation = "androidx.navigation:navigation-testing:${Versions.navigation}"
     const val room = "androidx.room:room-testing:${Versions.room}"
+    const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
 }

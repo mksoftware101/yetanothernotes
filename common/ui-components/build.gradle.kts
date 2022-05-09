@@ -63,6 +63,7 @@ dependencies {
     implementation(project(Core.core))
 
     testImplementation(TestLibs.junit)
+    testImplementation(TestLibs.coroutine)
     androidTestImplementation(TestLibs.extJunit)
     androidTestImplementation(TestLibs.espresso)
 }
