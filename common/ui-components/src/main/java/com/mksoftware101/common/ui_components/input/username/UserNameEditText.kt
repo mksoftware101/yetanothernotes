@@ -2,7 +2,9 @@ package com.mksoftware101.common.ui_components.input.username
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
 import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil

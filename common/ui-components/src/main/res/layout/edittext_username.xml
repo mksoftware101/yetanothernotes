@@ -10,13 +10,14 @@
     </data>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userNameEditText"
+        android:id="@+id/userNameEditTextContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:error="@{viewModel.usernameError}"
         tools:hint="User name">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"

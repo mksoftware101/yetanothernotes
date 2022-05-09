@@ -31,7 +31,7 @@
             app:layout_constraintVertical_bias="0.35">
 
             <com.mksoftware101.common.ui_components.input.username.UserNameEditText
-                android:id="@+id/emailTxt"
+                android:id="@+id/userNameTxt"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 app:hint="@string/signupEmail"
@@ -39,7 +39,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:onUserNameChanged="@{(userName) -> viewModel.onEmailChanged(userName)}"
+                app:onUserNameChanged="@{(userName) -> viewModel.onUserNameChanged(userName)}"
                 app:userNameType="email"
                 tools:hint="Email" />
 
@@ -51,7 +51,7 @@
                 app:endIconMode="password_toggle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailTxt">
+                app:layout_constraintTop_toBottomOf="@+id/userNameTxt">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/passwordTxt"
