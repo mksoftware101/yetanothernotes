@@ -1,15 +1,22 @@
 package mk.software101.features.signup.ui
 
 import android.util.Log
+import androidx.databinding.Observable
+import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 
 class SignupViewModel : ViewModel() {
 
-    fun onSignup() {
-        Log.d("TAG", "[d] Will do sign up")
-    }
+    val password = ObservableField<String>()
+    val repeatPassword = ObservableField<String>()
+    private var email: String? = null
 
     fun onUserNameChanged(userName: String?) {
         Log.d("TAG", "[d] SUCCESS, valid emial = $userName")
+        email = userName
+    }
+
+    fun onSignup() {
+        Log.d("TAG", "[d][signup] password=${password.get()}, repeatPasswd=${repeatPassword.get()}")
     }
 }

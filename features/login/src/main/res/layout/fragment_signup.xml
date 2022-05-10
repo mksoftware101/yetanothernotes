@@ -59,7 +59,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/signupPassword"
                     android:inputType="textPassword"
-                    android:selectAllOnFocus="true" />
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewModel.password}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -78,7 +79,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/signupRepeatPassword"
                     android:inputType="textPassword"
-                    android:selectAllOnFocus="true" />
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewModel.repeatPassword}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
