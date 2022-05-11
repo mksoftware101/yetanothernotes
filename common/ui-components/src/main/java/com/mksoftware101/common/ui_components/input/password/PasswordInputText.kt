@@ -3,6 +3,7 @@ package com.mksoftware101.common.ui_components.input.password
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
+import android.util.Log
 import android.widget.LinearLayout
 import androidx.annotation.StringRes
 import androidx.core.widget.doOnTextChanged
@@ -32,6 +33,12 @@ class PasswordInputText @JvmOverloads constructor(
      * Set coroutine scope to perform debounce while typing
      */
     var coroutineScope: CoroutineScope? = null
+        get() {
+            if (field == null) {
+                Log.e("PasswordInputText", "Coroutine scope is null. Have you forget to set coroutine scope?")
+            }
+            return field
+        }
 
     /**
      * Set callback to be informed, that password is valid or not. If password is invalid then return

@@ -20,6 +20,10 @@ class SignupViewModel : ViewModel() {
         Log.d("TAG", "[d] SUCCESS, valid password = $password")
     }
 
+    fun onRepeatPasswordChanged(password: String?) {
+        Log.d("TAG", "[d] SUCCESS, valid repeat password = $password")
+    }
+
     fun onSignup() {
         Log.d("TAG", "[d][signup] password=${password.get()}, repeatPasswd=${repeatPassword.get()}")
     }

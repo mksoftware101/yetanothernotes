@@ -26,6 +26,7 @@ class SignupFragment : Fragment() {
             false
         ).also {
             it.passwordContainer.coroutineScope = lifecycleScope
+            it.repeatPasswordContainer.coroutineScope = lifecycleScope
         }
         return binding.root
     }

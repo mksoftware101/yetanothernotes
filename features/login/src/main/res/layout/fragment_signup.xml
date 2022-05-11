@@ -52,29 +52,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/userNameTxt"
-                app:passwordValidator="validator_1"
-                app:onPasswordChanged="@{(password) -> viewModel.onPasswordChanged(password)}"/>
+                app:onPasswordChanged="@{(password) -> viewModel.onPasswordChanged(password)}"
+                app:passwordValidator="validator_1" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <com.mksoftware101.common.ui_components.input.password.PasswordInputText
                 android:id="@+id/repeatPasswordContainer"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/marginS"
-                app:endIconMode="password_toggle"
+                app:hint="@string/signupPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passwordContainer">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/repeatPasswordText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/signupRepeatPassword"
-                    android:inputType="textPassword"
-                    android:selectAllOnFocus="true"
-                    android:text="@={viewModel.repeatPassword}" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                app:layout_constraintTop_toBottomOf="@+id/passwordContainer"
+                app:onPasswordChanged="@{(password) -> viewModel.onRepeatPasswordChanged(password)}"
+                app:passwordValidator="validator_1" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/passwordRequirements"
