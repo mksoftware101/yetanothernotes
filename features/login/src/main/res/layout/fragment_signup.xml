@@ -30,10 +30,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.35">
 
-            <com.mksoftware101.common.ui_components.input.username.UserNameEditText
+            <com.mksoftware101.common.ui_components.input.username.UserNameInputText
                 android:id="@+id/userNameTxt"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:hint="@string/signupEmail"
                 app:layout_constraintBottom_toTopOf="@id/passwordContainer"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -46,8 +46,8 @@
             <com.mksoftware101.common.ui_components.input.password.PasswordInputText
                 android:id="@+id/passwordContainer"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/marginS"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginM"
                 app:hint="@string/signupPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,38 +58,27 @@
             <com.mksoftware101.common.ui_components.input.password.PasswordInputText
                 android:id="@+id/repeatPasswordContainer"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/marginS"
-                app:hint="@string/signupPassword"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginM"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passwordContainer"
                 app:onPasswordChanged="@{(password) -> viewModel.onRepeatPasswordChanged(password)}"
+                app:passwordHint="@string/signupRepeatPassword"
                 app:passwordValidator="validator_1" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/passwordRequirements"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/marginXXS"
-                android:text="@string/signupPasswordRequirements"
-                app:layout_constrainedWidth="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/repeatPasswordContainer" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/signupBtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/marginXL"
+                android:layout_height="56dp"
+                android:layout_marginTop="@dimen/marginL"
                 android:onClickListener="@{() -> viewModel.onSignup()}"
                 android:text="@string/signupSignUp"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passwordRequirements" />
+                app:layout_constraintTop_toBottomOf="@+id/repeatPasswordContainer" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

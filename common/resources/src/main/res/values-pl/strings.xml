@@ -5,7 +5,7 @@
  Release: Working copy
  Locale: pl, Polish
  Exported by: Marek
- Exported at: Mon, 09 May 2022 18:28:05 +0200
+ Exported at: Wed, 11 May 2022 15:21:50 +0200
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="appName"></string>
@@ -27,12 +27,14 @@
     <string name="loginPassword">Hasło</string>
     <string name="loginNewUser">Nowy użytkownik?</string>
     <string name="signupEmail">E-mail</string>
+    <string name="signupSignUp">Rejestracja</string>
+    <string name="userNameInputTextInvalidEmail">Adres e-mail jest niepoprawny</string>
+    <string name="userNameInputTextInvalidUserName">Nazwa użytkownika jest niepoprawna</string>
+    <string name="passwordInputTextPassword">Hasło</string>
+    <string name="passwordInputTextRepeatPassword">Powtórz hasło</string>
+    <string name="passwordInputTextInvalidPassword"></string>
+    <string name="userNameInputTextUserName">Nazwa użytkownika</string>
+    <string name="userNameInputTextEmail">E-mail</string>
     <string name="signupPassword">Hasło</string>
     <string name="signupRepeatPassword">Powtórz hasło</string>
-    <string name="signupSignUp">Rejestracja</string>
-    <string name="signupUsername">Nazwa użytkownika</string>
-    <string name="userNameEditTextEmailError">Adres e-mail jest niepoprawny</string>
-    <string name="userNameEditTextUserNameError">Nazwa użytkownika jest niepoprawna</string>
-    <string name="signupPasswordRequirements">Przynajmniej sześć znaków z jedną dużą literą, jedną małą literą i jedną cyfrą</string>
-    <string name="passwordEditTextError">Niepoprawne hasło</string>
 </resources>

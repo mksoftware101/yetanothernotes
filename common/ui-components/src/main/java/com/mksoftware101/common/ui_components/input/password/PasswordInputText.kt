@@ -35,7 +35,10 @@ class PasswordInputText @JvmOverloads constructor(
     var coroutineScope: CoroutineScope? = null
         get() {
             if (field == null) {
-                Log.e("PasswordInputText", "Coroutine scope is null. Have you forget to set coroutine scope?")
+                Log.e(
+                    "PasswordInputText",
+                    "Coroutine scope is null. Have you forget to set coroutine scope?"
+                )
             }
             return field
         }
@@ -47,7 +50,6 @@ class PasswordInputText @JvmOverloads constructor(
     var passwordCallback: PasswordCallback? = null
 
     init {
-        doSetupBy(attributeSet)
         inflate(context, R.layout.input_password, this)
         passwordInputLayout = findViewById(R.id.passwordInputLayout)
         passwordInputExitText = findViewById(R.id.passwordInputEditText)
@@ -70,10 +72,11 @@ class PasswordInputText @JvmOverloads constructor(
                 }
             }
         }
+        extractFrom(attributeSet)
         orientation = HORIZONTAL
     }
 
-    private fun doSetupBy(attributeSet: AttributeSet?) {
+    private fun extractFrom(attributeSet: AttributeSet?) {
         val styledAttributes =
             context.obtainStyledAttributes(attributeSet, R.styleable.PasswordInputText)
         setHint(styledAttributes)
@@ -96,13 +99,13 @@ class PasswordInputText @JvmOverloads constructor(
     private fun setHint(styledAttributes: TypedArray) {
         @StringRes val hintResId = styledAttributes.getResourceId(
             R.styleable.PasswordInputText_passwordHint,
-            R.string.signupPassword
+            R.string.passwordInputTextPassword
         )
         passwordInputLayout?.hint = resources.getString(hintResId)
     }
 
     private fun showError() {
-        passwordInputLayout?.error = resources.getString(R.string.passwordEditTextError)
+        passwordInputLayout?.error = resources.getString(R.string.passwordInputTextInvalidPassword)
     }
 
     private fun hideError() {

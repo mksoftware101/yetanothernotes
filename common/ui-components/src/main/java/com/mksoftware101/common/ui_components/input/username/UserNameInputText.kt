@@ -2,9 +2,7 @@ package com.mksoftware101.common.ui_components.input.username
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.LinearLayout
 import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
@@ -14,7 +12,7 @@ import com.mksoftware101.core.validator.EmailValidator
 import com.mksoftware101.core.validator.UserNameValidator
 import com.mksoftware101.core.validator.Validator
 
-class UserNameEditText @JvmOverloads constructor(
+class UserNameInputText @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defaultStyleAttributes: Int = 0
@@ -23,14 +21,20 @@ class UserNameEditText @JvmOverloads constructor(
     private var binding: EdittextUsernameBinding
 
     init {
-        val attributes = context.obtainStyledAttributes(attributeSet, R.styleable.UserNameEditText)
+        val attributes = context.obtainStyledAttributes(attributeSet, R.styleable.UserNameInputText)
         val userNameType = UserNameType.from(
-            attributes.getInt(R.styleable.UserNameEditText_userNameType, -1)
+            attributes.getInt(
+                R.styleable.UserNameInputText_userNameType,
+                UserNameType.USER_NAME.value
+            )
         )
 
         @StringRes
         val hintResId =
-            attributes.getResourceId(R.styleable.UserNameEditText_hint, R.string.signupUsername)
+            attributes.getResourceId(
+                R.styleable.UserNameInputText_hint,
+                R.string.userNameInputTextUserName
+            )
         attributes.recycle()
 
         binding = DataBindingUtil.inflate<EdittextUsernameBinding>(
@@ -39,7 +43,7 @@ class UserNameEditText @JvmOverloads constructor(
             this,
             true
         ).also { bindings ->
-            bindings.userNameEditText.hint = resources.getString(hintResId)
+            bindings.userNameEditTextContainer.hint = resources.getString(hintResId)
             bindings.viewModel = UserNameViewModel(
                 validator = getValidator(userNameType),
                 errorText = getErrorText(userNameType)
@@ -62,7 +66,7 @@ class UserNameEditText @JvmOverloads constructor(
     }
 
     private fun getErrorText(type: UserNameType): String = when (type) {
-        UserNameType.USER_NAME -> resources.getString(R.string.userNameEditTextUserNameError)
-        UserNameType.EMAIL -> resources.getString(R.string.userNameEditTextEmailError)
+        UserNameType.USER_NAME -> resources.getString(R.string.userNameInputTextInvalidUserName)
+        UserNameType.EMAIL -> resources.getString(R.string.userNameInputTextInvalidEmail)
     }
 }
