@@ -43,25 +43,17 @@
                 app:userNameType="email"
                 tools:hint="Email" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <com.mksoftware101.common.ui_components.input.password.PasswordInputText
                 android:id="@+id/passwordContainer"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/marginS"
-                app:endIconMode="password_toggle"
+                app:hint="@string/signupPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userNameTxt">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/passwordTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/signupPassword"
-                    android:inputType="textPassword"
-                    android:selectAllOnFocus="true"
-                    android:text="@={viewModel.password}" />
-            </com.google.android.material.textfield.TextInputLayout>
+                app:layout_constraintTop_toBottomOf="@+id/userNameTxt"
+                app:passwordValidator="validator_1"
+                app:onPasswordChanged="@{(password) -> viewModel.onPasswordChanged(password)}"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/repeatPasswordContainer"

@@ -7,4 +7,10 @@
         </attr>
         <attr name="hint" format="reference" />
     </declare-styleable>
+    <declare-styleable name="PasswordInputText">
+        <attr name="passwordHint" format="reference|string" />
+        <attr name="passwordValidator">
+            <enum name="validator_1" value="1" />
+        </attr>
+    </declare-styleable>
 </resources>

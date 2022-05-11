@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import mk.software101.features.login.R
 import mk.software101.features.login.databinding.FragmentSignupBinding
 
@@ -23,7 +24,9 @@ class SignupFragment : Fragment() {
             R.layout.fragment_signup,
             container,
             false
-        )
+        ).also {
+            it.passwordContainer.coroutineScope = lifecycleScope
+        }
         return binding.root
     }
 
