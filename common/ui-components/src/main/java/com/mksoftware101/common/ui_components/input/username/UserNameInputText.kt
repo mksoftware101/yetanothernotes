@@ -7,10 +7,10 @@ import android.widget.LinearLayout
 import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import com.mksoftware101.common.ui_components.R
-import com.mksoftware101.common.ui_components.databinding.EdittextUsernameBinding
 import com.mksoftware101.core.validator.EmailValidator
 import com.mksoftware101.core.validator.UserNameValidator
 import com.mksoftware101.core.validator.Validator
+import com.mksoftware101.common.ui_components.databinding.InputUsernameBinding
 
 class UserNameInputText @JvmOverloads constructor(
     context: Context,
@@ -18,7 +18,7 @@ class UserNameInputText @JvmOverloads constructor(
     defaultStyleAttributes: Int = 0
 ) : LinearLayout(context, attributeSet, defaultStyleAttributes) {
 
-    private var binding: EdittextUsernameBinding
+    private var binding: InputUsernameBinding
 
     init {
         val attributes = context.obtainStyledAttributes(attributeSet, R.styleable.UserNameInputText)
@@ -37,9 +37,9 @@ class UserNameInputText @JvmOverloads constructor(
             )
         attributes.recycle()
 
-        binding = DataBindingUtil.inflate<EdittextUsernameBinding>(
+        binding = DataBindingUtil.inflate<InputUsernameBinding>(
             LayoutInflater.from(context),
-            R.layout.edittext_username,
+            R.layout.input_username,
             this,
             true
         ).also { bindings ->
