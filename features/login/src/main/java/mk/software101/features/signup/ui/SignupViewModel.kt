@@ -1,30 +1,43 @@
 package mk.software101.features.signup.ui
 
-import android.util.Log
-import androidx.databinding.Observable
-import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import mk.software101.features.signup.ui.states.UiState
 
 class SignupViewModel : ViewModel() {
 
-    val password = ObservableField<String>()
-    val repeatPassword = ObservableField<String>()
     private var email: String? = null
+    private var password: String? = null
+    private var repeatPassword: String? = null
+
+    private val _uiState = MutableLiveData<UiState>()
+    val uiState: LiveData<UiState> = _uiState
 
     fun onUserNameChanged(userName: String?) {
-        Log.d("TAG", "[d] SUCCESS, valid emial = $userName")
         email = userName
     }
 
     fun onPasswordChanged(password: String?) {
-        Log.d("TAG", "[d] SUCCESS, valid password = $password")
+        this.password = password
     }
 
-    fun onRepeatPasswordChanged(password: String?) {
-        Log.d("TAG", "[d] SUCCESS, valid repeat password = $password")
+    fun onRepeatPasswordChanged(repeatPassword: String?) {
+        this.repeatPassword = repeatPassword
     }
 
     fun onSignup() {
-        Log.d("TAG", "[d][signup] password=${password.get()}, repeatPasswd=${repeatPassword.get()}")
+        if (email.isNullOrBlank()) {
+            _uiState.value = UiState.InvalidEmail
+            return
+        }
+        if (isPasswordNotSame(password, repeatPassword)) {
+            _uiState.value = UiState.InvalidOrNotSamePassword
+            return
+        }
+        // ToDo Run signIn
     }
+
+    private fun isPasswordNotSame(password: String?, repeatPassword: String?) =
+        password != repeatPassword
 }
