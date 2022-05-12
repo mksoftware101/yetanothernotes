@@ -10,78 +10,85 @@
             type="mk.software101.features.signup.ui.SignupViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/signupContainer"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/signupCoordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         tools:context="mk.software101.features.signup.ui.SignupFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/signupInnerContainer"
+            android:id="@+id/signupContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/marginM"
-            android:paddingTop="@dimen/marginM"
-            android:paddingRight="@dimen/marginM"
-            android:paddingBottom="@dimen/marginM"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35">
+            android:layout_height="match_parent">
 
-            <com.mksoftware101.common.ui_components.input.username.UserNameInputText
-                android:id="@+id/userNameTxt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:hint="@string/signupEmail"
-                app:layout_constraintBottom_toTopOf="@id/passwordContainer"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:onUserNameChanged="@{(userName) -> viewModel.onUserNameChanged(userName)}"
-                app:userNameType="email"
-                tools:hint="Email" />
-
-            <com.mksoftware101.common.ui_components.input.password.PasswordInputText
-                android:id="@+id/passwordContainer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/marginXS"
-                app:hint="@string/signupPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userNameTxt"
-                app:onPasswordChanged="@{(password) -> viewModel.onPasswordChanged(password)}"
-                app:passwordValidator="validator_1" />
-
-            <com.mksoftware101.common.ui_components.input.password.PasswordInputText
-                android:id="@+id/repeatPasswordContainer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/marginXS"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passwordContainer"
-                app:onPasswordChanged="@{(password) -> viewModel.onRepeatPasswordChanged(password)}"
-                app:passwordHint="@string/signupRepeatPassword"
-                app:passwordValidator="validator_1" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/signupBtn"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/signupInnerContainer"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="@dimen/marginM"
-                android:onClickListener="@{() -> viewModel.onSignup()}"
-                android:text="@string/signupSignUp"
-                android:textAllCaps="false"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/marginM"
+                android:paddingTop="@dimen/marginM"
+                android:paddingRight="@dimen/marginM"
+                android:paddingBottom="@dimen/marginM"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/repeatPasswordContainer" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.35">
 
+                <com.mksoftware101.common.ui_components.input.username.UserNameInputText
+                    android:id="@+id/userNameTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:hint="@string/signupEmail"
+                    app:layout_constraintBottom_toTopOf="@id/passwordContainer"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:onUserNameChanged="@{(userName) -> viewModel.onUserNameChanged(userName)}"
+                    app:userNameType="email"
+                    tools:hint="Email" />
+
+                <com.mksoftware101.common.ui_components.input.password.PasswordInputText
+                    android:id="@+id/passwordContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginXS"
+                    app:hint="@string/signupPassword"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/userNameTxt"
+                    app:onPasswordChanged="@{(password) -> viewModel.onPasswordChanged(password)}"
+                    app:passwordValidator="validator_1" />
+
+                <com.mksoftware101.common.ui_components.input.password.PasswordInputText
+                    android:id="@+id/repeatPasswordContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginXS"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/passwordContainer"
+                    app:onPasswordChanged="@{(password) -> viewModel.onRepeatPasswordChanged(password)}"
+                    app:passwordHint="@string/signupRepeatPassword"
+                    app:passwordValidator="validator_1" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/signupBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="@dimen/marginM"
+                    android:onClickListener="@{() -> viewModel.onSignup()}"
+                    android:text="@string/signupSignUp"
+                    android:textAllCaps="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/repeatPasswordContainer" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

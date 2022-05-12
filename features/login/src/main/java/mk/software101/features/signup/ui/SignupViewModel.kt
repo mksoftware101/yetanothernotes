@@ -39,5 +39,5 @@ class SignupViewModel : ViewModel() {
     }
 
     private fun isPasswordNotSame(password: String?, repeatPassword: String?) =
-        password != repeatPassword
+        password.isNullOrBlank() || repeatPassword.isNullOrBlank() || password != repeatPassword
 }
