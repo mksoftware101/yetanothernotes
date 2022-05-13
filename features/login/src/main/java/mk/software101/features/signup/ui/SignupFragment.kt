@@ -51,7 +51,7 @@ class SignupFragment : Fragment() {
     private fun handleInvalidOrNotSamePassword() {
         Snackbar.make(
             binding.signupCoordinatorLayout,
-            "Invalid or not the same password",
+            resources.getString(R.string.generalInvalidOrNotSamePassword),
             Snackbar.LENGTH_SHORT
         ).show()
     }
@@ -59,7 +59,7 @@ class SignupFragment : Fragment() {
     private fun handleInvalidEmail() {
         Snackbar.make(
             binding.signupCoordinatorLayout,
-            "Invalid e-mail address",
+            resources.getString(R.string.generalInvalidEmail),
             Snackbar.LENGTH_SHORT
         ).show()
     }
