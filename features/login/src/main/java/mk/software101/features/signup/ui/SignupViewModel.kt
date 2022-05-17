@@ -29,6 +29,7 @@ class SignupViewModel : ViewModel() {
     fun onSignup() {
         if (email.isNullOrBlank() || isPasswordNotSame(password, repeatPassword)) {
             _uiState.value = UiState.IncorrectValuesInFields
+            return
         }
         _uiState.value = UiState.OpenNotesList
     }

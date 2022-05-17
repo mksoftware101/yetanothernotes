@@ -19,17 +19,15 @@ import mk.software101.features.signup.ui.states.UiState
 
 class SignupFragment : Fragment() {
 
+    private val deepLinkNotesList by lazy {
+        resources.getString(R.string.deepLinkNotesListUrl).toUri()
+    }
     private lateinit var binding: FragmentSignupBinding
     private lateinit var viewModel: SignupViewModel
     private val uiStateObserver = Observer<UiState> { uiState ->
         when (uiState) {
             UiState.IncorrectValuesInFields -> handleIncorrectValuesInFields()
-            UiState.OpenNotesList -> {
-                findNavController().navigate(
-                    NavDeepLinkRequest.Builder.fromUri("android-app://example.google.app/fragment_notes".toUri())
-                        .build()
-                )
-            }
+            UiState.OpenNotesList -> openNotesList()
         }
     }
 
@@ -62,5 +60,11 @@ class SignupFragment : Fragment() {
             resources.getString(R.string.generalFillInFieldCorrectly),
             Snackbar.LENGTH_SHORT
         ).show()
+    }
+
+    private fun openNotesList() {
+        findNavController().navigate(
+            NavDeepLinkRequest.Builder.fromUri(deepLinkNotesList).build()
+        )
     }
 }

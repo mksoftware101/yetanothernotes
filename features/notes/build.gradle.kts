@@ -57,6 +57,9 @@ dependencies {
     // ui-components
     implementation(project(Common.uiComponents))
 
+    // core
+    implementation(project(Core.core))
+
     // recyclerview
     implementation(Libs.bindingCollectionAdapter)
     implementation(Libs.bindingCollectionAdapterRecyclerView)

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import mk.software101.features.notes.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,6 +29,8 @@ class NotesListFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(this, OnBackPressed())
     }
 
     override fun onCreateView(
@@ -36,6 +39,12 @@ class NotesListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notes_list, container, false)
+    }
+
+    private inner class OnBackPressed : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            requireActivity().finish()
+        }
     }
 
     companion object {

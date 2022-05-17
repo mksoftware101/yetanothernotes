@@ -11,7 +11,7 @@
         android:label="fragment_notes_list"
         tools:layout="@layout/fragment_notes_list">
 
-        <deepLink app:uri="android-app://example.google.app/fragment_notes" />
+        <deepLink app:uri="@string/deepLinkNotesListUrl" />
 
     </fragment>
 </navigation>
