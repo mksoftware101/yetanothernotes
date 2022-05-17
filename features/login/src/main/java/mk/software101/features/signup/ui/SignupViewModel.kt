@@ -27,15 +27,10 @@ class SignupViewModel : ViewModel() {
     }
 
     fun onSignup() {
-        if (email.isNullOrBlank()) {
-            _uiState.value = UiState.InvalidEmail
-            return
+        if (email.isNullOrBlank() || isPasswordNotSame(password, repeatPassword)) {
+            _uiState.value = UiState.IncorrectValuesInFields
         }
-        if (isPasswordNotSame(password, repeatPassword)) {
-            _uiState.value = UiState.InvalidOrNotSamePassword
-            return
-        }
-        // ToDo Run signIn
+        _uiState.value = UiState.OpenNotesList
     }
 
     private fun isPasswordNotSame(password: String?, repeatPassword: String?) =

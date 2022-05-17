@@ -39,4 +39,5 @@
     <string name="signupRepeatPassword">Powtórz hasło</string>
     <string name="generalInvalidEmail">Nieprawidłowy adres e-mail</string>
     <string name="generalInvalidOrNotSamePassword">Nieprawidłowe hasło lub hasła nie są takie same</string>
+    <string name="generalFillInFieldCorrectly">Proszę poprawnie wypełnić pola</string>
 </resources>

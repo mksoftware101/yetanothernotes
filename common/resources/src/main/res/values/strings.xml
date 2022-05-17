@@ -39,4 +39,5 @@
     <string name="signupRepeatPassword">Repeat password</string>
     <string name="generalInvalidEmail">Invalid e-mail address</string>
     <string name="generalInvalidOrNotSamePassword">Invalid or not the same password</string>
+    <string name="generalFillInFieldCorrectly">Please fill in the fields correctly</string>
 </resources>

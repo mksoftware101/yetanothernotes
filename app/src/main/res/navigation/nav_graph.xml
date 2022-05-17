@@ -3,7 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation_login">
+    app:startDestination="@id/navigation_login_wrapper">
 
-    <include app:graph="@navigation/navigation_login" />
+    <navigation
+        android:id="@+id/navigation_login_wrapper"
+        app:startDestination="@id/navigation_login">
+        <include app:graph="@navigation/navigation_login" />
+        <action
+            android:id="@+id/action_global_navigation_notes"
+            app:destination="@id/navigation_notes" />
+    </navigation>
+
+    <include app:graph="@navigation/navigation_notes" />
 </navigation>

@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import mk.software101.features.login.R
 import mk.software101.features.login.databinding.FragmentSignupBinding
@@ -20,8 +23,13 @@ class SignupFragment : Fragment() {
     private lateinit var viewModel: SignupViewModel
     private val uiStateObserver = Observer<UiState> { uiState ->
         when (uiState) {
-            UiState.InvalidEmail -> handleInvalidEmail()
-            UiState.InvalidOrNotSamePassword -> handleInvalidOrNotSamePassword()
+            UiState.IncorrectValuesInFields -> handleIncorrectValuesInFields()
+            UiState.OpenNotesList -> {
+                findNavController().navigate(
+                    NavDeepLinkRequest.Builder.fromUri("android-app://example.google.app/fragment_notes".toUri())
+                        .build()
+                )
+            }
         }
     }
 
@@ -48,18 +56,10 @@ class SignupFragment : Fragment() {
         viewModel.uiState.observe(viewLifecycleOwner, uiStateObserver)
     }
 
-    private fun handleInvalidOrNotSamePassword() {
+    private fun handleIncorrectValuesInFields() {
         Snackbar.make(
             binding.signupCoordinatorLayout,
-            resources.getString(R.string.generalInvalidOrNotSamePassword),
-            Snackbar.LENGTH_SHORT
-        ).show()
-    }
-
-    private fun handleInvalidEmail() {
-        Snackbar.make(
-            binding.signupCoordinatorLayout,
-            resources.getString(R.string.generalInvalidEmail),
+            resources.getString(R.string.generalFillInFieldCorrectly),
             Snackbar.LENGTH_SHORT
         ).show()
     }
