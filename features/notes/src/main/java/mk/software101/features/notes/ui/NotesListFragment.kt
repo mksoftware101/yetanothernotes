@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.navigation.fragment.findNavController
 import mk.software101.features.notes.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,6 +47,7 @@ class NotesListFragment : Fragment() {
             requireActivity().finish()
         }
     }
+
 
     companion object {
         /**
