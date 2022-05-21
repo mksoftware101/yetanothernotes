@@ -33,7 +33,7 @@ class SignupViewModel(
     }
 
     fun onSignup() {
-        if (validateEmailAndPasswords()) {
+        if (matchPasswords()) {
             viewModelScope.launch {
                 try {
                     signUpUseCase.run(LoginSharedData(emailAddress!!, password!!))
@@ -46,35 +46,13 @@ class SignupViewModel(
         }
     }
 
-    private fun validateEmailAndPasswords(): Boolean {
-        var isEmailCorrect = true
-        var isPasswordValid = true
-        var isRepeatPasswordValid = true
-        var isPasswordsSame = true
-
-        if (emailAddress.isNullOrBlank()) {
-            _uiState.value = UiState.EmptyEmail
-            isEmailCorrect = false
+    private fun matchPasswords(): Boolean {
+        if (isPasswordNotSame(password, repeatPassword)) {
+            _uiState.value = UiState.PasswordsNotSame
+            return false
         }
 
-        if (password.isNullOrBlank()) {
-            _uiState.value = UiState.PasswordEmpty
-            isPasswordValid = false
-        }
-
-        if (password.isNullOrBlank()) {
-            _uiState.value = UiState.RepeatedPasswordEmpty
-            isRepeatPasswordValid = false
-        }
-
-        if (isPasswordValid.and(isRepeatPasswordValid)) {
-            if (isPasswordNotSame(password, repeatPassword)) {
-                _uiState.value = UiState.PasswordsNotSame
-                isPasswordsSame = false
-            }
-        }
-
-        return isPasswordValid.and(isRepeatPasswordValid).and(isEmailCorrect).and(isPasswordsSame)
+        return true
     }
 
     private fun isPasswordNotSame(password: String?, repeatPassword: String?) =

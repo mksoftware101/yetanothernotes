@@ -58,18 +58,13 @@ class PasswordInputText @JvmOverloads constructor(
             delayJob = coroutineScope?.launch {
                 hideError()
                 delay(DEBOUNCE_MS)
-                val input = text.toString()
-                val candidate: String? = if (passwordValidator?.isValid(input) == true) {
-                    input
-                } else {
-                    showError()
-                    null
-                }
-
-                if (currentPassword != candidate) {
-                    currentPassword = candidate
-                    passwordCallback?.onPasswordChanged(currentPassword)
-                }
+                validate(text)
+            }
+        }
+        passwordInputExitText?.setOnFocusChangeListener { view, hasFocus ->
+            val inputEditText = view as TextInputEditText
+            if (!hasFocus && inputEditText.text.isNullOrBlank()) {
+                showError()
             }
         }
         extractFrom(attributeSet)
@@ -77,17 +72,25 @@ class PasswordInputText @JvmOverloads constructor(
     }
 
     /**
-     * Show error
-     */
-    fun showError() {
-        passwordInputLayout?.error = resources.getString(R.string.passwordInputTextInvalidPassword)
-    }
-
-    /**
      * Show error message, that passwords are not the same
      */
     fun setPasswordsNotSameError() {
         passwordInputLayout?.error = resources.getString(R.string.passwordPasswordsNotTheSame)
+    }
+
+    private fun validate(text: CharSequence?) {
+        val input = text.toString()
+        val candidate: String? = if (passwordValidator?.isValid(input) == true) {
+            input
+        } else {
+            showError()
+            null
+        }
+
+        if (currentPassword != candidate) {
+            currentPassword = candidate
+            passwordCallback?.onPasswordChanged(currentPassword)
+        }
     }
 
     private fun extractFrom(attributeSet: AttributeSet?) {
@@ -120,5 +123,9 @@ class PasswordInputText @JvmOverloads constructor(
 
     private fun hideError() {
         passwordInputLayout?.error = null
+    }
+
+    private fun showError() {
+        passwordInputLayout?.error = resources.getString(R.string.passwordInputTextInvalidPassword)
     }
 }

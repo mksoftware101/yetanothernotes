@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
+import com.google.android.material.textfield.TextInputEditText
 import com.mksoftware101.common.ui_components.R
 import com.mksoftware101.core.validator.EmailValidator
 import com.mksoftware101.core.validator.UserNameValidator
@@ -48,6 +49,12 @@ class UserNameInputText @JvmOverloads constructor(
                 validator = getValidator(userNameType),
                 errorText = getErrorText(userNameType)
             )
+            bindings.userNameEditText.setOnFocusChangeListener { view, hasFocus ->
+                val inputEditText = view as TextInputEditText
+                if (!hasFocus && inputEditText.text.isNullOrBlank()) {
+                    setError()
+                }
+            }
         }
 
         orientation = HORIZONTAL
@@ -60,12 +67,7 @@ class UserNameInputText @JvmOverloads constructor(
         binding.viewModel?.usernameCallback = callback
     }
 
-    /**
-     * Set error for input text
-     *
-     * Useful when user didn't touched username filed but clicked on login/signup button
-     */
-    fun setError() = binding.viewModel?.setError()
+    private fun setError() = binding.viewModel?.setError()
 
     private fun getValidator(userNameType: UserNameType): Validator = when (userNameType) {
         UserNameType.USER_NAME -> UserNameValidator()

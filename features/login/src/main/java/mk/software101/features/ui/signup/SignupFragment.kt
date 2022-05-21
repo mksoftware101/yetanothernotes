@@ -26,15 +26,6 @@ class SignupFragment : Fragment() {
     private lateinit var viewModel: SignupViewModel
     private val uiStateObserver = Observer<UiState> { uiState ->
         when (uiState) {
-            UiState.EmptyEmail -> {
-                binding.userNameTxt.setError()
-            }
-            UiState.PasswordEmpty -> {
-                binding.passwordContainer.showError()
-            }
-            UiState.RepeatedPasswordEmpty -> {
-                binding.repeatPasswordContainer.showError()
-            }
             UiState.PasswordsNotSame -> {
                 binding.repeatPasswordContainer.setPasswordsNotSameError()
             }
