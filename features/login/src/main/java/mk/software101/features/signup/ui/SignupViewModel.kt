@@ -3,11 +3,17 @@ package mk.software101.features.signup.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import mk.software101.features.signup.models.SignUpData
+import mk.software101.features.signup.domain.SignUpUseCase
 import mk.software101.features.signup.ui.states.UiState
 
-class SignupViewModel : ViewModel() {
+class SignupViewModel(
+    private val signUpUseCase: SignUpUseCase
+) : ViewModel() {
 
-    private var email: String? = null
+    private var emailAddress: String? = null
     private var password: String? = null
     private var repeatPassword: String? = null
 
@@ -15,7 +21,7 @@ class SignupViewModel : ViewModel() {
     val uiState: LiveData<UiState> = _uiState
 
     fun onUserNameChanged(userName: String?) {
-        email = userName
+        emailAddress = userName
     }
 
     fun onPasswordChanged(password: String?) {
@@ -27,13 +33,37 @@ class SignupViewModel : ViewModel() {
     }
 
     fun onSignup() {
-        if (email.isNullOrBlank() || isPasswordNotSame(password, repeatPassword)) {
+        if (emailAddress.isNullOrBlank() || isPasswordNotSame(password, repeatPassword)) {
             _uiState.value = UiState.IncorrectValuesInFields
             return
         }
-        _uiState.value = UiState.OpenNotesList
+        viewModelScope.launch {
+            try {
+                signUpUseCase.run(SignUpData(emailAddress!!, password!!))
+                _uiState.value = UiState.SignUpSucceeded
+            } catch (e: Throwable) {
+                e.printStackTrace()
+            }
+        }
     }
 
     private fun isPasswordNotSame(password: String?, repeatPassword: String?) =
         password.isNullOrBlank() || repeatPassword.isNullOrBlank() || password != repeatPassword
 }
+
+//                val user = ParseUser().apply {
+//                    Log.d("TAG", "[d] email=$emailAddress, passwd=$password")
+//                    username = "Just userName"
+//                    email = emailAddress
+//                    setPassword(password)
+//                }.also {
+//                    it.suspendSignUp()
+//                }
+//                ParseUser.logOut()
+//Log.d("TAG", "[d] Before login")
+////                ParseUser.logIn(emailAddress, password)
+//ParseUser.logOut()
+//Log.d(
+//"TAG",
+//"[d] Success? user=${ParseUser.getCurrentUser().sessionToken}"
+//) // Success? user=r:e8b51a31cda86213afe19352a36d8925

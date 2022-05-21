@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mksoftware101.notes">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".NotesApplication"
         android:allowBackup="true"
@@ -19,9 +22,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <meta-data
+            android:name="com.parse.SERVER_URL"
+            android:value="@string/ParseApiBaseUrl" />
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="@string/parseApplicationID" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="@string/parseClientKey" />
+
     </application>
 
 </manifest>

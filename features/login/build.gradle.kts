@@ -49,6 +49,10 @@ dependencies {
     implementation(project(Common.uiComponents))
     implementation(project(Common.resources))
 
+    // Parse
+    implementation(Libs.parse)
+    implementation(Libs.parseCoroutines)
+
     // Navigation
     implementation(Libs.androidX.navigationFragment)
     implementation(Libs.androidX.navigationUi)

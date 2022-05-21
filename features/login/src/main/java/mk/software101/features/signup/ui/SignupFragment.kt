@@ -27,7 +27,7 @@ class SignupFragment : Fragment() {
     private val uiStateObserver = Observer<UiState> { uiState ->
         when (uiState) {
             UiState.IncorrectValuesInFields -> handleIncorrectValuesInFields()
-            UiState.OpenNotesList -> openNotesList()
+            UiState.SignUpSucceeded -> openNotesList()
         }
     }
 
@@ -49,7 +49,8 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SignupViewModel::class.java)
+        viewModel =
+            ViewModelProvider(this, SignUpViewModelFactory()).get(SignupViewModel::class.java)
         DataBindingUtil.getBinding<FragmentSignupBinding>(requireView())?.viewModel = viewModel
         viewModel.uiState.observe(viewLifecycleOwner, uiStateObserver)
     }

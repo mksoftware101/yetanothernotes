@@ -1,3 +1,7 @@
+import java.util.Properties
+import java.io.FileInputStream
+import java.io.File
+
 plugins {
     id(Plugins.androidLibrary)
     id(Plugins.kotlinForAndroid)
@@ -15,6 +19,20 @@ android {
     }
 
     buildTypes {
+        getByName("debug") {
+            if (System.getenv("CI") == "true") {
+                // ToDo Add keys and others stuff to CI
+            } else {
+                val parseProperties = Properties().also {
+                    it.load(
+                        FileInputStream(File(rootProject.rootDir, "core/parse.properties"))
+                    )
+                }
+                resValue ("string", "parseApplicationID", parseProperties["applicationID"].toString())
+                resValue("string", "parseClientKey", parseProperties["clientKey"].toString())
+                resValue("string", "ParseApiBaseUrl", parseProperties["apiBaseUrl"].toString())
+            }
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -47,6 +65,9 @@ dependencies {
 
     // Logging
     implementation(Libs.timber)
+
+    // Parse
+    implementation(Libs.parse)
 
     testImplementation(TestLibs.junit)
     androidTestImplementation(TestLibs.extJunit)
