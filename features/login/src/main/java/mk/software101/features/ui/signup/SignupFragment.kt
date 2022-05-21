@@ -1,4 +1,4 @@
-package mk.software101.features.signup.ui
+package mk.software101.features.ui.signup
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDeepLinkRequest
@@ -15,7 +14,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import mk.software101.features.login.R
 import mk.software101.features.login.databinding.FragmentSignupBinding
-import mk.software101.features.signup.ui.states.UiState
+import mk.software101.features.ui.signup.states.UiState
+import androidx.lifecycle.Observer
 
 class SignupFragment : Fragment() {
 

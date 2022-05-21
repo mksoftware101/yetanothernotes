@@ -1,13 +1,13 @@
-package mk.software101.features.signup.ui
+package mk.software101.features.ui.signup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import mk.software101.features.signup.models.SignUpData
-import mk.software101.features.signup.domain.SignUpUseCase
-import mk.software101.features.signup.ui.states.UiState
+import mk.software101.features.domain.SignUpUseCase
+import mk.software101.features.models.LoginSharedData
+import mk.software101.features.ui.signup.states.UiState
 
 class SignupViewModel(
     private val signUpUseCase: SignUpUseCase
@@ -39,7 +39,7 @@ class SignupViewModel(
         }
         viewModelScope.launch {
             try {
-                signUpUseCase.run(SignUpData(emailAddress!!, password!!))
+                signUpUseCase.run(LoginSharedData(emailAddress!!, password!!))
                 _uiState.value = UiState.SignUpSucceeded
             } catch (e: Throwable) {
                 e.printStackTrace()
@@ -50,20 +50,3 @@ class SignupViewModel(
     private fun isPasswordNotSame(password: String?, repeatPassword: String?) =
         password.isNullOrBlank() || repeatPassword.isNullOrBlank() || password != repeatPassword
 }
-
-//                val user = ParseUser().apply {
-//                    Log.d("TAG", "[d] email=$emailAddress, passwd=$password")
-//                    username = "Just userName"
-//                    email = emailAddress
-//                    setPassword(password)
-//                }.also {
-//                    it.suspendSignUp()
-//                }
-//                ParseUser.logOut()
-//Log.d("TAG", "[d] Before login")
-////                ParseUser.logIn(emailAddress, password)
-//ParseUser.logOut()
-//Log.d(
-//"TAG",
-//"[d] Success? user=${ParseUser.getCurrentUser().sessionToken}"
-//) // Success? user=r:e8b51a31cda86213afe19352a36d8925

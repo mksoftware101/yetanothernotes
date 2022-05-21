@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="mk.software101.features.signup.ui.SignupViewModel" />
+            type="mk.software101.features.ui.signup.SignupViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="mk.software101.features.signup.ui.SignupFragment">
+        tools:context="mk.software101.features.ui.signup.SignupFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/signupContainer"

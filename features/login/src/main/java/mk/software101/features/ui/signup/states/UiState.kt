@@ -1,4 +1,4 @@
-package mk.software101.features.signup.ui.states
+package mk.software101.features.ui.signup.states
 
 sealed class UiState {
     object IncorrectValuesInFields : UiState()
