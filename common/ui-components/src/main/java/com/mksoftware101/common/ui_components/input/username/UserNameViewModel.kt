@@ -39,7 +39,7 @@ class UserNameViewModel(
         }
     }
 
-    private fun resetError() = usernameError.set(null)
+    fun setError() = usernameError.set(errorText)
 
-    private fun setError() = usernameError.set(errorText)
+    private fun resetError() = usernameError.set(null)
 }

@@ -32,7 +32,7 @@
     <string name="userNameInputTextInvalidUserName">Nazwa użytkownika jest niepoprawna</string>
     <string name="passwordInputTextPassword">Hasło</string>
     <string name="passwordInputTextRepeatPassword">Powtórz hasło</string>
-    <string name="passwordInputTextInvalidPassword"></string>
+    <string name="passwordInputTextInvalidPassword">Niepoprawne hasło*</string>
     <string name="userNameInputTextUserName">Nazwa użytkownika</string>
     <string name="userNameInputTextEmail">E-mail</string>
     <string name="signupPassword">Hasło</string>
@@ -40,4 +40,7 @@
     <string name="generalInvalidEmail">Nieprawidłowy adres e-mail</string>
     <string name="generalInvalidOrNotSamePassword">Nieprawidłowe hasło lub hasła nie są takie same</string>
     <string name="generalFillInFieldCorrectly">Proszę poprawnie wypełnić pola</string>
+    <string name="signupPasswordRequirements">*Przynajmniej sześć znaków, jedna duża litera i jedna cyfra</string>
+    <string name="signupSignUpError">Błąd podczas rejestracji. Spróbuj później.</string>
+    <string name="passwordPasswordsNotTheSame">Hasła nie są takie same</string>
 </resources>

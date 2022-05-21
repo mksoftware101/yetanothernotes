@@ -65,13 +65,26 @@
                     android:id="@+id/repeatPasswordContainer"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/marginXS"
+                    app:errorIconDrawable="@null"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/passwordContainer"
                     app:onPasswordChanged="@{(password) -> viewModel.onRepeatPasswordChanged(password)}"
                     app:passwordHint="@string/signupRepeatPassword"
                     app:passwordValidator="validator_1" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/passwordRequirementsTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginXXS"
+                    android:text="@string/signupPasswordRequirements"
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    android:textColor="?attr/colorOnSurface"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/repeatPasswordContainer" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/signupBtn"
@@ -84,7 +97,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/repeatPasswordContainer" />
+                    app:layout_constraintTop_toBottomOf="@+id/passwordRequirementsTxt" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

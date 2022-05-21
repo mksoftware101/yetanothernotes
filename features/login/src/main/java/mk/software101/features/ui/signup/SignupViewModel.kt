@@ -33,18 +33,48 @@ class SignupViewModel(
     }
 
     fun onSignup() {
-        if (emailAddress.isNullOrBlank() || isPasswordNotSame(password, repeatPassword)) {
-            _uiState.value = UiState.IncorrectValuesInFields
-            return
-        }
-        viewModelScope.launch {
-            try {
-                signUpUseCase.run(LoginSharedData(emailAddress!!, password!!))
-                _uiState.value = UiState.SignUpSucceeded
-            } catch (e: Throwable) {
-                e.printStackTrace()
+        if (validateEmailAndPasswords()) {
+            viewModelScope.launch {
+                try {
+                    signUpUseCase.run(LoginSharedData(emailAddress!!, password!!))
+                    _uiState.value = UiState.SignUpSucceeded
+                } catch (e: Throwable) {
+                    e.printStackTrace() // ToDo Where is Timber?
+                    _uiState.value = UiState.SignUpFailed
+                }
             }
         }
+    }
+
+    private fun validateEmailAndPasswords(): Boolean {
+        var isEmailCorrect = true
+        var isPasswordValid = true
+        var isRepeatPasswordValid = true
+        var isPasswordsSame = true
+
+        if (emailAddress.isNullOrBlank()) {
+            _uiState.value = UiState.EmptyEmail
+            isEmailCorrect = false
+        }
+
+        if (password.isNullOrBlank()) {
+            _uiState.value = UiState.PasswordEmpty
+            isPasswordValid = false
+        }
+
+        if (password.isNullOrBlank()) {
+            _uiState.value = UiState.RepeatedPasswordEmpty
+            isRepeatPasswordValid = false
+        }
+
+        if (isPasswordValid.and(isRepeatPasswordValid)) {
+            if (isPasswordNotSame(password, repeatPassword)) {
+                _uiState.value = UiState.PasswordsNotSame
+                isPasswordsSame = false
+            }
+        }
+
+        return isPasswordValid.and(isRepeatPasswordValid).and(isEmailCorrect).and(isPasswordsSame)
     }
 
     private fun isPasswordNotSame(password: String?, repeatPassword: String?) =

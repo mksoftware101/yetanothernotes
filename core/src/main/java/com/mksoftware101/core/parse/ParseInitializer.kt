@@ -2,6 +2,7 @@ package com.mksoftware101.core.parse
 
 import android.content.Context
 import com.parse.Parse
+import com.parse.ParseUser
 import mk.software101.core.R
 
 object ParseInitializer {

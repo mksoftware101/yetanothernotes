@@ -60,6 +60,13 @@ class UserNameInputText @JvmOverloads constructor(
         binding.viewModel?.usernameCallback = callback
     }
 
+    /**
+     * Set error for input text
+     *
+     * Useful when user didn't touched username filed but clicked on login/signup button
+     */
+    fun setError() = binding.viewModel?.setError()
+
     private fun getValidator(userNameType: UserNameType): Validator = when (userNameType) {
         UserNameType.USER_NAME -> UserNameValidator()
         UserNameType.EMAIL -> EmailValidator()

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDeepLinkRequest
@@ -15,7 +16,6 @@ import com.google.android.material.snackbar.Snackbar
 import mk.software101.features.login.R
 import mk.software101.features.login.databinding.FragmentSignupBinding
 import mk.software101.features.ui.signup.states.UiState
-import androidx.lifecycle.Observer
 
 class SignupFragment : Fragment() {
 
@@ -26,8 +26,20 @@ class SignupFragment : Fragment() {
     private lateinit var viewModel: SignupViewModel
     private val uiStateObserver = Observer<UiState> { uiState ->
         when (uiState) {
-            UiState.IncorrectValuesInFields -> handleIncorrectValuesInFields()
+            UiState.EmptyEmail -> {
+                binding.userNameTxt.setError()
+            }
+            UiState.PasswordEmpty -> {
+                binding.passwordContainer.showError()
+            }
+            UiState.RepeatedPasswordEmpty -> {
+                binding.repeatPasswordContainer.showError()
+            }
+            UiState.PasswordsNotSame -> {
+                binding.repeatPasswordContainer.setPasswordsNotSameError()
+            }
             UiState.SignUpSucceeded -> openNotesList()
+            UiState.SignUpFailed -> showSignupError()
         }
     }
 
@@ -55,11 +67,11 @@ class SignupFragment : Fragment() {
         viewModel.uiState.observe(viewLifecycleOwner, uiStateObserver)
     }
 
-    private fun handleIncorrectValuesInFields() {
+    private fun showSignupError() {
         Snackbar.make(
             binding.signupCoordinatorLayout,
-            resources.getString(R.string.generalFillInFieldCorrectly),
-            Snackbar.LENGTH_SHORT
+            R.string.signupSignUpError,
+            Snackbar.LENGTH_LONG
         ).show()
     }
 

@@ -32,7 +32,7 @@
     <string name="userNameInputTextInvalidUserName">Invalid user name</string>
     <string name="passwordInputTextPassword">Password</string>
     <string name="passwordInputTextRepeatPassword">Repeat password</string>
-    <string name="passwordInputTextInvalidPassword">Invalid. At least six signs, one capital letter and one number</string>
+    <string name="passwordInputTextInvalidPassword">Invalid password*</string>
     <string name="userNameInputTextUserName">User name</string>
     <string name="userNameInputTextEmail">E-mail</string>
     <string name="signupPassword">Password</string>
@@ -40,4 +40,7 @@
     <string name="generalInvalidEmail">Invalid e-mail address</string>
     <string name="generalInvalidOrNotSamePassword">Invalid or not the same password</string>
     <string name="generalFillInFieldCorrectly">Please fill in the fields correctly</string>
+    <string name="signupPasswordRequirements">*At least six signs, one capital letter and one number</string>
+    <string name="signupSignUpError">Sign up error. Try again later.</string>
+    <string name="passwordPasswordsNotTheSame">Passwords are not the same</string>
 </resources>

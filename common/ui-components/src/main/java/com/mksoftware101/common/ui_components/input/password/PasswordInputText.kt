@@ -76,6 +76,20 @@ class PasswordInputText @JvmOverloads constructor(
         orientation = HORIZONTAL
     }
 
+    /**
+     * Show error
+     */
+    fun showError() {
+        passwordInputLayout?.error = resources.getString(R.string.passwordInputTextInvalidPassword)
+    }
+
+    /**
+     * Show error message, that passwords are not the same
+     */
+    fun setPasswordsNotSameError() {
+        passwordInputLayout?.error = resources.getString(R.string.passwordPasswordsNotTheSame)
+    }
+
     private fun extractFrom(attributeSet: AttributeSet?) {
         val styledAttributes =
             context.obtainStyledAttributes(attributeSet, R.styleable.PasswordInputText)
@@ -102,10 +116,6 @@ class PasswordInputText @JvmOverloads constructor(
             R.string.passwordInputTextPassword
         )
         passwordInputLayout?.hint = resources.getString(hintResId)
-    }
-
-    private fun showError() {
-        passwordInputLayout?.error = resources.getString(R.string.passwordInputTextInvalidPassword)
     }
 
     private fun hideError() {
