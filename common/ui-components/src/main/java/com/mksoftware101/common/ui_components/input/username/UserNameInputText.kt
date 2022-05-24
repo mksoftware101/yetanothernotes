@@ -52,7 +52,7 @@ class UserNameInputText @JvmOverloads constructor(
             bindings.userNameEditText.setOnFocusChangeListener { view, hasFocus ->
                 val inputEditText = view as TextInputEditText
                 if (!hasFocus && inputEditText.text.isNullOrBlank()) {
-                    setError()
+                    showError()
                 }
             }
         }
@@ -67,7 +67,10 @@ class UserNameInputText @JvmOverloads constructor(
         binding.viewModel?.usernameCallback = callback
     }
 
-    private fun setError() = binding.viewModel?.setError()
+    /**
+     * Show error
+     */
+    fun showError() = binding.viewModel?.setError()
 
     private fun getValidator(userNameType: UserNameType): Validator = when (userNameType) {
         UserNameType.USER_NAME -> UserNameValidator()

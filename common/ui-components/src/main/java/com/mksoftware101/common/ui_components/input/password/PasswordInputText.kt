@@ -74,8 +74,17 @@ class PasswordInputText @JvmOverloads constructor(
     /**
      * Show error message, that passwords are not the same
      */
-    fun setPasswordsNotSameError() {
+    fun showPasswordsNotSameError() {
         passwordInputLayout?.error = resources.getString(R.string.passwordPasswordsNotTheSame)
+    }
+
+    /**
+     * Use to highlight error only without showing error message
+     *
+     * Useful in Sign up screen to highlight repeat password field when password != repeatPassword
+     */
+    fun highlightError() {
+        passwordInputLayout?.error = " "
     }
 
     private fun validate(text: CharSequence?) {

@@ -33,7 +33,7 @@ class SignupViewModel(
     }
 
     fun onSignup() {
-        if (matchPasswords()) {
+        checkEmailAndPasswordsThen {
             viewModelScope.launch {
                 try {
                     signUpUseCase.run(LoginSharedData(emailAddress!!, password!!))
@@ -46,15 +46,20 @@ class SignupViewModel(
         }
     }
 
-    private fun matchPasswords(): Boolean {
-        if (isPasswordNotSame(password, repeatPassword)) {
+    private fun checkEmailAndPasswordsThen(doNext: () -> Unit) {
+        if (emailAddress.isNullOrEmpty()) {
+            _uiState.value = UiState.EmptyEmail
+            return
+        }
+        
+        if (!isPasswordsTheSame(password, repeatPassword)) {
             _uiState.value = UiState.PasswordsNotSame
-            return false
+            return
         }
 
-        return true
+        doNext()
     }
 
-    private fun isPasswordNotSame(password: String?, repeatPassword: String?) =
-        password.isNullOrBlank() || repeatPassword.isNullOrBlank() || password != repeatPassword
+    private fun isPasswordsTheSame(password: String?, repeatPassword: String?) =
+        !password.isNullOrBlank() && !repeatPassword.isNullOrBlank() && password == repeatPassword
 }

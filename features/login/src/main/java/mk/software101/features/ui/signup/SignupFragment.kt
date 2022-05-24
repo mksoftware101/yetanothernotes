@@ -26,8 +26,12 @@ class SignupFragment : Fragment() {
     private lateinit var viewModel: SignupViewModel
     private val uiStateObserver = Observer<UiState> { uiState ->
         when (uiState) {
+            UiState.EmptyEmail -> {
+                binding.userNameTxt.showError()
+            }
             UiState.PasswordsNotSame -> {
-                binding.repeatPasswordContainer.setPasswordsNotSameError()
+                binding.passwordContainer.highlightError()
+                binding.repeatPasswordContainer.showPasswordsNotSameError()
             }
             UiState.SignUpSucceeded -> openNotesList()
             UiState.SignUpFailed -> showSignupError()

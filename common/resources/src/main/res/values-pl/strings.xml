@@ -5,7 +5,7 @@
  Release: Working copy
  Locale: pl, Polish
  Exported by: Marek
- Exported at: Fri, 13 May 2022 14:33:28 +0200
+ Exported at: Tue, 24 May 2022 19:57:42 +0200
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="appName"></string>
@@ -32,7 +32,7 @@
     <string name="userNameInputTextInvalidUserName">Nazwa użytkownika jest niepoprawna</string>
     <string name="passwordInputTextPassword">Hasło</string>
     <string name="passwordInputTextRepeatPassword">Powtórz hasło</string>
-    <string name="passwordInputTextInvalidPassword">Niepoprawne hasło*</string>
+    <string name="passwordInputTextInvalidPassword">Proszę wpisać poprawne hasło*</string>
     <string name="userNameInputTextUserName">Nazwa użytkownika</string>
     <string name="userNameInputTextEmail">E-mail</string>
     <string name="signupPassword">Hasło</string>
@@ -40,7 +40,7 @@
     <string name="generalInvalidEmail">Nieprawidłowy adres e-mail</string>
     <string name="generalInvalidOrNotSamePassword">Nieprawidłowe hasło lub hasła nie są takie same</string>
     <string name="generalFillInFieldCorrectly">Proszę poprawnie wypełnić pola</string>
-    <string name="signupPasswordRequirements">*Przynajmniej sześć znaków, jedna duża litera i jedna cyfra</string>
+    <string name="signupPasswordRequirements">*Prawidłowe hasło powinno mieć przynajmniej sześć znaków, jedną dużą literę i jedna cyfrę</string>
     <string name="signupSignUpError">Błąd podczas rejestracji. Spróbuj później.</string>
-    <string name="passwordPasswordsNotTheSame">Hasła nie są takie same</string>
+    <string name="passwordPasswordsNotTheSame">Hasła nie puste lub nie są takie same</string>
 </resources>
