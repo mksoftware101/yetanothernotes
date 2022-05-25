@@ -36,6 +36,12 @@ android {
             }
         }
         release {
+            if (System.getenv("CI") == "true") {
+                resValue ("string", "parseApplicationID", System.getenv("BACK4APP_APPLICATION_ID").toString())
+                resValue("string", "parseClientKey", System.getenv("BACK4APP_CLIENT_KEY").toString())
+                resValue("string", "ParseApiBaseUrl", System.getenv("BACK4APP_API_URL").toString())
+            }
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

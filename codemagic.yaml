@@ -46,7 +46,7 @@ workflows:
           - mk.software101@gmail.com
         notify:
           failure: true
-          success: true
+          success: false
 
   yetanothernotes-release-workflow:
     name: YetAnotherNotes Release Workflow
