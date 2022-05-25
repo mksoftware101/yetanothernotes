@@ -21,7 +21,9 @@ android {
     buildTypes {
         getByName("debug") {
             if (System.getenv("CI") == "true") {
-                // ToDo Add keys and others stuff to CI
+                resValue ("string", "parseApplicationID", System.getenv("BACK4APP_APPLICATION_ID").toString())
+                resValue("string", "parseClientKey", System.getenv("BACK4APP_CLIENT_KEY").toString())
+                resValue("string", "ParseApiBaseUrl", System.getenv("BACK4APP_API_URL").toString())
             } else {
                 val parseProperties = Properties().also {
                     it.load(
