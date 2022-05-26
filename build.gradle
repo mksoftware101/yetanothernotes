@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath BuildDependencies.androidGradlePlugin
@@ -10,14 +10,14 @@ buildscript {
         classpath BuildDependencies.firebaseCrashlytics
         classpath BuildDependencies.safeArgsPlugin
         classpath BuildDependencies.hiltPlugin
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30'
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 

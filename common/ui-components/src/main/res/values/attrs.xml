@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="UserNameInputText">
+        <attr name="userNameType">
+            <enum name="username" value="1" />
+            <enum name="email" value="2" />
+        </attr>
+        <attr name="hint" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="PasswordInputText">
+        <attr name="passwordHint" format="reference" />
+        <attr name="passwordValidator">
+            <enum name="validator_1" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

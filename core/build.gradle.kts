@@ -1,3 +1,7 @@
+import java.util.Properties
+import java.io.FileInputStream
+import java.io.File
+
 plugins {
     id(Plugins.androidLibrary)
     id(Plugins.kotlinForAndroid)
@@ -15,7 +19,29 @@ android {
     }
 
     buildTypes {
+        getByName("debug") {
+            if (System.getenv("CI") == "true") {
+                resValue ("string", "parseApplicationID", System.getenv("BACK4APP_APPLICATION_ID").toString())
+                resValue("string", "parseClientKey", System.getenv("BACK4APP_CLIENT_KEY").toString())
+                resValue("string", "ParseApiBaseUrl", System.getenv("BACK4APP_API_URL").toString())
+            } else {
+                val parseProperties = Properties().also {
+                    it.load(
+                        FileInputStream(File(rootProject.rootDir, "core/parse.properties"))
+                    )
+                }
+                resValue ("string", "parseApplicationID", parseProperties["applicationID"].toString())
+                resValue("string", "parseClientKey", parseProperties["clientKey"].toString())
+                resValue("string", "ParseApiBaseUrl", parseProperties["apiBaseUrl"].toString())
+            }
+        }
         release {
+            if (System.getenv("CI") == "true") {
+                resValue ("string", "parseApplicationID", System.getenv("BACK4APP_APPLICATION_ID").toString())
+                resValue("string", "parseClientKey", System.getenv("BACK4APP_CLIENT_KEY").toString())
+                resValue("string", "ParseApiBaseUrl", System.getenv("BACK4APP_API_URL").toString())
+            }
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -47,6 +73,9 @@ dependencies {
 
     // Logging
     implementation(Libs.timber)
+
+    // Parse
+    implementation(Libs.parse)
 
     testImplementation(TestLibs.junit)
     androidTestImplementation(TestLibs.extJunit)

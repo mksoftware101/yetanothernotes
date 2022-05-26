@@ -1,9 +1,11 @@
-private const val kotlinVersion = "1.5.31"
+object Kotlin {
+    const val version = "1.6.21"
+}
 
 object BuildDependencies {
 
     private object Versions {
-        const val kotlinGradlePlugin = kotlinVersion
+        const val kotlinGradlePlugin = Kotlin.version
         const val androidGradlePlugin = "7.1.2"
         const val googleServicesPlugin = "4.3.5"
         const val firebaseCrashlytics = "2.5.2"
@@ -69,6 +71,8 @@ object Libs {
         const val threeTenAbp = "1.3.1"
         const val bindingCollectionAdapter = "4.0.0"
         const val airbnbLottie = "3.4.0"
+        const val coroutines = "1.6.1"
+        const val parse = "2.1.0"
     }
 
     const val androidMaterial = "com.google.android.material:material:${Versions.material}"
@@ -82,6 +86,9 @@ object Libs {
     const val bindingCollectionAdapterRecyclerView =
         "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:${Versions.bindingCollectionAdapter}"
     const val airbnbLottie = "com.airbnb.android:lottie:${Versions.airbnbLottie}"
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    const val parse = "com.github.parse-community.Parse-SDK-Android:parse:${Versions.parse}"
+    const val parseCoroutines = "com.github.parse-community.Parse-SDK-Android:coroutines:${Versions.parse}"
 
     val androidX = AndroidX
 
@@ -157,6 +164,7 @@ object TestLibs {
         const val espresso = "3.4.0"
         const val navigation = "2.3.5"
         const val room = "2.3.0"
+        const val coroutines = "1.6.1"
     }
 
     const val junit = "junit:junit:${Versions.junit}"
@@ -166,4 +174,5 @@ object TestLibs {
     const val instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     const val navigation = "androidx.navigation:navigation-testing:${Versions.navigation}"
     const val room = "androidx.room:room-testing:${Versions.room}"
+    const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
 }

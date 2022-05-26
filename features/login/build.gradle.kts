@@ -1,6 +1,7 @@
 plugins {
     id(Plugins.androidLibrary)
     id(Plugins.kotlinForAndroid)
+    id(Plugins.safeArgs)
 }
 
 android {
@@ -45,7 +46,12 @@ dependencies {
     implementation(Libs.androidX.viewmodel)
 
     // Common
+    implementation(project(Common.uiComponents))
     implementation(project(Common.resources))
+
+    // Parse
+    implementation(Libs.parse)
+    implementation(Libs.parseCoroutines)
 
     // Navigation
     implementation(Libs.androidX.navigationFragment)
@@ -53,6 +59,9 @@ dependencies {
     implementation(Libs.androidX.navigationFragmentKtx)
     implementation(Libs.androidX.navigationUiKtx)
     implementation(Libs.androidX.navigationFeatureModuleSupport)
+
+    // Logging
+    implementation(Libs.timber)
 
     testImplementation(TestLibs.junit)
     androidTestImplementation(TestLibs.extJunit)

@@ -1,6 +1,9 @@
 plugins {
     id(Plugins.androidLibrary)
     id(Plugins.kotlinForAndroid)
+    id(Plugins.kotlinKapt)
+    kotlin("kapt")
+    id(Plugins.hilt)
 }
 
 android {
@@ -30,14 +33,37 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        dataBinding = true
+    }
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
     implementation(Libs.androidX.core)
     implementation(Libs.androidX.appcompat)
+    implementation(Libs.androidX.navigationFragmentKtx)
+    implementation(Libs.androidX.livedata)
     implementation(Libs.androidMaterial)
+    implementation(Libs.androidX.viewmodel)
+
+    // Hilt
+    implementation(Libs.Di.hilt)
+    kapt(Libs.Di.hiltKapt)
+
+    // Coroutines
+    implementation(Libs.coroutines)
+
+    // Resources
+    implementation(project(Common.resources))
+
+    //Core
+    implementation(project(Core.core))
 
     testImplementation(TestLibs.junit)
+    testImplementation(TestLibs.coroutine)
     androidTestImplementation(TestLibs.extJunit)
     androidTestImplementation(TestLibs.espresso)
 }

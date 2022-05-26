@@ -7,78 +7,102 @@
 
         <variable
             name="viewModel"
-            type="mk.software101.features.signup.ui.SignupViewModel" />
+            type="mk.software101.features.ui.signup.SignupViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/signupContainer"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/signupCoordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="mk.software101.features.signup.ui.SignupFragment">
+        android:fitsSystemWindows="true"
+        tools:context="mk.software101.features.ui.signup.SignupFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/signupInnerContainer"
+            android:id="@+id/signupContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/marginM"
-            android:paddingTop="@dimen/marginM"
-            android:paddingRight="@dimen/marginM"
-            android:paddingBottom="@dimen/marginM"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35">
+            android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/emailTxt"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:hint="@string/signupEmail"
-                android:inputType="textEmailAddress"
-                android:selectAllOnFocus="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/passwordTxt"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/marginS"
-                android:hint="@string/signupPassword"
-                android:inputType="textPassword"
-                android:selectAllOnFocus="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailTxt" />
-
-            <EditText
-                android:id="@+id/repeatPasswordTxt"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/marginS"
-                android:hint="@string/signupRepeatPassword"
-                android:inputType="textPassword"
-                android:selectAllOnFocus="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passwordTxt" />
-
-            <Button
-                android:id="@+id/signupBtn"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/signupInnerContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/marginL"
-                android:text="@string/signupSignUp"
-                android:textAllCaps="false"
+                android:paddingLeft="@dimen/marginM"
+                android:paddingTop="@dimen/marginM"
+                android:paddingRight="@dimen/marginM"
+                android:paddingBottom="@dimen/marginM"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/repeatPasswordTxt" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.35">
 
+                <com.mksoftware101.common.ui_components.input.username.UserNameInputText
+                    android:id="@+id/userNameTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:hint="@string/signupEmail"
+                    app:layout_constraintBottom_toTopOf="@id/passwordContainer"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:onUserNameChanged="@{(userName) -> viewModel.onUserNameChanged(userName)}"
+                    app:userNameType="email"
+                    tools:hint="Email" />
+
+                <com.mksoftware101.common.ui_components.input.password.PasswordInputText
+                    android:id="@+id/passwordContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginXS2"
+                    app:hint="@string/signupPassword"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/userNameTxt"
+                    app:onPasswordChanged="@{(password) -> viewModel.onPasswordChanged(password)}"
+                    app:passwordValidator="validator_1" />
+
+                <com.mksoftware101.common.ui_components.input.password.PasswordInputText
+                    android:id="@+id/repeatPasswordContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginXS2"
+                    app:errorIconDrawable="@null"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/passwordContainer"
+                    app:onPasswordChanged="@{(password) -> viewModel.onRepeatPasswordChanged(password)}"
+                    app:passwordHint="@string/signupRepeatPassword"
+                    app:passwordValidator="validator_1" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/passwordRequirementsTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginXS2"
+                    android:text="@string/signupPasswordRequirements"
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    android:textColor="?attr/colorOnSurface"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/repeatPasswordContainer" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/signupBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="@dimen/marginM"
+                    android:onClickListener="@{() -> viewModel.onSignup()}"
+                    android:text="@string/signupSignUp"
+                    android:textAllCaps="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/passwordRequirementsTxt" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
