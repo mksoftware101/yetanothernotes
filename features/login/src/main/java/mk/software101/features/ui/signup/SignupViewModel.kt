@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import mk.software101.features.domain.SignUpUseCase
 import mk.software101.features.models.LoginSharedData
 import mk.software101.features.ui.signup.states.UiState
+import timber.log.Timber
 
 class SignupViewModel(
     private val signUpUseCase: SignUpUseCase
@@ -39,8 +40,8 @@ class SignupViewModel(
                     signUpUseCase.run(LoginSharedData(emailAddress!!, password!!))
                     _uiState.value = UiState.SignUpSucceeded
                 } catch (e: Throwable) {
-                    e.printStackTrace() // ToDo Where is Timber?
                     _uiState.value = UiState.SignUpFailed
+                    Timber.e(e, "Sign up error")
                 }
             }
         }
@@ -51,7 +52,7 @@ class SignupViewModel(
             _uiState.value = UiState.EmptyEmail
             return
         }
-        
+
         if (!isPasswordsTheSame(password, repeatPassword)) {
             _uiState.value = UiState.PasswordsNotSame
             return

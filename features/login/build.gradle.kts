@@ -60,6 +60,9 @@ dependencies {
     implementation(Libs.androidX.navigationUiKtx)
     implementation(Libs.androidX.navigationFeatureModuleSupport)
 
+    // Logging
+    implementation(Libs.timber)
+
     testImplementation(TestLibs.junit)
     androidTestImplementation(TestLibs.extJunit)
     androidTestImplementation(TestLibs.espresso)
