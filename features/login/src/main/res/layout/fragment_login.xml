@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="mk.software101.features.login.ui.LoginViewModel" />
+            type="mk.software101.features.ui.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,20 +28,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.35"
-            tools:context=".ui.LoginFragment">
+            tools:context="mk.software101.features.ui.login.LoginFragment">
 
-            <EditText
+            <com.mksoftware101.common.ui_components.input.username.UserNameInputText
                 android:id="@+id/usernameTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/loginEmail"
-                android:inputType="textEmailAddress"
-                android:selectAllOnFocus="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:onUserNameChanged="@{(email)->viewModel.onEmailChanged(email)}"
+                app:userNameType="email" />
 
-            <EditText
+            <com.mksoftware101.common.ui_components.input.password.PasswordInputText
                 android:id="@+id/passwordTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -49,11 +49,11 @@
                 android:hint="@string/loginPassword"
                 android:imeActionLabel="@string/loginLogin"
                 android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:selectAllOnFocus="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/usernameTxt" />
+                app:layout_constraintTop_toBottomOf="@+id/usernameTxt"
+                app:onPasswordChanged="@{(password)->viewModel.onPasswordChanged(password)}"
+                app:passwordValidator="validator_1" />
 
             <TextView
                 android:id="@+id/forgotPasswordTxt"
@@ -62,6 +62,7 @@
                 android:layout_marginTop="@dimen/marginXS"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="@{() -> viewModel.onForgotPassword()}"
                 android:text="@string/loginForgotPassword"
                 app:layout_constraintEnd_toEndOf="@+id/passwordTxt"
                 app:layout_constraintHorizontal_bias="1"
@@ -75,6 +76,7 @@
                 android:layout_gravity="start"
                 android:layout_marginTop="@dimen/marginXL"
                 android:enabled="true"
+                android:onClick="@{()->viewModel.onLogin()}"
                 android:text="@string/loginLogin"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -103,6 +105,7 @@
                 android:layout_marginTop="@dimen/marginXS"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="@{()->viewModel.onSignupScreenClicked()}"
                 android:text="@string/loginSignUp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

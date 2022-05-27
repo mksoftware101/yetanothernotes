@@ -43,4 +43,5 @@
     <string name="signupPasswordRequirements">*Prawidłowe hasło powinno mieć przynajmniej sześć znaków, jedną dużą literę i jedna cyfrę</string>
     <string name="signupSignUpError">Błąd podczas rejestracji. Spróbuj później.</string>
     <string name="passwordPasswordsNotTheSame">Hasła nie puste lub nie są takie same</string>
+    <string name="loginLoginFailed">Logowanie nie powiodło się. Wprowadź poprany email i hasło.</string>
 </resources>

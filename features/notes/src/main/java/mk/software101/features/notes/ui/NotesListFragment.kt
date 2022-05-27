@@ -1,12 +1,15 @@
 package mk.software101.features.notes.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
+import com.parse.ParseUser
 import mk.software101.features.notes.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -39,7 +42,20 @@ class NotesListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notes_list, container, false)
+        val layout = inflater.inflate(R.layout.fragment_notes_list, container, false)
+        layout.findViewById<Button>(R.id.logoutBtn).apply {
+            setOnClickListener { _ ->
+                ParseUser.logOutInBackground { e->
+                    if (e == null) {
+                        Log.d("TAG", "[d] Logout successfuly")
+                    } else {
+                        Log.e("TAG", "[d] Logout failed")
+                    }
+                }
+            }
+        }
+
+        return layout
     }
 
     private inner class OnBackPressed : OnBackPressedCallback(true) {

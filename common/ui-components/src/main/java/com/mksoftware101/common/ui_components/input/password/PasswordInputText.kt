@@ -72,6 +72,13 @@ class PasswordInputText @JvmOverloads constructor(
     }
 
     /**
+     * Show error
+     */
+    fun showError() {
+        passwordInputLayout?.error = resources.getString(R.string.passwordInputTextInvalidPassword)
+    }
+
+    /**
      * Show error message, that passwords are not the same
      */
     fun showPasswordsNotSameError() {
@@ -132,9 +139,5 @@ class PasswordInputText @JvmOverloads constructor(
 
     private fun hideError() {
         passwordInputLayout?.error = null
-    }
-
-    private fun showError() {
-        passwordInputLayout?.error = resources.getString(R.string.passwordInputTextInvalidPassword)
     }
 }

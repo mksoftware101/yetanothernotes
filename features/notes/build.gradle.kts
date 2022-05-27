@@ -60,6 +60,10 @@ dependencies {
     // core
     implementation(project(Core.core))
 
+    // Back4app
+    implementation(Libs.parse)
+    implementation(Libs.parseCoroutines)
+
     // recyclerview
     implementation(Libs.bindingCollectionAdapter)
     implementation(Libs.bindingCollectionAdapterRecyclerView)

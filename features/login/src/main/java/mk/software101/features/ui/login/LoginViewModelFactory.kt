@@ -1,9 +1,10 @@
-package mk.software101.features.login.ui
+package mk.software101.features.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import mk.software101.features.login.data.LoginDataSource
-import mk.software101.features.login.data.LoginRepository
+import mk.software101.features.data.LoginSharedRepositoryImpl
+import mk.software101.features.domain.LoginSharedRepository
+import mk.software101.features.domain.LoginUseCase
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.
@@ -15,8 +16,8 @@ class LoginViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             return LoginViewModel(
-                loginRepository = LoginRepository(
-                    dataSource = LoginDataSource()
+                LoginUseCase(
+                    LoginSharedRepositoryImpl()
                 )
             ) as T
         }
