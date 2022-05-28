@@ -44,4 +44,8 @@
     <string name="signupSignUpError">Sign up error. Try again later.</string>
     <string name="passwordPasswordsNotTheSame">Passwords are empty or doesn\'t match</string>
     <string name="loginLoginFailed">Login failed</string>
+    <string name="loginEmptyEmailError">E-mail address is empty</string>
+    <string name="loginInvalidEmailError">Invalid e-mail address</string>
+    <string name="loginPasswordEmptyError">Password is empty</string>
+    <string name="loginInvalidPasswordError">Invalid password</string>
 </resources>

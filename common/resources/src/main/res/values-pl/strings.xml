@@ -44,4 +44,8 @@
     <string name="signupSignUpError">Błąd podczas rejestracji. Spróbuj później.</string>
     <string name="passwordPasswordsNotTheSame">Hasła nie puste lub nie są takie same</string>
     <string name="loginLoginFailed">Logowanie nie powiodło się. Wprowadź poprany email i hasło.</string>
+    <string name="loginEmptyEmailError">Address email jest pusty</string>
+    <string name="loginInvalidEmailError">Niepoprawny adres e-mail</string>
+    <string name="loginPasswordEmptyError">Hasło jest puste</string>
+    <string name="loginInvalidPasswordError">Niepoprawne hasło</string>
 </resources>

@@ -7,4 +7,5 @@
     <dimen name="marginM">24dp</dimen>
     <dimen name="marginL">36dp</dimen>
     <dimen name="marginXL">48dp</dimen>
+    <dimen name="buttonHeight_56">56dp</dimen>
 </resources>

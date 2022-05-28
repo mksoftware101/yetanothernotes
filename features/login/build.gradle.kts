@@ -49,6 +49,9 @@ dependencies {
     implementation(project(Common.uiComponents))
     implementation(project(Common.resources))
 
+    // Core
+    implementation(project(Core.core))
+
     // Parse
     implementation(Libs.parse)
     implementation(Libs.parseCoroutines)

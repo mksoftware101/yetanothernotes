@@ -3,12 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="mk.software101.features.ui.login.LoginViewModel" />
-    </data>
+    <data/>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/loginContainer"
@@ -16,120 +11,121 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/loginOuterContainer"
+            android:id="@+id/loginInnerContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/marginM"
+            android:paddingTop="@dimen/marginM"
+            android:paddingRight="@dimen/marginM"
+            android:paddingBottom="@dimen/marginM"
+            tools:context="mk.software101.features.ui.login.LoginFragment">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/loginInnerContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/marginM"
-                android:paddingTop="@dimen/marginM"
-                android:paddingRight="@dimen/marginM"
-                android:paddingBottom="@dimen/marginM"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.35"
-                tools:context="mk.software101.features.ui.login.LoginFragment">
-
-                <com.mksoftware101.common.ui_components.input.username.UserNameInputText
-                    android:id="@+id/usernameTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/loginEmail"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:onUserNameChanged="@{(email)->viewModel.onEmailChanged(email)}"
-                    app:userNameType="email" />
-
-                <com.mksoftware101.common.ui_components.input.password.PasswordInputText
-                    android:id="@+id/passwordTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/marginXS"
-                    android:hint="@string/loginPassword"
-                    android:imeActionLabel="@string/loginLogin"
-                    android:imeOptions="actionDone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/usernameTxt"
-                    app:onPasswordChanged="@{(password)->viewModel.onPasswordChanged(password)}"
-                    app:passwordValidator="validator_1" />
-
-                <TextView
-                    android:id="@+id/forgotPasswordTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/marginXS"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{() -> viewModel.onForgotPassword()}"
-                    android:text="@string/loginForgotPassword"
-                    app:layout_constraintEnd_toEndOf="@+id/passwordTxt"
-                    app:layout_constraintHorizontal_bias="1"
-                    app:layout_constraintStart_toStartOf="@+id/passwordTxt"
-                    app:layout_constraintTop_toBottomOf="@+id/passwordTxt" />
-
-                <Button
-                    android:id="@+id/loginBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginTop="@dimen/marginXL"
-                    android:enabled="true"
-                    android:onClick="@{()->viewModel.onLogin()}"
-                    android:text="@string/loginLogin"
-                    android:textAllCaps="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/forgotPasswordTxt" />
-
-                <TextView
-                    android:id="@+id/newUserTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/marginXS"
-                    android:text="@string/loginNewUser"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/signUpTxt"
-                    app:layout_constraintHorizontal_bias="1"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/loginBtn" />
-
-                <TextView
-                    android:id="@+id/signUpTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/marginXS"
-                    android:layout_marginTop="@dimen/marginXS"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{()->viewModel.onSignupScreenClicked()}"
-                    android:text="@string/loginSignUp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/newUserTxt"
-                    app:layout_constraintTop_toBottomOf="@id/loginBtn" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <ProgressBar
-                android:id="@+id/loadingProgressBar"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.35" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailInput"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/loginEmail"
+                app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.3" />
+                app:layout_constraintTop_toTopOf="@id/guideline">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress"
+                    android:selectAllOnFocus="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordInput"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginXS"
+                android:hint="@string/loginPassword"
+                app:endIconDrawable="@null"
+                app:endIconMode="password_toggle"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/emailInput">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress"
+                    android:selectAllOnFocus="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/forgotPasswordTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/loginForgotPassword"
+                app:layout_constraintEnd_toEndOf="@+id/passwordInput"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="@+id/passwordInput"
+                app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
+
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/buttonHeight_56"
+                android:layout_gravity="start"
+                android:layout_marginTop="@dimen/marginL"
+                android:enabled="true"
+                android:text="@string/loginLogin"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/forgotPasswordTxt" />
+
+            <TextView
+                android:id="@+id/newUserTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginXS"
+                android:text="@string/loginNewUser"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/signUpTxt"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/loginButton" />
+
+            <TextView
+                android:id="@+id/signUpTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginXS"
+                android:layout_marginTop="@dimen/marginXS"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/loginSignUp"
+                android:textAllCaps="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/newUserTxt"
+                app:layout_constraintTop_toBottomOf="@id/loginButton" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/loadingView"
+            layout="@layout/layout_loading"
+            tools:visibility="gone" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
