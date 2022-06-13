@@ -1,12 +1,12 @@
 package mk.software101.features.ui.login
 
-import mk.software101.features.domain.ValidationResult
+import mk.software101.features.domain.ValidationFailedReason
 
 data class LoginState private constructor(
     val isLoading: Boolean,
     val isLoginSucceed: Boolean,
     val isLoginFailure: Boolean,
-    val validationResult: ValidationResult,
+    val validationFailedReasons: Set<ValidationFailedReason>?,
     val isSignupClicked: Boolean
 ) {
     companion object {
@@ -14,15 +14,15 @@ data class LoginState private constructor(
             isLoading: Boolean,
             isLoginSucceed: Boolean,
             isLoginFailure: Boolean,
-            validationResult: ValidationResult,
+            validationFailedReasons: Set<ValidationFailedReason>?,
             isSignupClicked: Boolean
-        ) = LoginState(isLoading, isLoginSucceed, isLoginFailure, validationResult, isSignupClicked)
+        ) = LoginState(isLoading, isLoginSucceed, isLoginFailure, validationFailedReasons, isSignupClicked)
 
         fun initialize() = LoginState.of(
             isLoading = false,
             isLoginSucceed = false,
             isLoginFailure = false,
-            validationResult = ValidationResult(success = false, failedReasons = null),
+            validationFailedReasons = null,
             isSignupClicked = false
         )
     }

@@ -43,28 +43,26 @@ class LoginFragment : Fragment() {
     }
 
     private fun render(viewState: LoginState) {
+        resetEmailError()
+        resetPasswordError()
         showLoading(viewState.isLoading)
         with(viewState) {
-            binding.loadingView.visibility = if (isLoading) View.VISIBLE else View.GONE
-            if (isLoginSucceed) {
-                navigateToNotesListScreen()
+            validationFailedReasons?.forEach { validationFailedReason ->
+                when (validationFailedReason) {
+                    ValidationFailedReason.EMPTY_EMAIL -> setEmptyEmailError()
+                    ValidationFailedReason.EMPTY_PASSWORD -> setEmptyPasswordError()
+                    ValidationFailedReason.INVALID_EMAIL -> setInvalidEmailError()
+                    ValidationFailedReason.INVALID_PASSWORD -> setInvalidPasswordError()
+                }
             }
             if (isSignupClicked) {
                 navigateToSignupScreen()
             }
             if (isLoginFailure) {
-                if (validationResult.failedReasons != null) {
-                    validationResult.failedReasons.forEach {
-                        when (it) {
-                            ValidationFailedReason.EMPTY_EMAIL -> setEmptyEmailError()
-                            ValidationFailedReason.EMPTY_PASSWORD -> setEmptyPasswordError()
-                            ValidationFailedReason.INVALID_EMAIL -> setInvalidEmailError()
-                            ValidationFailedReason.INVALID_PASSWORD -> setInvalidPasswordError()
-                        }
-                    }
-                } else {
-                    showLoginFailedSnackbar()
-                }
+                showLoginFailedSnackbar()
+            }
+            if (isLoginSucceed) {
+                navigateToNotesListScreen()
             }
         }
     }
@@ -105,11 +103,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun setEmptyPasswordError() {
-        binding.emailInput.error = getString(R.string.loginPasswordEmptyError)
+        binding.passwordInput.error = getString(R.string.loginPasswordEmptyError)
     }
 
     private fun setInvalidPasswordError() {
-        binding.emailInput.error = getString(R.string.loginInvalidPasswordError)
+        binding.passwordInput.error = getString(R.string.loginInvalidPasswordError)
     }
 
     private fun navigateToSignupScreen() {
@@ -132,11 +130,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun showLoginFailedSnackbar() {
-        Snackbar
-            .make(binding.loginContainer, R.string.loginLoginFailed, Snackbar.LENGTH_LONG)
-            .apply {
-                val params = view.layoutParams as FrameLayout.LayoutParams
-                params.gravity = Gravity.TOP
-            }.show()
+        Snackbar.make(binding.loginContainer, R.string.loginLoginFailed, Snackbar.LENGTH_LONG)
+            .show()
+        // .apply {
+        //                val params = view.layoutParams as FrameLayout.LayoutParams
+        //                params.gravity = Gravity.TOP
+        //            }
     }
 }

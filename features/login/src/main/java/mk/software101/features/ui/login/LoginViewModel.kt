@@ -10,6 +10,7 @@ import com.mksoftware101.core.validator.PasswordValidator
 import kotlinx.coroutines.launch
 import mk.software101.features.domain.LoginUseCase
 import mk.software101.features.domain.ValidateCredentialsUseCase
+import mk.software101.features.domain.ValidationFailedReason
 import mk.software101.features.models.LoginSharedData
 
 class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
@@ -25,12 +26,12 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
 
     private val _state = MutableLiveData<LoginState>()
     val state: LiveData<LoginState> = _state
-        get() {
-            if (field.value == null) {
-                throw IllegalStateException("UI state wasn't initlialized. Have you run \"initialize\" method already?")
-            }
-            return field
-        }
+//        get() {
+//            if (field.value == null) {
+//                throw IllegalStateException("UI state wasn't initlialized. Have you run \"initialize\" method already?")
+//            }
+//            return field
+//        }
 
     private fun doLogin(data: LoginSharedData) {
         viewModelScope.launch {
@@ -60,23 +61,39 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
     }
 
     fun onSignup() {
-
+        reduce(LoginPartialState.SignupClicked)
     }
 
     fun onRecoverPassword() {
         TODO("Recover password not implemented yet")
     }
 
-    private fun reduce(partialState: LoginPartialState, currentState: LoginState = _state.value!!) {
+    fun onEmailTextChanged() {
+        reduce(LoginPartialState.EmailTextChanged)
+    }
+
+    fun onPasswordTextChanged() {
+        reduce(LoginPartialState.PasswordTextChanged)
+    }
+
+    private fun reduce(
+        partialState: LoginPartialState,
+        currentState: LoginState = _state.value ?: LoginState.initialize()
+    ) {
         when (partialState) {
             is LoginPartialState.Init -> {
                 _state.value = LoginState.initialize()
             }
             is LoginPartialState.ValidationFailed -> {
-                _state.value = currentState.copy(isLoginFailure = true, validationResult = partialState.validationResult)
+                _state.value =
+                    currentState.copy(validationFailedReasons = partialState.validationResult.failedReasons)
             }
             is LoginPartialState.LoadingVisible -> {
-                _state.value = currentState.copy(isLoading = true)
+                _state.value = currentState.copy(
+                    isLoading = true,
+                    isLoginFailure = false,
+                    validationFailedReasons = null
+                )
             }
             is LoginPartialState.LoginSucceed -> {
                 _state.value = currentState.copy(isLoading = false, isLoginSucceed = true)
@@ -84,6 +101,24 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
             is LoginPartialState.LoginFailed -> {
                 _state.value = currentState.copy(isLoading = false, isLoginFailure = true)
             }
+            is LoginPartialState.SignupClicked -> {
+                _state.value =
+                    currentState.copy(isSignupClicked = true, validationFailedReasons = null)
+            }
+            is LoginPartialState.EmailTextChanged, LoginPartialState.PasswordTextChanged -> {
+                val newValidationFailedReason = currentState.validationFailedReasons?.filter {
+                    filterBy(partialState, it)
+                }?.toSet()
+                _state.value =
+                    currentState.copy(validationFailedReasons = newValidationFailedReason)
+            }
         }
     }
+
+    private fun filterBy(partialState: LoginPartialState, it: ValidationFailedReason) =
+        if (partialState == LoginPartialState.EmailTextChanged) {
+            it == ValidationFailedReason.EMPTY_PASSWORD || it == ValidationFailedReason.INVALID_PASSWORD
+        } else {
+            it == ValidationFailedReason.EMPTY_EMAIL || it == ValidationFailedReason.INVALID_EMAIL
+        }
 }

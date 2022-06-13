@@ -20,7 +20,8 @@ class ValidateCredentialsUseCase(
     fun run(data: LoginSharedData): ValidationResult {
         val validationFailedReasons = mutableSetOf<ValidationFailedReason>()
         val invalidEmailReason = validateEmail(data.email)?.let { validationFailedReasons.add(it) }
-        val invalidPasswordReason = validatePassword(data.password)?.let { validationFailedReasons.add(it) }
+        val invalidPasswordReason =
+            validatePassword(data.password)?.let { validationFailedReasons.add(it) }
         val validationSuccess = invalidEmailReason == null && invalidPasswordReason == null
         return ValidationResult(validationSuccess, validationFailedReasons)
     }

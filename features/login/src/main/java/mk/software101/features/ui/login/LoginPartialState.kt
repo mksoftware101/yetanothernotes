@@ -8,4 +8,7 @@ sealed class LoginPartialState {
     object LoadingVisible : LoginPartialState()
     object LoginSucceed: LoginPartialState()
     object LoginFailed: LoginPartialState()
+    object SignupClicked: LoginPartialState()
+    object EmailTextChanged: LoginPartialState()
+    object PasswordTextChanged: LoginPartialState()
 }

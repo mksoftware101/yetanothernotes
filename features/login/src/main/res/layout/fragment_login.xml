@@ -48,6 +48,7 @@
                     android:layout_height="wrap_content"
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
+                    android:onTextChanged="@{(text, start,before, count)->viewModel.onEmailTextChanged()}"
                     android:selectAllOnFocus="true"
                     android:text="@={viewModel.emailObservable}" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -70,7 +71,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionDone"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPassword"
+                    android:onTextChanged="@{(text, start,before, count)->viewModel.onPasswordTextChanged()}"
                     android:selectAllOnFocus="true"
                     android:text="@={viewModel.passwordObservable}" />
             </com.google.android.material.textfield.TextInputLayout>
