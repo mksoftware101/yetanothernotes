@@ -6,7 +6,7 @@ data class LoginState private constructor(
     val isLoading: Boolean,
     val isLoginSucceed: Boolean,
     val isLoginFailure: Boolean,
-    val validationResult: ValidationResult?,
+    val validationResult: ValidationResult,
     val isSignupClicked: Boolean
 ) {
     companion object {
@@ -14,7 +14,7 @@ data class LoginState private constructor(
             isLoading: Boolean,
             isLoginSucceed: Boolean,
             isLoginFailure: Boolean,
-            validationResult: ValidationResult?,
+            validationResult: ValidationResult,
             isSignupClicked: Boolean
         ) = LoginState(isLoading, isLoginSucceed, isLoginFailure, validationResult, isSignupClicked)
 
@@ -22,7 +22,7 @@ data class LoginState private constructor(
             isLoading = false,
             isLoginSucceed = false,
             isLoginFailure = false,
-            validationResult = null,
+            validationResult = ValidationResult(success = false, failedReasons = null),
             isSignupClicked = false
         )
     }

@@ -73,7 +73,7 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
                 _state.value = LoginState.initialize()
             }
             is LoginPartialState.ValidationFailed -> {
-                _state.value = currentState.copy(validationResult = partialState.validationResult)
+                _state.value = currentState.copy(isLoginFailure = true, validationResult = partialState.validationResult)
             }
             is LoginPartialState.LoadingVisible -> {
                 _state.value = currentState.copy(isLoading = true)

@@ -8,126 +8,108 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.net.toUri
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import mk.software101.features.common.BaseFragment
+import mk.software101.features.domain.ValidationFailedReason
 import mk.software101.features.login.R
 import mk.software101.features.login.databinding.FragmentLoginBinding
-import mk.software101.features.models.LoginSharedData
 
-class LoginFragment :
-    BaseFragment<LoginIntent, LoginAction, LoginState, FragmentLoginBinding, LoginViewModel>() {
+class LoginFragment : Fragment() {
 
     private val deepLinkNotesList get() = resources.getString(R.string.deepLinkNotesListUrl).toUri()
+    private var _binding: FragmentLoginBinding? = null
+    private val binding: FragmentLoginBinding get() = _binding!!
 
-    override fun getScreenViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
-        FragmentLoginBinding.inflate(inflater, container, false)
 
-    override fun createViewModel(): LoginViewModel =
-        ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.dispatchIntent(LoginIntent.Idle)
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun render(viewState: LoginState) {
-        when (viewState) {
-            is LoginState.Idle -> {
-            }
-            is LoginState.Loading -> {
-                showLoading(true)
-            }
-            is LoginState.EmptyEmail -> {
-                setEmptyEmailError()
-            }
-            is LoginState.InvalidEmail -> {
-                setInvalidEmailError()
-            }
-            is LoginState.EmptyPassword -> {
-                setEmptyPasswordError()
-            }
-            is LoginState.InvalidPassword -> {
-                setInvalidPasswordError()
-            }
-            is LoginState.LoginSucceeded -> {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val viewModel = ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
+        viewModel.state.observe(viewLifecycleOwner) { state -> render(state) }
+        viewModel.initialize()
+        binding.viewModel = viewModel
+        binding.signUpTxt.paint?.isUnderlineText = true
+    }
+
+    private fun render(viewState: LoginState) {
+        showLoading(viewState.isLoading)
+        with(viewState) {
+            binding.loadingView.visibility = if (isLoading) View.VISIBLE else View.GONE
+            if (isLoginSucceed) {
                 navigateToNotesListScreen()
             }
-            is LoginState.LoginFailed -> {
-                onLoginFailed()
+            if (isSignupClicked) {
+                navigateToSignupScreen()
+            }
+            if (isLoginFailure) {
+                if (validationResult.failedReasons != null) {
+                    validationResult.failedReasons.forEach {
+                        when (it) {
+                            ValidationFailedReason.EMPTY_EMAIL -> setEmptyEmailError()
+                            ValidationFailedReason.EMPTY_PASSWORD -> setEmptyPasswordError()
+                            ValidationFailedReason.INVALID_EMAIL -> setInvalidEmailError()
+                            ValidationFailedReason.INVALID_PASSWORD -> setInvalidPasswordError()
+                        }
+                    }
+                } else {
+                    showLoginFailedSnackbar()
+                }
             }
         }
     }
 
-    override fun setupUI() {
-        viewBinding.signUpTxt.paint?.isUnderlineText = true
-    }
-
-    override fun setupEvents() {
-        setupLoginButtonEvent()
-        setupEmailTextChangedEvent()
-        setupPasswordTextChangedEvent()
-        setupForgotPasswordEvent()
-        setupNavigateToSignUpEvent()
-    }
-
     private fun setupNavigateToSignUpEvent() {
-        viewBinding.signUpTxt.setOnClickListener {
+        binding.signUpTxt.setOnClickListener {
             navigateToSignupScreen()
         }
     }
 
-    private fun setupLoginButtonEvent() {
-        viewBinding.loginButton.setOnClickListener {
-            val email = viewBinding.emailInput.editText.toString()
-            val password = viewBinding.passwordInput.editText.toString()
-            val loginData = LoginSharedData(email, password)
-            viewModel.dispatchIntent(LoginIntent.LogIn(loginData))
-        }
-    }
 
     private fun setupEmailTextChangedEvent() {
-        viewBinding.emailInput.editText?.doOnTextChanged { _, _, _, _ ->
+        binding.emailInput.editText?.doOnTextChanged { _, _, _, _ ->
             resetEmailError()
         }
     }
 
     private fun setupPasswordTextChangedEvent() {
-        viewBinding.passwordInput.editText?.doOnTextChanged { _, _, _, _ ->
+        binding.passwordInput.editText?.doOnTextChanged { _, _, _, _ ->
             resetPasswordError()
         }
     }
 
-    private fun setupForgotPasswordEvent() {
-        viewBinding.forgotPasswordTxt.setOnClickListener {
-            viewModel.dispatchIntent(LoginIntent.ForgotPassword)
-        }
-    }
-
     private fun resetEmailError() {
-        viewBinding.emailInput.error = null
+        binding.emailInput.error = null
     }
 
     private fun resetPasswordError() {
-        viewBinding.passwordInput.error = null
+        binding.passwordInput.error = null
     }
 
     private fun setEmptyEmailError() {
-        viewBinding.emailInput.error = getString(R.string.loginEmptyEmailError)
+        binding.emailInput.error = getString(R.string.loginEmptyEmailError)
     }
 
     private fun setInvalidEmailError() {
-        viewBinding.emailInput.error = getString(R.string.loginInvalidEmailError)
+        binding.emailInput.error = getString(R.string.loginInvalidEmailError)
     }
 
     private fun setEmptyPasswordError() {
-        viewBinding.emailInput.error = getString(R.string.loginPasswordEmptyError)
+        binding.emailInput.error = getString(R.string.loginPasswordEmptyError)
     }
 
     private fun setInvalidPasswordError() {
-        viewBinding.emailInput.error = getString(R.string.loginInvalidPasswordError)
+        binding.emailInput.error = getString(R.string.loginInvalidPasswordError)
     }
 
     private fun navigateToSignupScreen() {
@@ -135,7 +117,7 @@ class LoginFragment :
     }
 
     private fun showLoading(loadingVisible: Boolean) {
-        viewBinding.loadingView.visibility = if (loadingVisible) View.VISIBLE else View.GONE
+        binding.loadingView.visibility = if (loadingVisible) View.VISIBLE else View.GONE
     }
 
     private fun navigateToNotesListScreen() {
@@ -151,7 +133,7 @@ class LoginFragment :
 
     private fun showLoginFailedSnackbar() {
         Snackbar
-            .make(viewBinding.loginContainer, R.string.loginLoginFailed, Snackbar.LENGTH_LONG)
+            .make(binding.loginContainer, R.string.loginLoginFailed, Snackbar.LENGTH_LONG)
             .apply {
                 val params = view.layoutParams as FrameLayout.LayoutParams
                 params.gravity = Gravity.TOP
