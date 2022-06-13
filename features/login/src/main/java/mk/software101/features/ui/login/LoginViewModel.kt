@@ -1,86 +1,89 @@
 package mk.software101.features.ui.login
 
+import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mksoftware101.core.validator.EmailValidator
 import com.mksoftware101.core.validator.PasswordValidator
 import kotlinx.coroutines.launch
-import mk.software101.features.common.BaseViewModel
 import mk.software101.features.domain.LoginUseCase
 import mk.software101.features.domain.ValidateCredentialsUseCase
-import mk.software101.features.domain.ValidationFailedReason
 import mk.software101.features.models.LoginSharedData
-import timber.log.Timber
 
-class LoginViewModel(private val loginUseCase: LoginUseCase) :
-    BaseViewModel<LoginIntent, LoginAction, LoginState>() {
+class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
 
     private val validateCredentialsUseCase =
         ValidateCredentialsUseCase(EmailValidator(), PasswordValidator())
 
-    override fun mapIntentToAction(intent: LoginIntent): LoginAction =
-        when (intent) {
-            is LoginIntent.Idle -> LoginAction.SetIdle
-            is LoginIntent.LogIn -> LoginAction.ValidateCredentials(intent.data)
-            is LoginIntent.ForgotPassword -> LoginAction.RecoverPassword
-        }
+    val emailObservable = ObservableField("")
+    private val email get() = emailObservable.get()!!
 
-    override fun handleAction(action: LoginAction) {
-        when (action) {
-            is LoginAction.SetIdle -> setIdle()
-            is LoginAction.ValidateCredentials -> validateCredentials(action.data)
-            is LoginAction.DoLogin -> doLogin(action.data)
-            is LoginAction.RecoverPassword -> recoverPassword()
-        }
-    }
+    val passwordObservable = ObservableField("")
+    private val password get() = passwordObservable.get()!!
 
-    private fun validateCredentials(data: LoginSharedData) {
-        val result = validateCredentialsUseCase.run(data)
-        if (result.success) {
-            handleAction(LoginAction.DoLogin(data))
-            return
-        } else {
-            handleValidationFailed(result.failedReasons)
-        }
-    }
-
-    private fun handleValidationFailed(reasons: Set<ValidationFailedReason>?) {
-        reasons?.forEach {
-            when (it) {
-                ValidationFailedReason.EMPTY_EMAIL -> {
-                    _viewState.value = LoginState.EmptyEmail
-                }
-                ValidationFailedReason.INVALID_EMAIL -> {
-                    _viewState.value = LoginState.InvalidEmail
-                }
-                ValidationFailedReason.EMPTY_PASSWORD -> {
-                    _viewState.value = LoginState.EmptyPassword
-                }
-                ValidationFailedReason.INVALID_PASSWORD -> {
-                    _viewState.value = LoginState.InvalidPassword
-                }
+    private val _state = MutableLiveData<LoginState>()
+    val state: LiveData<LoginState> = _state
+        get() {
+            if (field.value == null) {
+                throw IllegalStateException("UI state wasn't initlialized. Have you run \"initialize\" method already?")
             }
+            return field
         }
-    }
 
     private fun doLogin(data: LoginSharedData) {
         viewModelScope.launch {
             try {
-                _viewState.value = LoginState.Loading
+                reduce(LoginPartialState.LoadingVisible)
                 val loginData = LoginSharedData(data.email, data.password)
                 loginUseCase.run(loginData)
-                _viewState.value = LoginState.LoginSucceeded
+                reduce(LoginPartialState.LoginSucceed)
             } catch (e: Throwable) {
-                Timber.e(e, "Login error")
-                _viewState.value = LoginState.LoginFailed
+                reduce(LoginPartialState.LoginFailed)
             }
         }
     }
 
-    private fun setIdle() {
-        _viewState.value = LoginState.Idle
+    fun initialize() {
+        reduce(LoginPartialState.Init)
     }
 
-    private fun recoverPassword() {
+    fun onLogin() {
+        val data = LoginSharedData(email, password)
+        val result = validateCredentialsUseCase.run(data)
+        if (result.success) {
+            doLogin(data)
+        } else {
+            reduce(partialState = LoginPartialState.ValidationFailed(result))
+        }
+    }
+
+    fun onSignup() {
+
+    }
+
+    fun onRecoverPassword() {
         TODO("Recover password not implemented yet")
+    }
+
+    private fun reduce(partialState: LoginPartialState, currentState: LoginState = _state.value!!) {
+        when (partialState) {
+            is LoginPartialState.Init -> {
+                _state.value = LoginState.initialize()
+            }
+            is LoginPartialState.ValidationFailed -> {
+                _state.value = currentState.copy(validationResult = partialState.validationResult)
+            }
+            is LoginPartialState.LoadingVisible -> {
+                _state.value = currentState.copy(isLoading = true)
+            }
+            is LoginPartialState.LoginSucceed -> {
+                _state.value = currentState.copy(isLoading = false, isLoginSucceed = true)
+            }
+            is LoginPartialState.LoginFailed -> {
+                _state.value = currentState.copy(isLoading = false, isLoginFailure = true)
+            }
+        }
     }
 }

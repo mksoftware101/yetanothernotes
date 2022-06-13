@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data/>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="mk.software101.features.ui.login.LoginViewModel" />
+    </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/loginContainer"
@@ -43,7 +48,8 @@
                     android:layout_height="wrap_content"
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
-                    android:selectAllOnFocus="true" />
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewModel.emailObservable}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +71,8 @@
                     android:layout_height="wrap_content"
                     android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
-                    android:selectAllOnFocus="true" />
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewModel.passwordObservable}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -74,7 +81,9 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="@{()->viewModel.onRecoverPassword()}"
                 android:text="@string/loginForgotPassword"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/passwordInput"
                 app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="@+id/passwordInput"
@@ -87,6 +96,7 @@
                 android:layout_gravity="start"
                 android:layout_marginTop="@dimen/marginL"
                 android:enabled="true"
+                android:onClick="@{() -> viewModel.onLogin()}"
                 android:text="@string/loginLogin"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -114,6 +124,7 @@
                 android:layout_marginTop="@dimen/marginXS"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="@{() -> viewModel.onSignup()}"
                 android:text="@string/loginSignUp"
                 android:textAllCaps="true"
                 app:layout_constraintBottom_toBottomOf="parent"

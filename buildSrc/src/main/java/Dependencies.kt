@@ -11,6 +11,7 @@ object BuildDependencies {
         const val firebaseCrashlytics = "2.5.2"
         const val safeArgsGradlePlugin = "2.3.5"
         const val hiltPlugin = "2.38.1"
+        const val noCopy = "1.4.0"
     }
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
@@ -23,9 +24,13 @@ object BuildDependencies {
     const val safeArgsPlugin =
         "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.safeArgsGradlePlugin}"
     const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hiltPlugin}"
+    const val noCopy = "dev.ahmedmourad.nocopy.nocopy-gradle-plugin:${Versions.noCopy}"
 }
 
 object Plugins {
+    object versions {
+        const val noCopy = "1.4.0"
+    }
     const val androidApplication = "com.android.application"
     const val androidLibrary = "com.android.library"
     const val kotlinForAndroid = "org.jetbrains.kotlin.android"
@@ -34,6 +39,7 @@ object Plugins {
     const val firebaseCrashlytics = "com.google.firebase.crashlytics"
     const val safeArgs = "androidx.navigation.safeargs.kotlin"
     const val hilt = "dagger.hilt.android.plugin"
+    const val noCopy = "dev.ahmedmourad.nocopy.nocopy-gradle-plugin"
 }
 
 object Releases {
