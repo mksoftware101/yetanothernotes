@@ -1,5 +1,6 @@
 package mk.software101.features.ui.signup
 
+import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,9 +15,18 @@ class SignupViewModel(
     private val signUpUseCase: SignUpUseCase
 ) : ViewModel() {
 
-    private var emailAddress: String? = null
-    private var password: String? = null
-    private var repeatPassword: String? = null
+    val emailObservable = ObservableField("")
+    private val email get() = emailObservable.get()!!
+
+    val passwordObservable = ObservableField("")
+    private val password get() = passwordObservable.get()!!
+
+    val repeatPasswordObservable = ObservableField("")
+    private val repeatPassword get() = passwordObservable.get()!!
+
+//    private var emailAddress: String? = null
+//    private var repeatPassword: String? = null
+
 
     private val _uiState = MutableLiveData<UiState>()
     val uiState: LiveData<UiState> = _uiState
@@ -31,6 +41,16 @@ class SignupViewModel(
 
     fun onRepeatPasswordChanged(repeatPassword: String?) {
         this.repeatPassword = repeatPassword
+    }
+
+
+    fun onEmailTextChanged() {
+
+    }
+
+
+    fun onPasswordTextChanged() {
+
     }
 
     fun onSignup() {

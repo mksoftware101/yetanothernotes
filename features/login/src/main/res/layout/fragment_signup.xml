@@ -18,91 +18,125 @@
         tools:context="mk.software101.features.ui.signup.SignupFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/signupContainer"
+            android:id="@+id/signupInnerContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/marginM"
+            android:paddingTop="@dimen/marginM"
+            android:paddingRight="@dimen/marginM"
+            android:paddingBottom="@dimen/marginM"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/signupInnerContainer"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.35" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/userNameTxt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/marginM"
-                android:paddingTop="@dimen/marginM"
-                android:paddingRight="@dimen/marginM"
-                android:paddingBottom="@dimen/marginM"
+                android:hint="@string/signupEmail"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guideline">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress"
+                    android:onTextChanged="@{(text, start,before, count)->viewModel.onEmailTextChanged()}"
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewModel.emailObservable}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginXS"
+                android:hint="@string/signupPassword"
+                app:endIconDrawable="@null"
+                app:endIconMode="password_toggle"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userNameTxt">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:onTextChanged="@{(text, start,before, count)->viewModel.onPasswordTextChanged()}"
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewModel.passwordObservable}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/repeatPasswordContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginXS"
+                android:hint="@string/signupRepeatPassword"
+                app:endIconDrawable="@null"
+                app:endIconMode="password_toggle"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/passwordContainer">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:onTextChanged="@{(text, start,before, count)->viewModel.onRepeatPasswordChanged()}"
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewModel.passwordObservable}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/passwordRequirementsTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginXS2"
+                android:text="@string/signupPasswordRequirements"
+                android:textAppearance="?attr/textAppearanceCaption"
+                android:textColor="?attr/colorOnSurface"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/repeatPasswordContainer" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/signupBtn"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="@dimen/marginM"
+                android:onClickListener="@{() -> viewModel.onSignup()}"
+                android:text="@string/signupSignUp"
+                android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.35">
-
-                <com.mksoftware101.common.ui_components.input.username.UserNameInputText
-                    android:id="@+id/userNameTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:hint="@string/signupEmail"
-                    app:layout_constraintBottom_toTopOf="@id/passwordContainer"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:onUserNameChanged="@{(userName) -> viewModel.onUserNameChanged(userName)}"
-                    app:userNameType="email"
-                    tools:hint="Email" />
-
-                <com.mksoftware101.common.ui_components.input.password.PasswordInputText
-                    android:id="@+id/passwordContainer"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/marginXS2"
-                    app:hint="@string/signupPassword"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/userNameTxt"
-                    app:onPasswordChanged="@{(password) -> viewModel.onPasswordChanged(password)}"
-                    app:passwordValidator="validator_1" />
-
-                <com.mksoftware101.common.ui_components.input.password.PasswordInputText
-                    android:id="@+id/repeatPasswordContainer"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/marginXS2"
-                    app:errorIconDrawable="@null"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/passwordContainer"
-                    app:onPasswordChanged="@{(password) -> viewModel.onRepeatPasswordChanged(password)}"
-                    app:passwordHint="@string/signupRepeatPassword"
-                    app:passwordValidator="validator_1" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/passwordRequirementsTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/marginXS2"
-                    android:text="@string/signupPasswordRequirements"
-                    android:textAppearance="?attr/textAppearanceCaption"
-                    android:textColor="?attr/colorOnSurface"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/repeatPasswordContainer" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/signupBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="@dimen/marginM"
-                    android:onClickListener="@{() -> viewModel.onSignup()}"
-                    android:text="@string/signupSignUp"
-                    android:textAllCaps="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/passwordRequirementsTxt" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                app:layout_constraintTop_toBottomOf="@+id/passwordRequirementsTxt" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/loadingView"
+            layout="@layout/layout_loading"
+            tools:visibility="visible" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
