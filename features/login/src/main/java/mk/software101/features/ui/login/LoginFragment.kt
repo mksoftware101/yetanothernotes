@@ -15,6 +15,7 @@ import mk.software101.features.domain.EmailValidationFailedReason
 import mk.software101.features.domain.PasswordValidationFailedReason
 import mk.software101.features.login.R
 import mk.software101.features.login.databinding.FragmentLoginBinding
+import timber.log.Timber
 
 class LoginFragment : Fragment() {
 
@@ -39,6 +40,8 @@ class LoginFragment : Fragment() {
         viewModel.initialize()
         binding.viewModel = viewModel
         binding.signUpTxt.paint?.isUnderlineText = true
+        resetEmailError()
+        resetPasswordError()
     }
 
     private fun render(viewState: LoginState) {

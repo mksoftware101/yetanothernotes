@@ -48,6 +48,8 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
     }
 
     fun initialize() {
+        emailObservable.set("")
+        passwordObservable.set("")
         reduce(LoginPartialState.Init)
     }
 
