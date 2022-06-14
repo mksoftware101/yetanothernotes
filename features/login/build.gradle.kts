@@ -2,7 +2,6 @@ plugins {
     id(Plugins.androidLibrary)
     id(Plugins.kotlinForAndroid)
     id(Plugins.safeArgs)
-    id(Plugins.noCopy) version(Plugins.versions.noCopy)
 }
 
 android {
