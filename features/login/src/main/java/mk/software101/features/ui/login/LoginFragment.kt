@@ -1,12 +1,9 @@
 package mk.software101.features.ui.login
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
-import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
@@ -15,59 +12,32 @@ import mk.software101.features.domain.EmailValidationFailedReason
 import mk.software101.features.domain.PasswordValidationFailedReason
 import mk.software101.features.login.R
 import mk.software101.features.login.databinding.FragmentLoginBinding
-import timber.log.Timber
+import mk.software101.features.ui.base.BaseFragment
 
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel, LoginPartialState, LoginState>() {
 
     private val deepLinkNotesList get() = resources.getString(R.string.deepLinkNotesListUrl).toUri()
-    private var _binding: FragmentLoginBinding? = null
-    private val binding: FragmentLoginBinding get() = _binding!!
 
-
-    override fun onCreateView(
+    override fun getViewBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+        container: ViewGroup?
+    ): FragmentLoginBinding = FragmentLoginBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val viewModel = ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
-        viewModel.state.observe(viewLifecycleOwner) { state -> render(state) }
-        viewModel.initialize()
+    override fun initViewModel(): LoginViewModel =
+        ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
+
+    override fun setupUI() {
         binding.viewModel = viewModel
         binding.signUpTxt.paint?.isUnderlineText = true
         resetEmailError()
         resetPasswordError()
     }
 
-    private fun render(viewState: LoginState) {
-        showLoading(viewState.isLoading)
+    override fun render(viewState: LoginState) {
         with(viewState) {
-            if (viewState.emailValidationFailedReasons != null) {
-                emailValidationFailedReasons?.forEach { it ->
-                    when (it) {
-                        EmailValidationFailedReason.EMPTY_EMAIL -> setEmptyEmailError()
-                        EmailValidationFailedReason.INVALID_EMAIL -> setInvalidEmailError()
-                    }
-                }
-            } else {
-                resetEmailError()
-            }
-
-            if (viewState.passwordValidationFailedReasons != null) {
-                passwordValidationFailedReasons?.forEach {
-                    when (it) {
-                        PasswordValidationFailedReason.EMPTY_PASSWORD -> setEmptyPasswordError()
-                        PasswordValidationFailedReason.INVALID_PASSWORD -> setInvalidPasswordError()
-                    }
-                }
-            } else {
-                resetPasswordError()
-            }
+            renderLoading(isLoading)
+            renderEmailValidation(emailValidationFailedReasons)
+            renderPasswordValidation(passwordValidationFailedReasons)
 
             if (isSignupClicked) {
                 navigateToSignupScreen()
@@ -81,22 +51,29 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun setupNavigateToSignUpEvent() {
-        binding.signUpTxt.setOnClickListener {
-            navigateToSignupScreen()
-        }
-    }
-
-
-    private fun setupEmailTextChangedEvent() {
-        binding.emailInput.editText?.doOnTextChanged { _, _, _, _ ->
-            resetEmailError()
-        }
-    }
-
-    private fun setupPasswordTextChangedEvent() {
-        binding.passwordInput.editText?.doOnTextChanged { _, _, _, _ ->
+    private fun renderPasswordValidation(passwordValidationFailedReasons: Set<PasswordValidationFailedReason>?) {
+        if (passwordValidationFailedReasons != null) {
+            passwordValidationFailedReasons.forEach {
+                when (it) {
+                    PasswordValidationFailedReason.EMPTY_PASSWORD -> setEmptyPasswordError()
+                    PasswordValidationFailedReason.INVALID_PASSWORD -> setInvalidPasswordError()
+                }
+            }
+        } else {
             resetPasswordError()
+        }
+    }
+
+    private fun renderEmailValidation(emailValidationFailedReasons: Set<EmailValidationFailedReason>?) {
+        if (emailValidationFailedReasons != null) {
+            emailValidationFailedReasons.forEach {
+                when (it) {
+                    EmailValidationFailedReason.EMPTY_EMAIL -> setEmptyEmailError()
+                    EmailValidationFailedReason.INVALID_EMAIL -> setInvalidEmailError()
+                }
+            }
+        } else {
+            resetEmailError()
         }
     }
 
@@ -128,7 +105,7 @@ class LoginFragment : Fragment() {
         findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
     }
 
-    private fun showLoading(loadingVisible: Boolean) {
+    private fun renderLoading(loadingVisible: Boolean) {
         binding.loadingView.visibility = if (loadingVisible) View.VISIBLE else View.GONE
     }
 
@@ -138,17 +115,8 @@ class LoginFragment : Fragment() {
         )
     }
 
-    private fun onLoginFailed() {
-        showLoading(loadingVisible = false)
-        showLoginFailedSnackbar()
-    }
-
     private fun showLoginFailedSnackbar() {
         Snackbar.make(binding.loginContainer, R.string.loginLoginFailed, Snackbar.LENGTH_LONG)
             .show()
-        // .apply {
-        //                val params = view.layoutParams as FrameLayout.LayoutParams
-        //                params.gravity = Gravity.TOP
-        //            }
     }
 }

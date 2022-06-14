@@ -2,6 +2,7 @@ package mk.software101.features.ui.login
 
 import mk.software101.features.domain.EmailValidationFailedReason
 import mk.software101.features.domain.PasswordValidationFailedReason
+import mk.software101.features.ui.base.BaseState
 
 data class LoginState private constructor(
     val isLoading: Boolean,
@@ -10,7 +11,7 @@ data class LoginState private constructor(
     val emailValidationFailedReasons: Set<EmailValidationFailedReason>?,
     val passwordValidationFailedReasons: Set<PasswordValidationFailedReason>?,
     val isSignupClicked: Boolean
-) {
+) : BaseState {
     companion object {
         fun of(
             isLoading: Boolean,

@@ -1,8 +1,9 @@
 package mk.software101.features.ui.login
 
 import mk.software101.features.domain.ValidationResult
+import mk.software101.features.ui.base.BasePartialState
 
-sealed class LoginPartialState {
+sealed class LoginPartialState : BasePartialState{
     object Init : LoginPartialState()
     data class ValidationFailed(val validationResult: ValidationResult) : LoginPartialState()
     object LoadingVisible : LoginPartialState()
