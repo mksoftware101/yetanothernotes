@@ -10,7 +10,8 @@ import com.mksoftware101.core.validator.PasswordValidator
 import kotlinx.coroutines.launch
 import mk.software101.features.domain.LoginUseCase
 import mk.software101.features.domain.ValidateCredentialsUseCase
-import mk.software101.features.domain.ValidationFailedReason
+import mk.software101.features.domain.EmailValidationFailedReason
+import mk.software101.features.domain.PasswordValidationFailedReason
 import mk.software101.features.models.LoginSharedData
 
 class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
@@ -86,13 +87,17 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
             }
             is LoginPartialState.ValidationFailed -> {
                 _state.value =
-                    currentState.copy(validationFailedReasons = partialState.validationResult.failedReasons)
+                    currentState.copy(
+                        emailValidationFailedReasons = partialState.validationResult.emailFailedReasons,
+                        passwordValidationFailedReasons = partialState.validationResult.passwordFailedReasons
+                    )
             }
             is LoginPartialState.LoadingVisible -> {
                 _state.value = currentState.copy(
                     isLoading = true,
                     isLoginFailure = false,
-                    validationFailedReasons = null
+                    emailValidationFailedReasons = null,
+                    passwordValidationFailedReasons = null
                 )
             }
             is LoginPartialState.LoginSucceed -> {
@@ -103,22 +108,18 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
             }
             is LoginPartialState.SignupClicked -> {
                 _state.value =
-                    currentState.copy(isSignupClicked = true, validationFailedReasons = null)
+                    currentState.copy(
+                        isSignupClicked = true,
+                        emailValidationFailedReasons = null,
+                        passwordValidationFailedReasons = null
+                    )
             }
-            is LoginPartialState.EmailTextChanged, LoginPartialState.PasswordTextChanged -> {
-                val newValidationFailedReason = currentState.validationFailedReasons?.filter {
-                    filterBy(partialState, it)
-                }?.toSet()
-                _state.value =
-                    currentState.copy(validationFailedReasons = newValidationFailedReason)
+            is LoginPartialState.EmailTextChanged -> {
+                _state.value = currentState.copy(emailValidationFailedReasons = null)
+            }
+            is LoginPartialState.PasswordTextChanged -> {
+                _state.value = currentState.copy(passwordValidationFailedReasons = null)
             }
         }
     }
-
-    private fun filterBy(partialState: LoginPartialState, it: ValidationFailedReason) =
-        if (partialState == LoginPartialState.EmailTextChanged) {
-            it == ValidationFailedReason.EMPTY_PASSWORD || it == ValidationFailedReason.INVALID_PASSWORD
-        } else {
-            it == ValidationFailedReason.EMPTY_EMAIL || it == ValidationFailedReason.INVALID_EMAIL
-        }
 }

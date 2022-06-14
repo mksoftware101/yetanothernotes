@@ -1,11 +1,9 @@
 package mk.software101.features.ui.login
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.core.net.toUri
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -13,7 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import mk.software101.features.domain.ValidationFailedReason
+import mk.software101.features.domain.EmailValidationFailedReason
+import mk.software101.features.domain.PasswordValidationFailedReason
 import mk.software101.features.login.R
 import mk.software101.features.login.databinding.FragmentLoginBinding
 
@@ -43,18 +42,30 @@ class LoginFragment : Fragment() {
     }
 
     private fun render(viewState: LoginState) {
-        resetEmailError()
-        resetPasswordError()
         showLoading(viewState.isLoading)
         with(viewState) {
-            validationFailedReasons?.forEach { validationFailedReason ->
-                when (validationFailedReason) {
-                    ValidationFailedReason.EMPTY_EMAIL -> setEmptyEmailError()
-                    ValidationFailedReason.EMPTY_PASSWORD -> setEmptyPasswordError()
-                    ValidationFailedReason.INVALID_EMAIL -> setInvalidEmailError()
-                    ValidationFailedReason.INVALID_PASSWORD -> setInvalidPasswordError()
+            if (viewState.emailValidationFailedReasons != null) {
+                emailValidationFailedReasons?.forEach { it ->
+                    when (it) {
+                        EmailValidationFailedReason.EMPTY_EMAIL -> setEmptyEmailError()
+                        EmailValidationFailedReason.INVALID_EMAIL -> setInvalidEmailError()
+                    }
                 }
+            } else {
+                resetEmailError()
             }
+
+            if (viewState.passwordValidationFailedReasons != null) {
+                passwordValidationFailedReasons?.forEach {
+                    when (it) {
+                        PasswordValidationFailedReason.EMPTY_PASSWORD -> setEmptyPasswordError()
+                        PasswordValidationFailedReason.INVALID_PASSWORD -> setInvalidPasswordError()
+                    }
+                }
+            } else {
+                resetPasswordError()
+            }
+
             if (isSignupClicked) {
                 navigateToSignupScreen()
             }

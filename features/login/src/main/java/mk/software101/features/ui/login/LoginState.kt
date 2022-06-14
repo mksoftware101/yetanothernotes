@@ -1,12 +1,14 @@
 package mk.software101.features.ui.login
 
-import mk.software101.features.domain.ValidationFailedReason
+import mk.software101.features.domain.EmailValidationFailedReason
+import mk.software101.features.domain.PasswordValidationFailedReason
 
 data class LoginState private constructor(
     val isLoading: Boolean,
     val isLoginSucceed: Boolean,
     val isLoginFailure: Boolean,
-    val validationFailedReasons: Set<ValidationFailedReason>?,
+    val emailValidationFailedReasons: Set<EmailValidationFailedReason>?,
+    val passwordValidationFailedReasons: Set<PasswordValidationFailedReason>?,
     val isSignupClicked: Boolean
 ) {
     companion object {
@@ -14,15 +16,24 @@ data class LoginState private constructor(
             isLoading: Boolean,
             isLoginSucceed: Boolean,
             isLoginFailure: Boolean,
-            validationFailedReasons: Set<ValidationFailedReason>?,
+            emailValidationFailedReasons: Set<EmailValidationFailedReason>?,
+            passwordValidationFailedReasons: Set<PasswordValidationFailedReason>?,
             isSignupClicked: Boolean
-        ) = LoginState(isLoading, isLoginSucceed, isLoginFailure, validationFailedReasons, isSignupClicked)
+        ) = LoginState(
+            isLoading,
+            isLoginSucceed,
+            isLoginFailure,
+            emailValidationFailedReasons,
+            passwordValidationFailedReasons,
+            isSignupClicked
+        )
 
         fun initialize() = LoginState.of(
             isLoading = false,
             isLoginSucceed = false,
             isLoginFailure = false,
-            validationFailedReasons = null,
+            emailValidationFailedReasons = null,
+            passwordValidationFailedReasons = null,
             isSignupClicked = false
         )
     }

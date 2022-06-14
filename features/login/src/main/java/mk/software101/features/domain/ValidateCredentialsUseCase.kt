@@ -4,13 +4,18 @@ import com.mksoftware101.core.validator.EmailValidator
 import com.mksoftware101.core.validator.PasswordValidator
 import mk.software101.features.models.LoginSharedData
 
-enum class ValidationFailedReason {
-    EMPTY_EMAIL, INVALID_EMAIL, EMPTY_PASSWORD, INVALID_PASSWORD
+enum class EmailValidationFailedReason {
+    EMPTY_EMAIL, INVALID_EMAIL
+}
+
+enum class PasswordValidationFailedReason {
+    EMPTY_PASSWORD, INVALID_PASSWORD
 }
 
 data class ValidationResult(
     val success: Boolean,
-    val failedReasons: Set<ValidationFailedReason>? = null
+    val emailFailedReasons: Set<EmailValidationFailedReason>? = null,
+    val passwordFailedReasons: Set<PasswordValidationFailedReason>? = null
 )
 
 class ValidateCredentialsUseCase(
@@ -18,28 +23,30 @@ class ValidateCredentialsUseCase(
     private val passwordValidator: PasswordValidator
 ) {
     fun run(data: LoginSharedData): ValidationResult {
-        val validationFailedReasons = mutableSetOf<ValidationFailedReason>()
-        val invalidEmailReason = validateEmail(data.email)?.let { validationFailedReasons.add(it) }
+        val emailValidationFailedReasons = mutableSetOf<EmailValidationFailedReason>()
+        val passwordValidationFailedReasons = mutableSetOf<PasswordValidationFailedReason>()
+        val invalidEmailReason =
+            validateEmail(data.email)?.let { emailValidationFailedReasons.add(it) }
         val invalidPasswordReason =
-            validatePassword(data.password)?.let { validationFailedReasons.add(it) }
+            validatePassword(data.password)?.let { passwordValidationFailedReasons.add(it) }
         val validationSuccess = invalidEmailReason == null && invalidPasswordReason == null
-        return ValidationResult(validationSuccess, validationFailedReasons)
+        return ValidationResult(validationSuccess, emailValidationFailedReasons, passwordValidationFailedReasons)
     }
 
-    private fun validateEmail(email: String): ValidationFailedReason? =
+    private fun validateEmail(email: String): EmailValidationFailedReason? =
         if (email.isEmpty()) {
-            ValidationFailedReason.EMPTY_EMAIL
+            EmailValidationFailedReason.EMPTY_EMAIL
         } else if (!emailValidator.isValid(email)) {
-            ValidationFailedReason.INVALID_EMAIL
+            EmailValidationFailedReason.INVALID_EMAIL
         } else {
             null
         }
 
-    private fun validatePassword(password: String): ValidationFailedReason? =
+    private fun validatePassword(password: String): PasswordValidationFailedReason? =
         if (password.isEmpty()) {
-            ValidationFailedReason.EMPTY_PASSWORD
+            PasswordValidationFailedReason.EMPTY_PASSWORD
         } else if (!passwordValidator.isValid(password)) {
-            ValidationFailedReason.INVALID_PASSWORD
+            PasswordValidationFailedReason.INVALID_PASSWORD
         } else {
             null
         }
