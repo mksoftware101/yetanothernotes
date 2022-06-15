@@ -1,19 +1,17 @@
 package mk.software101.features.ui.signup
 
 import androidx.databinding.ObservableField
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import mk.software101.features.domain.SignUpUseCase
+import mk.software101.features.domain.ValidateSignupInputsUseCase
 import mk.software101.features.models.LoginSharedData
-import mk.software101.features.ui.signup.states.UiState
-import timber.log.Timber
+import mk.software101.features.ui.base.BaseViewModel
 
 class SignupViewModel(
+    private val validateSignupInputsUseCase: ValidateSignupInputsUseCase,
     private val signUpUseCase: SignUpUseCase
-) : ViewModel() {
+) : BaseViewModel<SignupPartialState, SignupState>() {
 
     val emailObservable = ObservableField("")
     private val email get() = emailObservable.get()!!
@@ -24,63 +22,86 @@ class SignupViewModel(
     val repeatPasswordObservable = ObservableField("")
     private val repeatPassword get() = passwordObservable.get()!!
 
-//    private var emailAddress: String? = null
-//    private var repeatPassword: String? = null
-
-
-    private val _uiState = MutableLiveData<UiState>()
-    val uiState: LiveData<UiState> = _uiState
-
-    fun onUserNameChanged(userName: String?) {
-        emailAddress = userName
+    override fun initialize() {
+        emailObservable.set("")
+        passwordObservable.set("")
+        repeatPasswordObservable.set("")
+        reduce(SignupPartialState.Init)
     }
 
-    fun onPasswordChanged(password: String?) {
-        this.password = password
-    }
-
-    fun onRepeatPasswordChanged(repeatPassword: String?) {
-        this.repeatPassword = repeatPassword
-    }
-
-
-    fun onEmailTextChanged() {
-
-    }
-
-
-    fun onPasswordTextChanged() {
-
-    }
-
-    fun onSignup() {
-        checkEmailAndPasswordsThen {
-            viewModelScope.launch {
-                try {
-                    signUpUseCase.run(LoginSharedData(emailAddress!!, password!!))
-                    _uiState.value = UiState.SignUpSucceeded
-                } catch (e: Throwable) {
-                    _uiState.value = UiState.SignUpFailed
-                    Timber.e(e, "Sign up error")
-                }
+    override fun reduce(partialState: SignupPartialState) {
+        val currentState = state.value ?: SignupState.initialize()
+        when (partialState) {
+            SignupPartialState.Init -> {
+                SignupState.initialize().emit()
+            }
+            SignupPartialState.SignupFailed -> {
+                currentState.copy(
+                    isSignupFailure = true,
+                    emailValidationFailedReason = null,
+                    passwordValidationFailedReason = null
+                ).emit()
+            }
+            SignupPartialState.SignupSucceed -> {
+                currentState.copy(isSignupFailure = false, isSignupSucceed = true).emit()
+            }
+            is SignupPartialState.ValidationFailed -> {
+                currentState.copy(
+                    isLoading = false,
+                    isSignupFailure = false,
+                    emailValidationFailedReason = partialState.result.emailFailedReasons,
+                    passwordValidationFailedReason = partialState.result.passwordFailedReasons
+                ).emit()
+            }
+            SignupPartialState.EmailTextChanged -> {
+                currentState.copy(emailValidationFailedReason = null).emit()
+            }
+            SignupPartialState.LoadingVisible -> {
+                currentState.copy(isLoading = true).emit()
+            }
+            SignupPartialState.PasswordTextChanged -> {
+                currentState.copy(passwordValidationFailedReason = null).emit()
+            }
+            SignupPartialState.RepeatPasswordChanged -> {
+                currentState.copy(repeatPasswordValidationFailedReason = null).emit()
             }
         }
     }
 
-    private fun checkEmailAndPasswordsThen(doNext: () -> Unit) {
-        if (emailAddress.isNullOrEmpty()) {
-            _uiState.value = UiState.EmptyEmail
-            return
-        }
-
-        if (!isPasswordsTheSame(password, repeatPassword)) {
-            _uiState.value = UiState.PasswordsNotSame
-            return
-        }
-
-        doNext()
+    fun onEmailTextChanged() {
+        reduce(SignupPartialState.EmailTextChanged)
     }
 
-    private fun isPasswordsTheSame(password: String?, repeatPassword: String?) =
-        !password.isNullOrBlank() && !repeatPassword.isNullOrBlank() && password == repeatPassword
+    fun onPasswordTextChanged() {
+        reduce(SignupPartialState.PasswordTextChanged)
+    }
+
+    fun onRepeatPasswordChanged() {
+
+    }
+
+    fun onSignup() {
+        val result = validateSignupInputsUseCase.run(email, password, repeatPassword)
+        if (result.success) {
+            doSignup()
+        } else {
+            reduce(SignupPartialState.ValidationFailed(result))
+        }
+    }
+
+    fun doSignup() {
+        viewModelScope.launch {
+            try {
+                reduce(SignupPartialState.LoadingVisible)
+                signUpUseCase.run(LoginSharedData(email, password))
+                reduce(SignupPartialState.SignupSucceed)
+            } catch (e: Throwable) {
+                reduce(SignupPartialState.SignupFailed)
+            }
+        }
+    }
+
+    private fun SignupState.emit() {
+        _state.value = this
+    }
 }
