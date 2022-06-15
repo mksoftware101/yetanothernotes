@@ -20,7 +20,7 @@ class SignupViewModel(
     private val password get() = passwordObservable.get()!!
 
     val repeatPasswordObservable = ObservableField("")
-    private val repeatPassword get() = passwordObservable.get()!!
+    private val repeatPassword get() = repeatPasswordObservable.get()!!
 
     override fun initialize() {
         emailObservable.set("")
@@ -37,7 +37,9 @@ class SignupViewModel(
             }
             SignupPartialState.SignupFailed -> {
                 currentState.copy(
+                    isLoading = false,
                     isSignupFailure = true,
+                    isPasswordsSame = true,
                     emailValidationFailedReason = null,
                     passwordValidationFailedReason = null
                 ).emit()
@@ -49,8 +51,10 @@ class SignupViewModel(
                 currentState.copy(
                     isLoading = false,
                     isSignupFailure = false,
+                    isPasswordsSame = partialState.result.isPasswordsSame,
                     emailValidationFailedReason = partialState.result.emailFailedReasons,
-                    passwordValidationFailedReason = partialState.result.passwordFailedReasons
+                    passwordValidationFailedReason = partialState.result.passwordFailedReasons,
+                    repeatPasswordValidationFailedReason = partialState.result.repeatPasswordFailedReasons
                 ).emit()
             }
             SignupPartialState.EmailTextChanged -> {
@@ -60,10 +64,10 @@ class SignupViewModel(
                 currentState.copy(isLoading = true).emit()
             }
             SignupPartialState.PasswordTextChanged -> {
-                currentState.copy(passwordValidationFailedReason = null).emit()
+                currentState.copy(isPasswordsSame = true, passwordValidationFailedReason = null).emit()
             }
             SignupPartialState.RepeatPasswordChanged -> {
-                currentState.copy(repeatPasswordValidationFailedReason = null).emit()
+                currentState.copy(isPasswordsSame = true, repeatPasswordValidationFailedReason = null).emit()
             }
         }
     }
@@ -77,7 +81,7 @@ class SignupViewModel(
     }
 
     fun onRepeatPasswordChanged() {
-
+        reduce(SignupPartialState.RepeatPasswordChanged)
     }
 
     fun onSignup() {

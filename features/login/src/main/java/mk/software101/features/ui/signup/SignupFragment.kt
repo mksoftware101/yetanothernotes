@@ -41,21 +41,25 @@ class SignupFragment :
             renderEmailValidation(emailValidationFailedReason)
             renderPasswordValidation(passwordValidationFailedReason)
             renderRepeatPasswordValidation(repeatPasswordValidationFailedReason)
-            if (!isPasswordsSame) {
-                renderPasswordNotTheSame()
-            }
+            renderPasswordSame(isPasswordsSame)
             if (isSignupFailure) {
                 showSignupError()
+                binding.emailInput.requestFocus()
             }
-            if(isSignupSucceed) {
+            if (isSignupSucceed) {
                 openNotesList()
             }
         }
     }
 
-    private fun renderPasswordNotTheSame() {
-        binding.passwordInput.error = "Passwords not the same"
-        binding.repeatPasswordInput.error = "Passwords not the same"
+    private fun renderPasswordSame(isPasswordsSame: Boolean) {
+        if (!isPasswordsSame) {
+            binding.passwordInput.error = "Passwords not the same"
+            binding.repeatPasswordInput.error = "Passwords not the same"
+        } else {
+            binding.passwordInput.error = null
+            binding.repeatPasswordInput.error = null
+        }
     }
 
     private fun renderRepeatPasswordValidation(repeatPasswordValidationFailedReason: Set<PasswordValidationFailedReason>?) {
