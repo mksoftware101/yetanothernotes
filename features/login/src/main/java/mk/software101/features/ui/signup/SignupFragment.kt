@@ -139,48 +139,6 @@ class SignupFragment :
         binding.emailInput.error = "Empty e-mail"
     }
 
-
-    /*
-        private val uiStateObserver = Observer<UiState> { uiState ->
-            when (uiState) {
-                UiState.EmptyEmail -> {
-                    binding.userNameTxt.showError()
-                }
-                UiState.PasswordsNotSame -> {
-                    binding.passwordContainer.highlightError()
-                    binding.repeatPasswordContainer.showPasswordsNotSameError()
-                }
-                UiState.SignUpSucceeded -> openNotesList()
-                UiState.SignUpFailed -> showSignupError()
-            }
-        }
-    */
-/*
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate<FragmentSignupBinding>(
-            inflater,
-            R.layout.fragment_signup,
-            container,
-            false
-        ).also {
-            it.passwordContainer.coroutineScope = lifecycleScope
-            it.repeatPasswordContainer.coroutineScope = lifecycleScope
-        }
-        return binding.root
-    }
-*/
-/*    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel =
-            ViewModelProvider(this, SignUpViewModelFactory()).get(SignupViewModel::class.java)
-        DataBindingUtil.getBinding<FragmentSignupBinding>(requireView())?.viewModel = viewModel
-        viewModel.uiState.observe(viewLifecycleOwner, uiStateObserver)
-    }
-*/
-
     private fun renderLoading(loadingVisible: Boolean) {
         binding.loadingView.visibility = if (loadingVisible) View.VISIBLE else View.GONE
     }

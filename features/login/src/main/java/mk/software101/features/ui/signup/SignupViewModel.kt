@@ -93,7 +93,7 @@ class SignupViewModel(
         }
     }
 
-    fun doSignup() {
+    private fun doSignup() {
         viewModelScope.launch {
             try {
                 reduce(SignupPartialState.LoadingVisible)
