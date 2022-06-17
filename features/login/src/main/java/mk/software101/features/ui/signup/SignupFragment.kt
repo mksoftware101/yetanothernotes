@@ -9,10 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import mk.software101.features.domain.EmailValidationFailedReason
-import mk.software101.features.domain.PasswordValidationFailedReason
 import mk.software101.features.login.R
 import mk.software101.features.login.databinding.FragmentSignupBinding
+import mk.software101.features.models.EmailValidationFailedReason
+import mk.software101.features.models.PasswordValidationFailedReason
 import mk.software101.features.ui.base.BaseFragment
 
 class SignupFragment :

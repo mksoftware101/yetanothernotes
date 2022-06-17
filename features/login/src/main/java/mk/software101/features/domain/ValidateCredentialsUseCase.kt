@@ -2,33 +2,10 @@ package mk.software101.features.domain
 
 import com.mksoftware101.core.validator.EmailValidator
 import com.mksoftware101.core.validator.PasswordValidator
+import mk.software101.features.models.EmailValidationFailedReason
 import mk.software101.features.models.LoginSharedData
-
-enum class EmailValidationFailedReason {
-    EMPTY_EMAIL, INVALID_EMAIL
-}
-
-enum class PasswordValidationFailedReason {
-    EMPTY_PASSWORD, INVALID_PASSWORD
-}
-
-enum class PasswordsValidation {
-    PASSWORDS_THE_SAME, PASSWORDS_NOT_THE_SAME;
-
-    companion object {
-        fun from(password: String, repeatPassword: String) = if (password == repeatPassword) {
-            PASSWORDS_THE_SAME
-        } else {
-            PASSWORDS_NOT_THE_SAME
-        }
-    }
-}
-
-data class ValidationResult(
-    val success: Boolean,
-    val emailFailedReasons: Set<EmailValidationFailedReason>? = null,
-    val passwordFailedReasons: Set<PasswordValidationFailedReason>? = null
-)
+import mk.software101.features.models.PasswordValidationFailedReason
+import mk.software101.features.models.ValidationResult
 
 class ValidateCredentialsUseCase(
     private val emailValidator: EmailValidator,

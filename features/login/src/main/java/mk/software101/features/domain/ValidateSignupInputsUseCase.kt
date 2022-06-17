@@ -2,6 +2,8 @@ package mk.software101.features.domain
 
 import com.mksoftware101.core.validator.EmailValidator
 import com.mksoftware101.core.validator.PasswordValidator
+import mk.software101.features.models.EmailValidationFailedReason
+import mk.software101.features.models.PasswordValidationFailedReason
 
 data class SignupInputValidationResult(
     val success: Boolean,

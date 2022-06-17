@@ -1,6 +1,6 @@
 package mk.software101.features.ui.login
 
-import mk.software101.features.domain.ValidationResult
+import mk.software101.features.models.ValidationResult
 import mk.software101.features.ui.base.BasePartialState
 
 sealed class LoginPartialState : BasePartialState{
