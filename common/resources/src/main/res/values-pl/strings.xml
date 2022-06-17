@@ -5,7 +5,7 @@
  Release: Working copy
  Locale: pl, Polish
  Exported by: Marek
- Exported at: Tue, 24 May 2022 19:57:42 +0200
+ Exported at: Fri, 17 Jun 2022 11:44:42 +0200
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="appName"></string>
@@ -37,15 +37,20 @@
     <string name="userNameInputTextEmail">E-mail</string>
     <string name="signupPassword">Hasło</string>
     <string name="signupRepeatPassword">Powtórz hasło</string>
-    <string name="generalInvalidEmail">Nieprawidłowy adres e-mail</string>
+    <string name="generalInvalidEmail">Proszę wpisać poprawny adres e-mail</string>
     <string name="generalInvalidOrNotSamePassword">Nieprawidłowe hasło lub hasła nie są takie same</string>
     <string name="generalFillInFieldCorrectly">Proszę poprawnie wypełnić pola</string>
     <string name="signupPasswordRequirements">*Prawidłowe hasło powinno mieć przynajmniej sześć znaków, jedną dużą literę i jedna cyfrę</string>
     <string name="signupSignUpError">Błąd podczas rejestracji. Spróbuj później.</string>
     <string name="passwordPasswordsNotTheSame">Hasła nie puste lub nie są takie same</string>
-    <string name="loginLoginFailed">Logowanie nie powiodło się. Wprowadź poprany email i hasło.</string>
-    <string name="loginEmptyEmailError">Address email jest pusty</string>
+    <string name="loginLoginFailed">Logowanie nie powiodło się. Wprowadź poprawny e-mail i hasło.</string>
+    <string name="loginEmptyEmailError">Adres e-mail jest pusty</string>
     <string name="loginInvalidEmailError">Niepoprawny adres e-mail</string>
-    <string name="loginPasswordEmptyError">Hasło jest puste</string>
+    <string name="loginPasswordEmptyError">Puste hasło</string>
     <string name="loginInvalidPasswordError">Niepoprawne hasło</string>
+    <string name="signupEmptyEmailError">Pusty e-mail</string>
+    <string name="signupInvalidEmailError">Nieprawidłowy e-mail</string>
+    <string name="signupEmptyPasswordError">Puste hasło*</string>
+    <string name="signupInvalidPasswordError">Niepoprawne hasło*</string>
+    <string name="signupPasswordNotTheSameError">Hasła nie są takie same</string>
 </resources>

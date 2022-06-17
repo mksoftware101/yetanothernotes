@@ -5,7 +5,7 @@
  Release: Working copy
  Locale: en-GB, English (UK)
  Exported by: Marek
- Exported at: Tue, 24 May 2022 19:57:42 +0200
+ Exported at: Fri, 17 Jun 2022 11:44:42 +0200
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="appName">YetAnotherNotes</string>
@@ -37,15 +37,20 @@
     <string name="userNameInputTextEmail">E-mail</string>
     <string name="signupPassword">Password</string>
     <string name="signupRepeatPassword">Repeat password</string>
-    <string name="generalInvalidEmail">Invalid e-mail address</string>
+    <string name="generalInvalidEmail">Please enter valid e-mail address</string>
     <string name="generalInvalidOrNotSamePassword">Invalid or not the same password</string>
     <string name="generalFillInFieldCorrectly">Please fill in the field correctly</string>
     <string name="signupPasswordRequirements">*Valid password should have at least six signs, one capital letter and one number</string>
     <string name="signupSignUpError">Sign up error. Try again later.</string>
     <string name="passwordPasswordsNotTheSame">Passwords are empty or doesn\'t match</string>
-    <string name="loginLoginFailed">Login failed</string>
-    <string name="loginEmptyEmailError">E-mail address is empty</string>
+    <string name="loginLoginFailed">Login failed. Wrong e-mail or password.</string>
+    <string name="loginEmptyEmailError">Email address is empty</string>
     <string name="loginInvalidEmailError">Invalid e-mail address</string>
-    <string name="loginPasswordEmptyError">Password is empty</string>
+    <string name="loginPasswordEmptyError">Empty password</string>
     <string name="loginInvalidPasswordError">Invalid password</string>
+    <string name="signupEmptyEmailError">Empty e-mail</string>
+    <string name="signupInvalidEmailError">Invalid e-mail</string>
+    <string name="signupEmptyPasswordError">Empty password*</string>
+    <string name="signupInvalidPasswordError">Invalid password*</string>
+    <string name="signupPasswordNotTheSameError">Passwords are not the same</string>
 </resources>

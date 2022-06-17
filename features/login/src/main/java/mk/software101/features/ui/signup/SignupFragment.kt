@@ -58,8 +58,8 @@ class SignupFragment :
                 binding.passwordInput.error = null
                 binding.repeatPasswordInput.error = null
             } else {
-                binding.passwordInput.error = "Passwords not the same"
-                binding.repeatPasswordInput.error = "Passwords not the same"
+                binding.passwordInput.error = getString(R.string.signupPasswordNotTheSameError)
+                binding.repeatPasswordInput.error = getString(R.string.signupPasswordNotTheSameError)
             }
         }
     }
@@ -78,11 +78,11 @@ class SignupFragment :
     }
 
     private fun setInvalidRepeatPasswordError() {
-        binding.repeatPasswordInput.error = "Invalid repeat password"
+        binding.repeatPasswordInput.error = getString(R.string.signupInvalidPasswordError)
     }
 
     private fun setEmptyRepeatPasswordError() {
-        binding.repeatPasswordInput.error = "EMpty repeat password"
+        binding.repeatPasswordInput.error = getString(R.string.signupEmptyPasswordError)
     }
 
     private fun resetRepeatPasswordError() {
@@ -120,11 +120,11 @@ class SignupFragment :
     }
 
     private fun setInvalidPasswordError() {
-        binding.passwordInput.error = "Invalid passwd"
+        binding.passwordInput.error = getString(R.string.signupInvalidPasswordError)
     }
 
     private fun setEmptyPasswordError() {
-        binding.passwordInput.error = "Empty passwd"
+        binding.passwordInput.error = getString(R.string.signupEmptyPasswordError)
     }
 
     private fun resetEmailError() {
@@ -132,11 +132,11 @@ class SignupFragment :
     }
 
     private fun setInvalidEmailError() {
-        binding.emailInput.error = "Invalid e-mail"
+        binding.emailInput.error = getString(R.string.signupInvalidEmailError)
     }
 
     private fun setEmptyEmailError() {
-        binding.emailInput.error = "Empty e-mail"
+        binding.emailInput.error = getString(R.string.signupEmptyEmailError)
     }
 
     private fun renderLoading(loadingVisible: Boolean) {
