@@ -39,7 +39,7 @@ class SignupViewModel(
                 currentState.copy(
                     isLoading = false,
                     isSignupFailure = true,
-                    isPasswordsSame = true,
+                    isPasswordsTheSame = true,
                     emailValidationFailedReason = null,
                     passwordValidationFailedReason = null
                 ).emit()
@@ -51,7 +51,7 @@ class SignupViewModel(
                 currentState.copy(
                     isLoading = false,
                     isSignupFailure = false,
-                    isPasswordsSame = partialState.result.isPasswordsSame,
+                    isPasswordsTheSame = partialState.result.isPasswordsTheSame,
                     emailValidationFailedReason = partialState.result.emailFailedReasons,
                     passwordValidationFailedReason = partialState.result.passwordFailedReasons,
                     repeatPasswordValidationFailedReason = partialState.result.repeatPasswordFailedReasons
@@ -64,10 +64,10 @@ class SignupViewModel(
                 currentState.copy(isLoading = true).emit()
             }
             SignupPartialState.PasswordTextChanged -> {
-                currentState.copy(isPasswordsSame = true, passwordValidationFailedReason = null).emit()
+                currentState.copy(isPasswordsTheSame = null, passwordValidationFailedReason = null).emit()
             }
             SignupPartialState.RepeatPasswordChanged -> {
-                currentState.copy(isPasswordsSame = true, repeatPasswordValidationFailedReason = null).emit()
+                currentState.copy(isPasswordsTheSame = null, repeatPasswordValidationFailedReason = null).emit()
             }
         }
     }

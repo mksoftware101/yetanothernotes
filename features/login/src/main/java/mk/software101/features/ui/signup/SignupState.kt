@@ -9,7 +9,7 @@ data class SignupState(
     val emailValidationFailedReason: Set<EmailValidationFailedReason>?,
     val passwordValidationFailedReason: Set<PasswordValidationFailedReason>?,
     val repeatPasswordValidationFailedReason: Set<PasswordValidationFailedReason>?,
-    val isPasswordsSame: Boolean,
+    val isPasswordsTheSame: Boolean?,
     val isSignupSucceed: Boolean,
     val isSignupFailure: Boolean
 ) : BaseState {
@@ -19,7 +19,7 @@ data class SignupState(
             emailValidationFailedReason = null,
             passwordValidationFailedReason = null,
             repeatPasswordValidationFailedReason = null,
-            isPasswordsSame = true,
+            isPasswordsTheSame = null,
             isSignupSucceed = false,
             isSignupFailure = false
         )
@@ -29,7 +29,7 @@ data class SignupState(
             emailValidationFailedReason: Set<EmailValidationFailedReason>?,
             passwordValidationFailedReason: Set<PasswordValidationFailedReason>?,
             repeatPasswordValidationFailedReason: Set<PasswordValidationFailedReason>?,
-            isPasswordsSame: Boolean,
+            isPasswordsTheSame: Boolean?,
             isSignupSucceed: Boolean,
             isSignupFailure: Boolean
         ) = SignupState(
@@ -37,7 +37,7 @@ data class SignupState(
             emailValidationFailedReason,
             passwordValidationFailedReason,
             repeatPasswordValidationFailedReason,
-            isPasswordsSame,
+            isPasswordsTheSame,
             isSignupSucceed,
             isSignupFailure
         )

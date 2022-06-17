@@ -39,12 +39,9 @@ class SignupFragment :
         with(viewState) {
             renderLoading(isLoading)
             renderEmailValidation(emailValidationFailedReason)
-            if (!isPasswordsSame) {
-                renderPasswordSame(isPasswordsSame)
-            } else {
-                renderPasswordValidation(passwordValidationFailedReason)
-                renderRepeatPasswordValidation(repeatPasswordValidationFailedReason)
-            }
+            renderPasswordValidation(passwordValidationFailedReason)
+            renderRepeatPasswordValidation(repeatPasswordValidationFailedReason)
+            renderPasswordSame(isPasswordsTheSame)
             if (isSignupFailure) {
                 showSignupError()
                 binding.emailInput.requestFocus()
@@ -55,13 +52,15 @@ class SignupFragment :
         }
     }
 
-    private fun renderPasswordSame(isPasswordsSame: Boolean) {
-        if (isPasswordsSame) {
-            binding.passwordInput.error = null
-            binding.repeatPasswordInput.error = null
-        } else {
-            binding.passwordInput.error = "Passwords not the same"
-            binding.repeatPasswordInput.error = "Passwords not the same"
+    private fun renderPasswordSame(isPasswordsTheSame: Boolean?) {
+        isPasswordsTheSame?.let {
+            if (it) {
+                binding.passwordInput.error = null
+                binding.repeatPasswordInput.error = null
+            } else {
+                binding.passwordInput.error = "Passwords not the same"
+                binding.repeatPasswordInput.error = "Passwords not the same"
+            }
         }
     }
 

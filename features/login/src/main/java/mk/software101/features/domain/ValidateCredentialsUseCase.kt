@@ -12,6 +12,18 @@ enum class PasswordValidationFailedReason {
     EMPTY_PASSWORD, INVALID_PASSWORD
 }
 
+enum class PasswordsValidation {
+    PASSWORDS_THE_SAME, PASSWORDS_NOT_THE_SAME;
+
+    companion object {
+        fun from(password: String, repeatPassword: String) = if (password == repeatPassword) {
+            PASSWORDS_THE_SAME
+        } else {
+            PASSWORDS_NOT_THE_SAME
+        }
+    }
+}
+
 data class ValidationResult(
     val success: Boolean,
     val emailFailedReasons: Set<EmailValidationFailedReason>? = null,
@@ -30,7 +42,11 @@ class ValidateCredentialsUseCase(
         val invalidPasswordReason =
             validatePassword(data.password)?.let { passwordValidationFailedReasons.add(it) }
         val validationSuccess = invalidEmailReason == null && invalidPasswordReason == null
-        return ValidationResult(validationSuccess, emailValidationFailedReasons, passwordValidationFailedReasons)
+        return ValidationResult(
+            validationSuccess,
+            emailValidationFailedReasons,
+            passwordValidationFailedReasons
+        )
     }
 
     private fun validateEmail(email: String): EmailValidationFailedReason? =

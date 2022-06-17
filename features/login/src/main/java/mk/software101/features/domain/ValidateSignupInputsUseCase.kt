@@ -5,10 +5,10 @@ import com.mksoftware101.core.validator.PasswordValidator
 
 data class SignupInputValidationResult(
     val success: Boolean,
-    val isPasswordsSame: Boolean,
+    val isPasswordsTheSame: Boolean?,
     val emailFailedReasons: Set<EmailValidationFailedReason>? = null,
     val passwordFailedReasons: Set<PasswordValidationFailedReason>? = null,
-    val repeatPasswordFailedReasons: Set<PasswordValidationFailedReason>? = null,
+    val repeatPasswordFailedReasons: Set<PasswordValidationFailedReason>? = null
 )
 
 class ValidateSignupInputsUseCase(
@@ -16,18 +16,31 @@ class ValidateSignupInputsUseCase(
     private val passwordValidator: PasswordValidator
 ) {
     fun run(email: String, password: String, repeatPassword: String): SignupInputValidationResult {
-        val emailValidationFailedReasons = mutableSetOf<EmailValidationFailedReason>()
-        val passwordValidationFailedReasons = mutableSetOf<PasswordValidationFailedReason>()
-        val repeatPasswordValidationFailedReasons = mutableSetOf<PasswordValidationFailedReason>()
-        val invalidEmailReason =
-            validateEmail(email)?.let { emailValidationFailedReasons.add(it) }
-        val invalidPasswordReason =
-            validatePassword(password)?.let { passwordValidationFailedReasons.add(it) }
-        val invalidRepeatPasswordReason =
-            validatePassword(repeatPassword)?.let { repeatPasswordValidationFailedReasons.add(it) }
-        val isPasswordsTheSame = match(password, repeatPassword)
-        val validationSuccess = invalidEmailReason == null && invalidPasswordReason == null &&
-                invalidRepeatPasswordReason == null && isPasswordsTheSame
+        val emailValidationFailedReasons = mutableSetOf<EmailValidationFailedReason>().apply {
+            validateEmail(email)?.let { add(it) }
+        }
+        val passwordValidationFailedReasons = mutableSetOf<PasswordValidationFailedReason>().apply {
+            validatePassword(password)?.let { add(it) }
+        }
+        val repeatPasswordValidationFailedReasons =
+            mutableSetOf<PasswordValidationFailedReason>().apply {
+                validatePassword(repeatPassword)?.let { add(it) }
+            }
+
+        val hasNotEmailFailedReasons = emailValidationFailedReasons.isEmpty()
+        val hasNotPasswordFailedReason = passwordValidationFailedReasons.isEmpty()
+        val hasNotRepeatPasswordFailedReason = repeatPasswordValidationFailedReasons.isEmpty()
+
+        val isPasswordsTheSame: Boolean? =
+            if (hasNotPasswordFailedReason && hasNotRepeatPasswordFailedReason) {
+                password == repeatPassword
+            } else {
+                null
+            }
+
+        val validationSuccess =
+            hasNotEmailFailedReasons && hasNotPasswordFailedReason && hasNotRepeatPasswordFailedReason && isPasswordsTheSame ?: false
+
         return SignupInputValidationResult(
             validationSuccess,
             isPasswordsTheSame,
@@ -54,7 +67,4 @@ class ValidateSignupInputsUseCase(
         } else {
             null
         }
-
-    private fun match(password: String, repeatPassword: String) =
-        password.isNotBlank() && repeatPassword.isNotBlank() && password == repeatPassword
 }
