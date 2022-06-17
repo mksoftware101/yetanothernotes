@@ -29,6 +29,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel, LoginPa
     override fun setupUI() {
         binding.viewModel = viewModel
         binding.signUpTxt.paint?.isUnderlineText = true
+        binding.passwordInput.errorIconDrawable = null
         resetEmailError()
         resetPasswordError()
     }

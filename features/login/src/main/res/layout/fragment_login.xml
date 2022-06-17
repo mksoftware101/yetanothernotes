@@ -60,7 +60,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/marginXS"
                 android:hint="@string/loginPassword"
-                app:endIconDrawable="@null"
                 app:endIconMode="password_toggle"
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -33,6 +33,8 @@ class SignupFragment :
 
     override fun setupUI() {
         binding.viewModel = viewModel
+        binding.passwordInput.errorIconDrawable = null
+        binding.repeatPasswordInput.errorIconDrawable = null
     }
 
     override fun render(viewState: SignupState) {

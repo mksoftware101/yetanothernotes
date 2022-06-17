@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/fragment_note_list.xml" value="0.365625" />
         <entry key="app/src/main/res/layout/notes_list_item.xml" value="0.365625" />
+        <entry key="app/src/main/res/layout/view_loading.xml" value="0.4745614035087719" />
         <entry key="common/ui-components/src/main/res/layout/edittext_username.xml" value="0.33" />
         <entry key="common/ui-components/src/main/res/layout/input_password.xml" value="0.25" />
         <entry key="common/ui-components/src/main/res/layout/input_username.xml" value="0.1" />
