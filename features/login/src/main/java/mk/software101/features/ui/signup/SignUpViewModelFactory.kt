@@ -7,6 +7,7 @@ import com.mksoftware101.core.validator.PasswordValidator
 import mk.software101.features.data.LoginSharedRepositoryImpl
 import mk.software101.features.domain.SignUpUseCase
 import mk.software101.features.domain.ValidateSignupInputsUseCase
+import mk.software101.features.domain.ValidationHelper
 import java.lang.IllegalArgumentException
 
 class SignUpViewModelFactory : ViewModelProvider.Factory {
@@ -16,7 +17,7 @@ class SignUpViewModelFactory : ViewModelProvider.Factory {
         if (modelClass.isAssignableFrom(SignupViewModel::class.java)) {
             val repository = LoginSharedRepositoryImpl()
             val validateSignupInputsUseCase =
-                ValidateSignupInputsUseCase(EmailValidator(), PasswordValidator())
+                ValidateSignupInputsUseCase(ValidationHelper(EmailValidator(), PasswordValidator()))
             val signUpUseCase = SignUpUseCase(repository)
             return SignupViewModel(validateSignupInputsUseCase, signUpUseCase) as T
         } else throw IllegalArgumentException("modelClass is not derived from ViewModel")

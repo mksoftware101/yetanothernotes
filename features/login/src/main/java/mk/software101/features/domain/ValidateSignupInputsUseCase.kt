@@ -1,7 +1,5 @@
 package mk.software101.features.domain
 
-import com.mksoftware101.core.validator.EmailValidator
-import com.mksoftware101.core.validator.PasswordValidator
 import mk.software101.features.models.EmailValidationFailedReason
 import mk.software101.features.models.PasswordValidationFailedReason
 
@@ -13,20 +11,18 @@ data class SignupInputValidationResult(
     val repeatPasswordFailedReasons: Set<PasswordValidationFailedReason>? = null
 )
 
-class ValidateSignupInputsUseCase(
-    private val emailValidator: EmailValidator,
-    private val passwordValidator: PasswordValidator
-) {
+class ValidateSignupInputsUseCase(private val validationHelper: ValidationHelper) {
     fun run(email: String, password: String, repeatPassword: String): SignupInputValidationResult {
         val emailValidationFailedReasons = mutableSetOf<EmailValidationFailedReason>().apply {
-            validateEmail(email)?.let { add(it) }
+            validationHelper.validateEmail(email)?.let { add(it) }
         }
         val passwordValidationFailedReasons = mutableSetOf<PasswordValidationFailedReason>().apply {
-            validatePassword(password)?.let { add(it) }
+            validationHelper.validatePassword(password)?.let { add(it) }
         }
         val repeatPasswordValidationFailedReasons =
             mutableSetOf<PasswordValidationFailedReason>().apply {
-                validatePassword(repeatPassword)?.let { add(it) }
+                validationHelper.validatePassword(repeatPassword)
+                    ?.let { add(it) }
             }
 
         val hasNotEmailFailedReasons = emailValidationFailedReasons.isEmpty()
@@ -51,22 +47,4 @@ class ValidateSignupInputsUseCase(
             repeatPasswordValidationFailedReasons
         )
     }
-
-    private fun validateEmail(email: String): EmailValidationFailedReason? =
-        if (email.isEmpty()) {
-            EmailValidationFailedReason.EMPTY_EMAIL
-        } else if (!emailValidator.isValid(email)) {
-            EmailValidationFailedReason.INVALID_EMAIL
-        } else {
-            null
-        }
-
-    private fun validatePassword(password: String): PasswordValidationFailedReason? =
-        if (password.isEmpty()) {
-            PasswordValidationFailedReason.EMPTY_PASSWORD
-        } else if (!passwordValidator.isValid(password)) {
-            PasswordValidationFailedReason.INVALID_PASSWORD
-        } else {
-            null
-        }
 }

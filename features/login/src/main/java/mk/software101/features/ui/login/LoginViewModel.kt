@@ -7,6 +7,7 @@ import com.mksoftware101.core.validator.PasswordValidator
 import kotlinx.coroutines.launch
 import mk.software101.features.domain.LoginUseCase
 import mk.software101.features.domain.ValidateCredentialsUseCase
+import mk.software101.features.domain.ValidationHelper
 import mk.software101.features.models.LoginSharedData
 import mk.software101.features.ui.base.BaseViewModel
 
@@ -14,7 +15,7 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) :
     BaseViewModel<LoginPartialState, LoginState>() {
 
     private val validateCredentialsUseCase =
-        ValidateCredentialsUseCase(EmailValidator(), PasswordValidator())
+        ValidateCredentialsUseCase(ValidationHelper(EmailValidator(), PasswordValidator()))
 
     val emailObservable = ObservableField("")
     private val email get() = emailObservable.get()!!
